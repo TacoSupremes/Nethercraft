@@ -31,8 +31,6 @@ public class TileFormationBase extends TileMod implements IGenerator, IConsumer
 		return amount;
 	}
 	
-	
-
 	public int power = 0;
 	
 	public int maxPower = 5000;
@@ -91,16 +89,13 @@ public class TileFormationBase extends TileMod implements IGenerator, IConsumer
 			formation = Formations.getFormation(this.getWorld(), this.getPos());
 		
 		if(formation == null)
-		{
-			System.out.println("FORMATION NULL");
 			return;
-		}	
+		
 		if(!canRun(this.getWorld(), this.getPos(), nbt))
 		{
 			formation = null;
 			return;
-		}
-		
+		}		
 		
 		if(isGen())
 		{
@@ -127,7 +122,8 @@ public class TileFormationBase extends TileMod implements IGenerator, IConsumer
 	
 	
 	
-	public boolean canRun(World w, BlockPos pos, NBTTagCompound nbt) {
+	public boolean canRun(World w, BlockPos pos, NBTTagCompound nbt) 
+	{
 		
 		Block[] b = formation.getBlocks();
 		

@@ -64,9 +64,19 @@ public class TileNode extends TileMod implements INode
 	public void update()
 	{
 	
-		for(BlockPos bp : linkedTo)
+		for(int i = 0; i< linkedTo.size(); i++)
 		{
-			BlockUtils.drawLine(getWorld(), this.getParticleOffset(), ((INode)this.getWorld().getTileEntity(bp)).getParticleOffset(), EnumParticleTypes.REDSTONE);
+			if(this.getWorld().getTileEntity(linkedTo.get(i)) instanceof INode)
+			{
+				if(((INode)this.getWorld().getTileEntity(linkedTo.get(i))).isActiveNode())
+					BlockUtils.drawLine(getWorld(), this.getParticleOffset(), ((INode)this.getWorld().getTileEntity(linkedTo.get(i))).getParticleOffset(), EnumParticleTypes.REDSTONE);	
+			}
+			else
+			{
+				linkedTo.remove(i);
+				break;
+			}
+				
 		}
 	}
 
@@ -78,7 +88,7 @@ public class TileNode extends TileMod implements INode
 	
 		double d0 = (double)pos.getX() + 0.5D;
   
-		double d1 = (double)pos.getY() + 0.45D;
+		double d1 = (double)pos.getY() + 0.5D;
 	    
 		double d2 = (double)pos.getZ() + 0.5D;
 	    
@@ -89,14 +99,14 @@ public class TileNode extends TileMod implements INode
 	    
 		if (enumfacing.getAxis().isHorizontal())
 		{
-			EnumFacing enumfacing1 = enumfacing.getOpposite();           
-	        double offset = 0.57D;
-	        return new Vector3(d0 + offset * (double)enumfacing1.getFrontOffsetX(), d1 + 1, d2 + offset * (double)enumfacing1.getFrontOffsetZ()); 
+			EnumFacing enumfacing1 = enumfacing.getOpposite();
+	        double offset = 0.15D;
+	        return new Vector3(d0 + offset * (double)enumfacing1.getFrontOffsetX(), d1, d2 + offset * (double)enumfacing1.getFrontOffsetZ()); 
 		}
 		else
 		{
 			if(enumfacing == EnumFacing.UP)
-				return new Vector3(d0, d1, d2);
+				return new Vector3(d0, d1-0.1D, d2);
 			else
 				return new Vector3(d0, pos.getY() + 0.55D, d2);
 	    }	
