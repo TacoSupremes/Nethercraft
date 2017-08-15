@@ -1,0 +1,16 @@
+[
+{
+  "modid": "nethercraft",
+  "name": "Nethercraft",
+  "description": "Mod that uses the power of the Nether.",
+  "version": "1.0",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["TacoSupremes"],
+  "credits": "The Forge and FML guys, for making this example",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]

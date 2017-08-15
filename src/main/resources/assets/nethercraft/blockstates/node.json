@@ -1,0 +1,10 @@
+{
+    "variants": {
+        "facing=down":  { "model": "nethercraft:node", "x": 180 },
+        "facing=up":    { "model": "nethercraft:node" },
+        "facing=north": { "model": "nethercraft:node", "x": 90},
+        "facing=south": { "model": "nethercraft:node", "x": 90, "y": 180 },
+        "facing=west":  { "model": "nethercraft:node", "x": 90, "y": 270 },
+        "facing=east":  { "model": "nethercraft:node", "x": 90, "y": 90 }
+    }
+}
