@@ -11,6 +11,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
 public class BlockUtils
@@ -210,6 +211,8 @@ public class BlockUtils
 		  
 		 double vectorLength = Math.sqrt(Math.pow((start.getX()-end.getX()),2)+Math.pow((start.getY()-end.getY()),2)+Math.pow((start.getZ()-end.getZ()),2));
 		 
+		 w.spawnParticle(type, end.getX(), end.getY(), end.getZ(), 0, 0, 0, 0);
+		 
 		 while (i <= vectorLength)
 		 {
 			 
@@ -221,13 +224,20 @@ public class BlockUtils
 			 
 			 xD *= dL;
 			 yD *= dL;
-			 zD *= dL;
-			
-			 w.spawnParticle(type, start.getX()+xD,start.getY()+yD,start.getZ()+zD, 0, 0, 0, 0);
+			 zD *= dL;			
+	
+			 w.spawnParticle(type, start.getX()+xD, start.getY()+yD, start.getZ()+zD, 0, 0, 0, 0);
 				  
 			 i++;
 		 }  
+		 
+		 
+			
+	
 		  
 	  }
+
+	
+	
 
 }

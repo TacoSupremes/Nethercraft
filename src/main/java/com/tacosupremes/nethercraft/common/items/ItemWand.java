@@ -26,6 +26,7 @@ public class ItemWand extends ItemMod
 			if(isBound(player.getHeldItem(hand)))
 			{
 				((INode)w.getTileEntity(pos)).getNodeList().add(BlockPos.fromLong(player.getHeldItem(hand).getTagCompound().getLong("BOUND")));
+				((INode)w.getTileEntity(BlockPos.fromLong(player.getHeldItem(hand).getTagCompound().getLong("BOUND")))).getNodeList().add(pos);
 				player.getHeldItem(hand).getTagCompound().removeTag("BOUND");			
 			}
 			else
@@ -43,6 +44,8 @@ public class ItemWand extends ItemMod
 	{
 		return is.hasTagCompound() && is.getTagCompound().hasKey("BOUND");
 	}
+	
+
 	
 	
 

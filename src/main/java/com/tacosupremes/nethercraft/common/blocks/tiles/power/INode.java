@@ -6,7 +6,8 @@ import com.tacosupremes.nethercraft.common.utils.Vector3;
 
 import net.minecraft.util.math.BlockPos;
 
-public interface INode {
+public interface INode 
+{
 	
 	public boolean isActiveNode();
 	

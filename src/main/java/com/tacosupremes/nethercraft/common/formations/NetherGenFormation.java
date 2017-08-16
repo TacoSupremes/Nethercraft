@@ -34,7 +34,7 @@ public class NetherGenFormation implements IGenFormation
 							
 							te.power += 10;
 							
-							System.out.println(te.power);
+							System.out.println("GENERATOR" + te.power);
 							
 							return;
 						}

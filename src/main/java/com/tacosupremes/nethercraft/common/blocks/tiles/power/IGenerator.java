@@ -5,4 +5,6 @@ public interface IGenerator extends INode
 	public int drain(int amount, boolean doit);
 	
 	public boolean isGen();
+	
+	public int getPower();
 }

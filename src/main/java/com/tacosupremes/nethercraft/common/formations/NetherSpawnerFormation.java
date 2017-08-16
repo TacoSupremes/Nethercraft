@@ -51,6 +51,8 @@ public class NetherSpawnerFormation implements IConsumerFormation {
 		if(w.getDifficulty() == EnumDifficulty.PEACEFUL)
 			return;
 		
+		System.out.println("NETHERSPAWNER" + te.power);
+		
 		if(te.power >= 300)
 		{
 			Entity e;

@@ -17,6 +17,8 @@ public class Formations
 	{
 		formations.add(new NetherGenFormation());
 		formations.add(new NetherSpawnerFormation());
+		
+		//TODO Nether Wart Farm, GlowStone growing, Miner, smelter, lava gen, soul gen.
 	}
 
 
