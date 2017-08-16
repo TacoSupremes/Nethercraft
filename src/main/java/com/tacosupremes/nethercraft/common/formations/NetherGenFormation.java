@@ -1,6 +1,7 @@
 package com.tacosupremes.nethercraft.common.formations;
 
 import com.tacosupremes.nethercraft.common.blocks.tiles.TileFormationBase;
+import com.tacosupremes.nethercraft.common.utils.Vector3;
 
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
@@ -64,6 +65,15 @@ public class NetherGenFormation implements IGenFormation
 		 a,a,a,a,a,
 		 f,a,f,a,f				
 		};
+	}
+
+
+
+	@Override
+	public Vector3 getOffset() 
+	{
+	
+		return Vector3.zero;
 	}
 
 }

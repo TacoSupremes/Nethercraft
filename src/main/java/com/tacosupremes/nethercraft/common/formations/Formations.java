@@ -3,6 +3,8 @@ package com.tacosupremes.nethercraft.common.formations;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.tacosupremes.nethercraft.common.utils.Vector3;
+
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -17,8 +19,9 @@ public class Formations
 	{
 		formations.add(new NetherGenFormation());
 		formations.add(new NetherSpawnerFormation());
+		formations.add(new NetherWartFarm());
 		
-		//TODO Nether Wart Farm, GlowStone growing, Miner, smelter, lava gen, soul gen.
+		//TODO GlowStone growing, Miner, smelter, lava gen, soul gen.
 	}
 
 
@@ -33,6 +36,8 @@ public class Formations
 			
 			int index = -1;
 			
+			Vector3 v3 = formations.get(i).getOffset();
+			
 			for(int x = -r; x <= r; x++)
 			{
 				for(int z = -r; z <= r; z++)
@@ -42,7 +47,7 @@ public class Formations
 					if(b[index] == Blocks.AIR)
 						continue;
 					
-					if(w.getBlockState(pos.add(x, 0, z)).getBlock() != b[index])
+					if(w.getBlockState(pos.add(x, 0, z).add(v3.x, v3.y, v3.z)).getBlock() != b[index])
 					{
 						continue formLoop;
 					}
@@ -50,6 +55,7 @@ public class Formations
 				
 			}
 			
+			System.out.println(formations.get(i));
 			return formations.get(i);
 		}
 		

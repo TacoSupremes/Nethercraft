@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.tacosupremes.nethercraft.common.blocks.tiles.TileFormationBase;
+import com.tacosupremes.nethercraft.common.utils.Vector3;
 import com.tacosupremes.nethercraft.common.utils.WeightedObject;
 
 import net.minecraft.block.Block;
@@ -82,6 +83,12 @@ public class NetherSpawnerFormation implements IConsumerFormation {
 		
 		return (Entity)WeightedRandom.getRandomItem(w.rand, l2).getObject();
 		
+	}
+
+	@Override
+	public Vector3 getOffset() {
+		
+		return Vector3.zero;
 	}
 
 }

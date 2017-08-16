@@ -168,6 +168,8 @@ public class TileFormationBase extends TileMod implements IGenerator, IConsumer
 		
 		Block[] b = formation.getBlocks();
 		
+		Vector3 v3 = formation.getOffset();
+		
 		int r = (int) (Math.sqrt(b.length) - 1) / 2;
 		
 		int index = -1;
@@ -181,7 +183,7 @@ public class TileFormationBase extends TileMod implements IGenerator, IConsumer
 				if(b[index] == Blocks.AIR)
 					continue;
 				
-				if(w.getBlockState(pos.add(x, 0, z)).getBlock() != b[index])
+				if(w.getBlockState(pos.add(x, 0, z).add(v3.x, v3.y, v3.z)).getBlock() != b[index])
 				{
 					return false;
 				}
