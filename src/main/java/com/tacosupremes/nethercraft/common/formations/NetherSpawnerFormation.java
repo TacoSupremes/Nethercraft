@@ -91,4 +91,10 @@ public class NetherSpawnerFormation implements IConsumerFormation {
 		return Vector3.zero;
 	}
 
+	@Override
+	public int getMaxPower()
+	{	
+		return 5000;
+	}
+
 }

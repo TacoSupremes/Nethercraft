@@ -2,7 +2,9 @@ package com.tacosupremes.nethercraft.common.items;
 
 import com.tacosupremes.nethercraft.common.blocks.tiles.power.INode;
 
+import net.minecraft.block.BlockNetherWart;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumActionResult;
@@ -36,6 +38,9 @@ public class ItemWand extends ItemMod
 				player.getHeldItem(hand).getTagCompound().setLong("BOUND", pos.toLong());
 			}
 		}
+		
+		if(w.getBlockState(pos).getBlock() == Blocks.NETHER_WART)
+			w.setBlockState(pos, Blocks.NETHER_WART.getDefaultState().withProperty(BlockNetherWart.AGE, 3));
 		
 		return super.onItemUse(player, w, pos, hand, facing, hitX, hitY, hitZ);
 	}

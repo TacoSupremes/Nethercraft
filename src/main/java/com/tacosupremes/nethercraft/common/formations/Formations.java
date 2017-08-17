@@ -20,8 +20,8 @@ public class Formations
 		formations.add(new NetherGenFormation());
 		formations.add(new NetherSpawnerFormation());
 		formations.add(new NetherWartFarm());
-		
-		//TODO GlowStone growing, Miner, smelter, lava gen, soul gen.
+		formations.add(new LavaGenFormation());
+		//TODO GlowStone growing, Miner, smelter, lava gen, soul gen, soul cage = (Containment for Entities) .
 	}
 
 

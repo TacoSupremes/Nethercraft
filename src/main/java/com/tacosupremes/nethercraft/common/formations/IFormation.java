@@ -13,4 +13,6 @@ public interface IFormation
 	
 	public Vector3 getOffset();
 	
+	public int getMaxPower();
+	
 }

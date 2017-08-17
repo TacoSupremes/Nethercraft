@@ -36,7 +36,7 @@ public class TileFormationBase extends TileMod implements IGenerator, IConsumer
 	
 	public int power = 0;
 	
-	public int maxPower = 5000;
+//	public int maxPower = 5000;
 	
 	public static int transferRate = 50;
 	
@@ -144,10 +144,10 @@ public class TileFormationBase extends TileMod implements IGenerator, IConsumer
 			if(nbt.getBoolean("DONE"))
 				return;
 		
-			if(power < maxPower)
+			if(power < formation.getMaxPower())
 				((IGenFormation)formation).generatePower(this.getWorld(), this.getPos(), nbt, this);
-			else if(power > maxPower)
-				power = maxPower;
+			else if(power > formation.getMaxPower())
+				power = formation.getMaxPower();
 		}
 		else
 		{
@@ -199,15 +199,15 @@ public class TileFormationBase extends TileMod implements IGenerator, IConsumer
 	public int fill(int amount, boolean doit)
 	{	
 		
-		if(power == maxPower)
+		if(power == formation.getMaxPower())
 			return 0;
 		
-		if(amount + power > maxPower)
+		if(amount + power > formation.getMaxPower())
 		{
 			if(doit)
-				power = maxPower;
+				power = formation.getMaxPower();
 			
-			return maxPower - power;
+			return formation.getMaxPower() - power;
 		}
 	
 		if(doit)
@@ -291,9 +291,7 @@ public static List<BlockPos> getPathToConsumer(World w, BlockPos posF, List<Bloc
 		BlockPos pos = toCheck.remove(0);
 		
 		path.add(pos);
-		
-	//	w.spawnParticle(e, pos.getX()+0.5D, pos.getY()+1.5D, pos.getZ()+0.5D, 0, 0, 0, null);
-		
+
 		checked.add(pos.toString());
 		
 		INode ip = (INode)w.getTileEntity(pos);

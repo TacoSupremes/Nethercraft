@@ -76,4 +76,12 @@ public class NetherGenFormation implements IGenFormation
 		return Vector3.zero;
 	}
 
+
+
+	@Override
+	public int getMaxPower() 
+	{
+		return 1000;
+	}
+
 }
