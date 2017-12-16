@@ -1,0 +1,10 @@
+{
+    "variants": {
+        "age=0": { "model": "nethercraft:glowstone" },
+        "age=1": { "model": "nethercraft:glowstone1" },
+        "age=2": { "model": "nethercraft:glowstone2" },
+        "age=3": { "model": "nethercraft:glowstone3" },
+        "age=4": { "model": "nethercraft:glowstone4" },
+        "age=5": { "model": "nethercraft:glowstone5" }
+    }
+}

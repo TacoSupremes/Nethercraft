@@ -204,6 +204,11 @@ public class BlockUtils
 		return l;
 	}
 	
+	public static void drawLine(World w, BlockPos start, BlockPos end, EnumParticleTypes type)
+	{
+		 drawLine(w, Vector3.fromBlockPos(start).add(0.5D), Vector3.fromBlockPos(end).add(0.5D), type);
+	}
+	
 	public static void drawLine(World w, Vector3 start, Vector3 end, EnumParticleTypes type)
 	{
 		  

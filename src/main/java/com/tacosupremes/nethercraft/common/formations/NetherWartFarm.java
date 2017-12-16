@@ -18,7 +18,7 @@ public class NetherWartFarm implements IConsumerFormation {
 	
 		Block n = Blocks.SOUL_SAND;
 		
-		Block a = Blocks.AIR;
+		Block a = Blocks.OBSIDIAN;
 				
 		return new Block[]
 				{

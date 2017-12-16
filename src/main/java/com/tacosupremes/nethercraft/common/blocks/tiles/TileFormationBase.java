@@ -35,9 +35,7 @@ public class TileFormationBase extends TileMod implements IGenerator, IConsumer
 	}
 	
 	public int power = 0;
-	
-//	public int maxPower = 5000;
-	
+
 	public static int transferRate = 50;
 	
 	public IFormation formation = null;
@@ -99,6 +97,27 @@ public class TileFormationBase extends TileMod implements IGenerator, IConsumer
 				
 		}
 		
+		
+		
+		if(this.getWorld().isRemote)
+			return;
+		
+		if(!this.isActiveNode())
+			return;
+		
+		if(formation == null)
+			formation = Formations.getFormation(this.getWorld(), this.getPos());
+		
+		if(formation == null)
+			return;
+		
+		if(!canRun(this.getWorld(), this.getPos(), nbt))
+		{
+			formation = null;
+			return;
+		}
+		
+		
 		if(this.isGen()  && !linkedTo.isEmpty() && this.power >= this.transferRate)
 		{
 			IConsumer ii = null;
@@ -120,24 +139,6 @@ public class TileFormationBase extends TileMod implements IGenerator, IConsumer
 			
 		}
 		
-		if(this.getWorld().isRemote)
-			return;
-		
-		if(!this.isActiveNode())
-			return;
-		
-		if(formation == null)
-			formation = Formations.getFormation(this.getWorld(), this.getPos());
-		
-		if(formation == null)
-			return;
-		
-		if(!canRun(this.getWorld(), this.getPos(), nbt))
-		{
-			formation = null;
-			return;
-		}		
-		
 		if(isGen())
 		{
 		
@@ -148,6 +149,8 @@ public class TileFormationBase extends TileMod implements IGenerator, IConsumer
 				((IGenFormation)formation).generatePower(this.getWorld(), this.getPos(), nbt, this);
 			else if(power > formation.getMaxPower())
 				power = formation.getMaxPower();
+			
+			
 		}
 		else
 		{
