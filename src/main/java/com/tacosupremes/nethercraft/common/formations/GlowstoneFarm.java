@@ -77,16 +77,6 @@ public class GlowstoneFarm implements IConsumerFormation
 		
 	}
 	
-	
-	public boolean canGrow(World w, BlockPos pos)
-	{
-		for(BlockPos tPos : aPos)
-		{
-			return true;
-		}
-		return true;
-	}
-	
 	public int randGlowstone(World w, BlockPos pos)
 	{
 		
@@ -120,7 +110,7 @@ public class GlowstoneFarm implements IConsumerFormation
 			
 		}
 		
-		if(w.getBlockState(pos).getBlock() == Blocks.GLOWSTONE)
+		if(w.getBlockState(pos).getBlock() == Blocks.GLOWSTONE && (w.getBlockState(pos.up()).getBlock().isAir(w.getBlockState(pos.up()), w, pos.up()) || w.getBlockState(pos.up()).getBlock() == ModBlocks.glowstoneCrop))
 			setGlowstone(w, pos.up(), center);
 		
 		
