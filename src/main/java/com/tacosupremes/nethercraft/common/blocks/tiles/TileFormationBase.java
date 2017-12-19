@@ -202,6 +202,9 @@ public class TileFormationBase extends TileMod implements IGenerator, IConsumer
 	public int fill(int amount, boolean doit)
 	{	
 		
+		if(formation == null)
+			return 0;
+		
 		if(power == formation.getMaxPower())
 			return 0;
 		
