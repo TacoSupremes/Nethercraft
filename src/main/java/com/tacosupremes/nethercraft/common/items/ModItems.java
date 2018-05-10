@@ -23,15 +23,42 @@ public class ModItems
 	public static List<Item> nitems = new ArrayList<Item>();
 
 	public static Item wand;
+	
+	public static Item firePickaxe;
+	
+	public static Item netherWalker;
+	
+	//FIRE Sword swing to shoot fire right click for fire shield
+	
+	//Item that moves you 8 blocks at a time since that is nether rules for distance
+	
+	// ghast/blaze cannon
+	
+	//scythe high chance of dropping heads
 
+	// TODO: MAKE BOOK 
+	
+	
 	public static void preInit()
 	{
 		wand = new ItemWand();	
+		
+		firePickaxe = new ItemFirePickaxe();
+		
+		netherWalker = new ItemNetherWalker();
+		
+		
 	}
 	
 	public static void register()
 	{
 		for(ItemMod i : items)
+		{		
+			if(Nethercraft.config.isItemEnabled(i))
+				ProxyRegistry.register(i);
+		}
+		
+		for(Item i : nitems)
 		{		
 			if(Nethercraft.config.isItemEnabled(i))
 				ProxyRegistry.register(i);

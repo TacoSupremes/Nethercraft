@@ -241,6 +241,11 @@ public class BlockUtils
 	
 		  
 	  }
+	
+	public static void spawnParticle(World w, BlockPos pos, EnumParticleTypes type)
+	{
+		w.spawnParticle(type, pos.getX(), pos.getY(), pos.getZ(), 0, 0, 0, 0);
+	}
 
 	
 	

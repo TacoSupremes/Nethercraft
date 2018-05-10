@@ -142,8 +142,6 @@ public class TileFormationBase extends TileMod implements IGenerator, IConsumer
 		if(isGen())
 		{
 		
-			if(nbt.getBoolean("DONE"))
-				return;
 		
 			if(power < formation.getMaxPower())
 				((IGenFormation)formation).generatePower(this.getWorld(), this.getPos(), nbt, this);
@@ -372,6 +370,11 @@ public static List<BlockPos> getPathToConsumer(World w, BlockPos posF, List<Bloc
 	pf.add(posF);
 	pf.addAll(path);	
 	return pf;
+}
+
+ public boolean isDone() {
+
+	return nbt.getBoolean("DONE");
 }
 
 }

@@ -21,6 +21,8 @@ public class ModBlocks
 	public static Block node;
 	
 	public static Block glowstoneCrop;
+	
+	public static Block fire;
 
 	public static void preInit()
 	{
@@ -29,6 +31,8 @@ public class ModBlocks
 		node = new BlockNode();
 
 		glowstoneCrop = new BlockGlowstoneCrop();
+		
+		fire = new BlockFire();
 	}
 	
 	public static void register()

@@ -19,6 +19,8 @@ public class NetherGenFormation implements IGenFormation
 		if(w.getWorldTime() %20 != 0)
 			return;
 
+		
+		
 		for(int y = 1; y < pos.getY(); y++)
 		{
 			for(int x = pos.getX() - 16; x <= pos.getX() + 16; x++)

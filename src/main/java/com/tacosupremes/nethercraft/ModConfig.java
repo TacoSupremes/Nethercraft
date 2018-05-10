@@ -36,6 +36,11 @@ public class ModConfig
 			iMap.put(i, true);
 		}
 		
+		for(Item i : ModItems.nitems)
+		{
+			iMap.put(i, true);
+		}
+		
 		for(Block i : ModBlocks.blocks)
 		{
 			bMap.put(i, true);

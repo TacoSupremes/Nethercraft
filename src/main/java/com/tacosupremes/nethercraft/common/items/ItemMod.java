@@ -80,6 +80,14 @@ public class ItemMod extends Item
 		}
 
 	}
+	
+	public static void registerNonItemMod(Item item, String name)
+	{
+		item.setUnlocalizedName(name);
+		item.setRegistryName(new ResourceLocation(LibMisc.MODID + ":" + name));
+		item.setCreativeTab(Nethercraft.tab);
+		ModItems.nitems.add(item);
+	}
 
 	public boolean needsDifferentNames()
 	{

@@ -1,12 +1,14 @@
 package com.tacosupremes.nethercraft.common.formations;
 
 import com.tacosupremes.nethercraft.common.blocks.tiles.TileFormationBase;
+import com.tacosupremes.nethercraft.common.utils.BlockUtils;
 import com.tacosupremes.nethercraft.common.utils.Vector3;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockNetherWart;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -57,6 +59,8 @@ public class NetherWartFarm implements IConsumerFormation {
 						w.getBlockState(pos_).getBlock().dropBlockAsItem(w, pos_, w.getBlockState(pos_), 0);
 						w.setBlockState(pos_, Blocks.NETHER_WART.getDefaultState());
 						te.power -= 100;
+						BlockUtils.spawnParticle(w, pos_, EnumParticleTypes.FLAME);
+						System.out.println("Wart Farmed");
 					}
 				
 				}

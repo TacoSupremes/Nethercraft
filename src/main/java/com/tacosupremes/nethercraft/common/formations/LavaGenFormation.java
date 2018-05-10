@@ -33,6 +33,8 @@ public class LavaGenFormation implements IGenFormation
 				 b,o,n,o,b						
 				};
 	}
+	
+	
 
 	@Override
 	public Vector3 getOffset()
