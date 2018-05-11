@@ -26,6 +26,8 @@ public class ModItems
 	
 	public static Item firePickaxe;
 	
+	public static Item fireSword;
+	
 	public static Item netherWalker;
 	
 	//FIRE Sword swing to shoot fire right click for fire shield
@@ -36,6 +38,9 @@ public class ModItems
 	
 	//scythe high chance of dropping heads
 
+	//hellcats because why not
+	
+	//nether glasses to see range of formations ie: you can see chunks that are targeted by nether gen and to allow for discovery of dungeons,
 	// TODO: MAKE BOOK 
 	
 	
@@ -44,6 +49,8 @@ public class ModItems
 		wand = new ItemWand();	
 		
 		firePickaxe = new ItemFirePickaxe();
+		
+		fireSword = new ItemFireSword();
 		
 		netherWalker = new ItemNetherWalker();
 		

@@ -35,7 +35,7 @@ public class NetherGenFormation implements IGenFormation
 						{			
 							w.setBlockState(pos_, Blocks.NETHERRACK.getDefaultState(), 3);	
 							
-							te.power += 10;
+							
 							
 							System.out.println("GENERATOR" + te.power);
 							

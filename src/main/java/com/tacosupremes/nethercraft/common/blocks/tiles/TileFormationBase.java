@@ -3,6 +3,7 @@ package com.tacosupremes.nethercraft.common.blocks.tiles;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.tacosupremes.nethercraft.Nethercraft;
 import com.tacosupremes.nethercraft.common.blocks.tiles.power.IConsumer;
 import com.tacosupremes.nethercraft.common.blocks.tiles.power.IGenerator;
 import com.tacosupremes.nethercraft.common.blocks.tiles.power.INode;
@@ -10,6 +11,7 @@ import com.tacosupremes.nethercraft.common.formations.Formations;
 import com.tacosupremes.nethercraft.common.formations.IConsumerFormation;
 import com.tacosupremes.nethercraft.common.formations.IFormation;
 import com.tacosupremes.nethercraft.common.formations.IGenFormation;
+import com.tacosupremes.nethercraft.common.items.ModItems;
 import com.tacosupremes.nethercraft.common.utils.BlockUtils;
 import com.tacosupremes.nethercraft.common.utils.Vector3;
 
@@ -86,7 +88,7 @@ public class TileFormationBase extends TileMod implements IGenerator, IConsumer
 		{
 			if(this.getWorld().getTileEntity(linkedTo.get(i)) instanceof INode)
 			{
-				if(((INode)this.getWorld().getTileEntity(linkedTo.get(i))).isActiveNode())
+				if(((INode)this.getWorld().getTileEntity(linkedTo.get(i))).isActiveNode() && Nethercraft.proxy.playerHoldingItem(ModItems.wand))
 					BlockUtils.drawLine(getWorld(), this.getParticleOffset(), ((INode)this.getWorld().getTileEntity(linkedTo.get(i))).getParticleOffset(), EnumParticleTypes.REDSTONE);	
 			}
 			else
