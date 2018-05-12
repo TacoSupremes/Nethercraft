@@ -23,7 +23,7 @@ public class Formations
 		formations.add(new LavaGenFormation());
 		formations.add(new GlowstoneFarm());
 		formations.add(new OreMagnetFormation());
-		//TODO Miner, smelter, soul gen, soul cage = (Containment for Entities) .
+		//TODO smelter, soul gen, soul cage = (Containment for Entities) .
 	}
 
 

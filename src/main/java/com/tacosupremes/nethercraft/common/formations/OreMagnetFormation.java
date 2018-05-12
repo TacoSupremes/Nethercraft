@@ -57,6 +57,10 @@ public class OreMagnetFormation implements IConsumerFormation {
 	@Override
 	public void usePower(World w, BlockPos pos, NBTTagCompound nbt, TileFormationBase te) 
 	{
+		
+		if(w.getWorldTime() %100 != 0 || te.power < 100)
+			return;
+		
 		for(int y = pos.getY()-1; y > 1; y--)
 		{
 			for(int x = pos.getX() - 8; x <= pos.getX() + 8; x++)
@@ -85,6 +89,8 @@ public class OreMagnetFormation implements IConsumerFormation {
 							w.setBlockState(pos_, Blocks.NETHERRACK.getDefaultState(), 3);
 					
 						te.power -= 100;
+						
+						return;
 					}
 		
 				}

@@ -43,6 +43,8 @@ public class ModItems
 	//nether glasses to see range of formations ie: you can see chunks that are targeted by nether gen and to allow for discovery of dungeons,
 	// TODO: MAKE BOOK 
 	
+	// make power particles move and shit
+	
 	
 	public static void preInit()
 	{
