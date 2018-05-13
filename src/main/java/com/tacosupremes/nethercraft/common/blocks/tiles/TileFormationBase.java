@@ -265,6 +265,7 @@ public class TileFormationBase extends TileMod implements IGenerator, IConsumer
 	}
 	
 
+@SuppressWarnings("unused")
 public static List<BlockPos> getPathToConsumer(World w, BlockPos posF, List<BlockPos> linked){
 	
 	List<BlockPos> toCheck = new ArrayList<BlockPos>();

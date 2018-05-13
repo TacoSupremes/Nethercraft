@@ -30,6 +30,8 @@ public class ModItems
 	
 	public static Item netherWalker;
 	
+	public static Item netherScythe;
+	
 	//FIRE Sword swing to shoot fire right click for fire shield
 	
 	//Item that moves you 8 blocks at a time since that is nether rules for distance
@@ -56,6 +58,7 @@ public class ModItems
 		
 		netherWalker = new ItemNetherWalker();
 		
+		netherScythe = new ItemNetherScythe();
 		
 	}
 	

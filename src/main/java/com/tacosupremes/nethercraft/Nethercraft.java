@@ -16,6 +16,7 @@ import com.tacosupremes.nethercraft.recipes.ModRecipes;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.Enchantment;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
@@ -107,7 +108,7 @@ public class Nethercraft
 		@SideOnly(Side.CLIENT)
 		public ItemStack getTabIconItem()
 		{
-			return new ItemStack(Items.CAKE);
+			return new ItemStack(Blocks.RED_NETHER_BRICK);
 		}
 
 		@Override
