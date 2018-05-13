@@ -1,5 +1,8 @@
 package com.tacosupremes.nethercraft.common.items;
 
+import com.tacosupremes.nethercraft.common.utils.BlockUtils;
+import com.tacosupremes.nethercraft.common.utils.Vector3;
+
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -31,11 +34,13 @@ public class ItemNetherScythe extends ItemSword {
 		
 		int chance = target.getEntityWorld().rand.nextInt(100) + 1;
 		
-		if(attacker.getHealth() < attacker.getMaxHealth() && chance <= 45)
+		if(attacker.getHealth() < attacker.getMaxHealth() && chance <= 35)
 		{
-			attacker.setHealth(Math.min(attacker.getHealth() + 1, attacker.getMaxHealth()));
-			target.world.spawnParticle(EnumParticleTypes.HEART, target.posX, target.posY+target.getEyeHeight(), target.posZ, 0, 0, 0);
+			attacker.setHealth(Math.min(attacker.getHealth() + 2, attacker.getMaxHealth()));
+			
+			BlockUtils.drawLine(attacker.world, Vector3.fromEntityCenter(target), Vector3.fromEntityCenter(attacker), EnumParticleTypes.REDSTONE);
 		}
+		
 		if(hasSkull(target) && !target.isEntityAlive() && chance <= (35 + EnchantmentHelper.getLootingModifier(attacker) * 5))
 			target.entityDropItem(getSkull(target), 0);
 		

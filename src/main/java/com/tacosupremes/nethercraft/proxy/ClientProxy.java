@@ -1,15 +1,19 @@
 package com.tacosupremes.nethercraft.proxy;
 
+import java.util.List;
+
 import com.tacosupremes.nethercraft.common.blocks.ModBlocks;
 import com.tacosupremes.nethercraft.common.items.ModItems;
 import com.tacosupremes.nethercraft.common.utils.ClientStuff;
 import com.tacosupremes.nethercraft.common.utils.ParticleFlameTornado;
+import com.tacosupremes.nethercraft.common.utils.PowerParticle;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.client.ForgeHooksClient;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
@@ -54,6 +58,16 @@ public class ClientProxy extends CommonProxy
 		
 		Minecraft.getMinecraft().effectRenderer.addEffect(wisp);
 	}
+	
+	@Override
+	public void powerFX(double x, double y, double z, List<BlockPos> bp) 
+	{
+		PowerParticle wisp = new PowerParticle(Minecraft.getMinecraft().world, x, y, z, 0, 1.0F, 0, bp);
+		
+		Minecraft.getMinecraft().effectRenderer.addEffect(wisp);
+	}
+	
+	
 	@Override
 	public boolean playerHoldingItem(Item wand) 
 	{

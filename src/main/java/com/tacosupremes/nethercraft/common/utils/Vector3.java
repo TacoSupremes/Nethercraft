@@ -40,7 +40,7 @@ public class Vector3
 		return z;
 	}
 
-	public static Vector3 zero = new Vector3();
+	public static Vector3 zero = new Vector3(0,0,0);
 	public static Vector3 one = new Vector3(1, 1, 1);
 	public static Vector3 center = new Vector3(0.5, 0.5, 0.5);
 
@@ -55,8 +55,7 @@ public class Vector3
 	public double y;
 	public double z;
 
-	public Vector3() {
-	}
+	
 
 	public Vector3(double d, double d1, double d2) {
 		x = d;

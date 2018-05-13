@@ -99,11 +99,6 @@ public class TileFormationBase extends TileMod implements IGenerator, IConsumer
 				
 		}
 		
-		
-		
-		if(this.getWorld().isRemote)
-			return;
-		
 		if(!this.isActiveNode())
 			return;
 		
@@ -124,12 +119,14 @@ public class TileFormationBase extends TileMod implements IGenerator, IConsumer
 		{
 			IConsumer ii = null;
 			
-			List<BlockPos> l = getPathToConsumer(getWorld(), getPos(), linkedTo);
-			
+			List<BlockPos> l = getPathToConsumer(getWorld(), getPos(), linkedTo, false);
+			//TODO: MAKE THIS GAY BS VECTOR3 to FIX GAY SHIT
 			if(!l.isEmpty())
 			{	
 				if(this.getWorld().getTileEntity(l.get(l.size() - 1)) != null && this.getWorld().getTileEntity(l.get(l.size() - 1)) instanceof IConsumer && ((IConsumer)this.getWorld().getTileEntity(l.get(l.size() - 1))).isConsumer())
 					ii = ((IConsumer)this.getWorld().getTileEntity(l.get(l.size() - 1)));
+				
+				Nethercraft.proxy.powerFX(this.getPos().getX()+0.5D, this.getPos().getY()+1.5D, this.getPos().getZ()+0.5D, l);
 			}
 			
 			if(ii != null)
@@ -140,6 +137,9 @@ public class TileFormationBase extends TileMod implements IGenerator, IConsumer
 			}
 			
 		}
+		
+		if(this.getWorld().isRemote)
+			return;
 		
 		if(isGen())
 		{
@@ -266,7 +266,7 @@ public class TileFormationBase extends TileMod implements IGenerator, IConsumer
 	
 
 @SuppressWarnings("unused")
-public static List<BlockPos> getPathToConsumer(World w, BlockPos posF, List<BlockPos> linked){
+public static List<BlockPos> getPathToConsumer(World w, BlockPos posF, List<BlockPos> linked, boolean includeStart){
 	
 	List<BlockPos> toCheck = new ArrayList<BlockPos>();
 	
@@ -370,7 +370,8 @@ public static List<BlockPos> getPathToConsumer(World w, BlockPos posF, List<Bloc
 		
 //	w.spawnParticle(e.EXPLOSION_HUGE, pos2.getX(), pos2.getY()+2, pos2.getZ(), 0, 0, 0, null);
 	ArrayList<BlockPos> pf = new ArrayList<BlockPos>();
-	pf.add(posF);
+	if(includeStart)
+		pf.add(posF);
 	pf.addAll(path);	
 	return pf;
 }
