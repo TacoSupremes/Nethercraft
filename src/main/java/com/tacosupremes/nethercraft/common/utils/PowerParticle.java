@@ -17,6 +17,7 @@ public class PowerParticle extends ParticleRedstone {
 		this.particleGreen = g;
 		this.particleBlue = b;
 		this.path = path;
+		this.canCollide = false;
 	}
 	
 	private int index = 0;
@@ -34,11 +35,17 @@ public class PowerParticle extends ParticleRedstone {
 	            this.setExpired();
 	        }
 	        
-	        Vector3 v = new Vector3(Math.round((path.get(index).getX()-this.posX)*100.0D)/100.0D, Math.round((path.get(index).getY()-this.posY)*100.0D)/100.0D, Math.round((path.get(index).getZ() - this.posZ)*100)/100);
+	        Vector3 v = new Vector3(path.get(index).getX()-this.posX, path.get(index).getY()-this.posY, path.get(index).getZ() - this.posZ).normalize().multiply(0.25D);
 	        
-	        double mag = v.mag();
+	        Vector3 v2 = new Vector3(path.get(index).getX()-this.posX, path.get(index).getY()-this.posY, path.get(index).getZ() - this.posZ);
+	                
+	      //  double mag = v2.mag();
 	        	        
-	        System.out.println(v.toString()+" "+mag);
+	    //    System.out.println(v.toString()+" "+mag);
+	        
+	        
+	        if(v.mag() > v2.mag())
+	        	v = v.normalize().multiply(v2.mag());
 	        
 	        this.motionX = v.x;
 	        
@@ -49,13 +56,20 @@ public class PowerParticle extends ParticleRedstone {
 	        this.move(motionX, motionY, motionZ);
 	        
 	        
-	        if(mag >= 0 && mag <=0.2)      
+	      
+	        if(v2.mag() <= 0.2)      
 	    		index++;
 	        
-	        System.out.println(v.toString()+index);
+	     //   System.out.println(v.toString()+index);
 	        
 	        
 	        
+	    }
+	 @Override
+	 public int getBrightnessForRender(float p_189214_1_)
+	    {
+	       
+	        return 1000;
 	    }
 
 }

@@ -3,6 +3,7 @@ package com.tacosupremes.nethercraft.proxy;
 import java.util.List;
 
 import com.tacosupremes.nethercraft.common.utils.ProxyRegistry;
+import com.tacosupremes.nethercraft.common.utils.Vector3;
 
 import net.minecraft.item.Item;
 import net.minecraft.util.math.BlockPos;
@@ -35,7 +36,7 @@ public class CommonProxy
 		
 	}
 	
-	public void powerFX(double x, double y, double z, List<BlockPos> bp) 
+	public void powerFX(double x, double y, double z, List<BlockPos> l) 
 	{
 		
 	}

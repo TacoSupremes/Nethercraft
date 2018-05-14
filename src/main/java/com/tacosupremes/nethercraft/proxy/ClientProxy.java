@@ -7,6 +7,7 @@ import com.tacosupremes.nethercraft.common.items.ModItems;
 import com.tacosupremes.nethercraft.common.utils.ClientStuff;
 import com.tacosupremes.nethercraft.common.utils.ParticleFlameTornado;
 import com.tacosupremes.nethercraft.common.utils.PowerParticle;
+import com.tacosupremes.nethercraft.common.utils.Vector3;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
@@ -60,9 +61,9 @@ public class ClientProxy extends CommonProxy
 	}
 	
 	@Override
-	public void powerFX(double x, double y, double z, List<BlockPos> bp) 
+	public void powerFX(double x, double y, double z, List<BlockPos> list)  
 	{
-		PowerParticle wisp = new PowerParticle(Minecraft.getMinecraft().world, x, y, z, 0, 1.0F, 0, bp);
+		PowerParticle wisp = new PowerParticle(Minecraft.getMinecraft().world, x, y, z, 0, 1.0F, 0, list);
 		
 		Minecraft.getMinecraft().effectRenderer.addEffect(wisp);
 	}

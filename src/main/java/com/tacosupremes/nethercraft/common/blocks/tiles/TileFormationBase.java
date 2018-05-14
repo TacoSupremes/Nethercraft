@@ -1,7 +1,9 @@
 package com.tacosupremes.nethercraft.common.blocks.tiles;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.tacosupremes.nethercraft.Nethercraft;
 import com.tacosupremes.nethercraft.common.blocks.tiles.power.IConsumer;
@@ -120,20 +122,26 @@ public class TileFormationBase extends TileMod implements IGenerator, IConsumer
 			IConsumer ii = null;
 			
 			List<BlockPos> l = getPathToConsumer(getWorld(), getPos(), linkedTo, false);
+			
+			//getPathToConsumer2(getWorld(), getPos(), linkedTo, false);
+			
 			//TODO: MAKE THIS GAY BS VECTOR3 to FIX GAY SHIT
 			if(!l.isEmpty())
 			{	
 				if(this.getWorld().getTileEntity(l.get(l.size() - 1)) != null && this.getWorld().getTileEntity(l.get(l.size() - 1)) instanceof IConsumer && ((IConsumer)this.getWorld().getTileEntity(l.get(l.size() - 1))).isConsumer())
 					ii = ((IConsumer)this.getWorld().getTileEntity(l.get(l.size() - 1)));
-				
-				Nethercraft.proxy.powerFX(this.getPos().getX()+0.5D, this.getPos().getY()+1.5D, this.getPos().getZ()+0.5D, l);
-			}
+			
+						}
 			
 			if(ii != null)
 			{
 				if(ii.fill(transferRate, false) > 0)		
-						power -= ii.fill(transferRate, true);	
+				{	
+					Nethercraft.proxy.powerFX(this.getPos().getX()+0.5D, this.getPos().getY()+1.5D, this.getPos().getZ()+0.5D,  l);
 				
+					power -= ii.fill(transferRate, true);	
+					
+				}
 			}
 			
 		}
@@ -276,9 +284,6 @@ public static List<BlockPos> getPathToConsumer(World w, BlockPos posF, List<Bloc
 	
 	List<Integer> choice = new ArrayList<Integer>();
 	
-	//int pig  = 4;
-	//EnumParticleTypes e = EnumParticleTypes.values()[pig];
-	
 	if(linked.isEmpty())
 		return toCheck;
 	
@@ -375,6 +380,122 @@ public static List<BlockPos> getPathToConsumer(World w, BlockPos posF, List<Bloc
 	pf.addAll(path);	
 	return pf;
 }
+
+
+public static List<BlockPos> getPathToConsumer2(World w, BlockPos s, List<BlockPos> linked, boolean includeStart){
+	
+	Map<Integer, List<BlockPos>> map = new HashMap<Integer, List<BlockPos>>();
+	
+	BlockPos consumer = null;
+	
+	int lvl = 0;
+
+	List<String> checked = new ArrayList<String>();
+
+	boolean added = true;
+	
+	List<BlockPos> first = new ArrayList<BlockPos>();
+	
+	first.add(s);
+	
+	map.put(lvl, first);
+	
+	while(added)
+	{
+		added = false;
+		
+		List<BlockPos> l = new ArrayList<BlockPos>();
+				
+		for(BlockPos bp : map.get(lvl))
+		{
+			checked.add(bp.toString());
+			
+			if(w.getTileEntity(bp) instanceof IConsumer && ((IConsumer)w.getTileEntity(bp)).fill(transferRate, false) > 0)
+			{
+				
+				System.out.println("Found it nibba");
+				consumer = bp;
+				break;
+			}
+			
+			for(BlockPos bp2 : ((INode)w.getTileEntity(bp)).getNodeList())
+			{
+				if(!checked.contains(bp2.toString()))
+				{
+					added = true;
+					l.add(bp2);
+				}
+			}
+	
+		}
+		
+		lvl++;
+		
+		map.put(lvl, l);
+	}
+			
+	
+	
+	List<BlockPos> bt = new ArrayList<BlockPos>();
+	
+	if(consumer == null)
+	{
+		return bt;
+	}
+	
+	bt.add(consumer);
+	
+	while(lvl > 0)
+	{
+		lvl--;
+		
+		outer:
+		for(BlockPos pos : ((INode)w.getTileEntity(bt.get(bt.size()-1))).getNodeList())
+		
+			for(BlockPos ipos : map.get(lvl))
+			{
+				if(pos.toString() == ipos.toString())
+				{
+					bt.add(ipos);
+					break outer;
+				}
+			}
+			
+		
+		
+	}
+	if(!includeStart)
+	bt.remove(bt.size()-1);
+	
+	List<BlockPos> tbt = new ArrayList<BlockPos>();
+	for(int i = bt.size()-1; i >= 0; i--)
+		tbt.add(bt.get(i));
+	
+	return tbt;
+	
+	//toCheck	//Backtrack nodes at end.
+
+	
+	
+}
+
+public static List<Vector3> getOffset(World w, List<BlockPos> bp)
+{	
+	List<Vector3> v3 = new ArrayList<Vector3>();
+	
+	for(BlockPos pos : bp)
+	{
+		if(w.getTileEntity(pos) == null)
+			return new ArrayList<Vector3>();
+		
+		Vector3 off = ((INode)w.getTileEntity(pos)).getParticleOffset();
+		
+		v3.add(off);
+	}
+	
+	return v3;	
+}
+
 
  public boolean isDone() {
 
