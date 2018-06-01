@@ -32,6 +32,10 @@ public class ModItems
 	
 	public static Item netherScythe;
 	
+	public static Item lavaWalker;
+	
+	public static Item book;
+	
 	//FIRE Sword swing to shoot fire right click for fire shield
 	
 	//Item that moves you 8 blocks at a time since that is nether rules for distance
@@ -47,6 +51,7 @@ public class ModItems
 	
 	// make power particles move and shit
 	
+	// enchant lava walker
 	
 	public static void preInit()
 	{

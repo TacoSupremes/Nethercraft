@@ -23,6 +23,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.Vec3i;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -73,6 +74,12 @@ public class Vector3
 		x = vec.x;
 		y = vec.y;
 		z = vec.z;
+	}
+
+	public Vector3(Vec3i vec) {
+		x = vec.getX();
+		y = vec.getY();
+		z = vec.getZ();
 	}
 
 	public Vector3 copy() {
@@ -325,5 +332,10 @@ public class Vector3
 
 		Vector3 v = (Vector3)o;
 		return x == v.x && y == v.y && z == v.z;
+	}
+
+	public Vec3i toVec3i() {
+		
+		return new Vec3i(x, y, z);
 	}
 }

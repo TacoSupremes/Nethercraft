@@ -36,7 +36,7 @@ public class CommonProxy
 		
 	}
 	
-	public void powerFX(double x, double y, double z, List<BlockPos> l) 
+	public void powerFX(double x, double y, double z, List<Vector3> l) 
 	{
 		
 	}

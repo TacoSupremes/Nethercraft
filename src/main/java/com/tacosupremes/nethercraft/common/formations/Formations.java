@@ -13,7 +13,6 @@ import net.minecraft.world.World;
 public class Formations
 {
 	public static List<IFormation> formations = new ArrayList<IFormation>();
-
 	
 	public static void preInit()
 	{
@@ -23,6 +22,8 @@ public class Formations
 		formations.add(new LavaGenFormation());
 		formations.add(new GlowstoneFarm());
 		formations.add(new OreMagnetFormation());
+		
+		
 		//TODO smelter, soul gen, soul cage = (Containment for Entities) .
 	}
 

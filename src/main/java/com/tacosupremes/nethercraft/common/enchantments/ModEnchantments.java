@@ -9,10 +9,12 @@ public class ModEnchantments
 {
 
 	public static List<Enchantment> enchants = new ArrayList<Enchantment>();
+	
+	public static Enchantment lavaWalker;
 
 	public static void preInit()
 	{
-
+		lavaWalker = new LavaWalkerEnchantment();
 	}
 
 }

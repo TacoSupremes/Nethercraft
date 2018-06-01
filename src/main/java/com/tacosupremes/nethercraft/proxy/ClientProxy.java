@@ -61,7 +61,7 @@ public class ClientProxy extends CommonProxy
 	}
 	
 	@Override
-	public void powerFX(double x, double y, double z, List<BlockPos> list)  
+	public void powerFX(double x, double y, double z, List<Vector3> list)  
 	{
 		PowerParticle wisp = new PowerParticle(Minecraft.getMinecraft().world, x, y, z, 0, 1.0F, 0, list);
 		

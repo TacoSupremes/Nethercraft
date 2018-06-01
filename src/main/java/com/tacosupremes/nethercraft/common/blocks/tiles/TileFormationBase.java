@@ -123,21 +123,23 @@ public class TileFormationBase extends TileMod implements IGenerator, IConsumer
 			
 			List<BlockPos> l = getPathToConsumer(getWorld(), getPos(), linkedTo, false);
 			
-			//getPathToConsumer2(getWorld(), getPos(), linkedTo, false);
-			
-			//TODO: MAKE THIS GAY BS VECTOR3 to FIX GAY SHIT
 			if(!l.isEmpty())
 			{	
 				if(this.getWorld().getTileEntity(l.get(l.size() - 1)) != null && this.getWorld().getTileEntity(l.get(l.size() - 1)) instanceof IConsumer && ((IConsumer)this.getWorld().getTileEntity(l.get(l.size() - 1))).isConsumer())
 					ii = ((IConsumer)this.getWorld().getTileEntity(l.get(l.size() - 1)));
 			
-						}
+			}
 			
 			if(ii != null)
 			{
 				if(ii.fill(transferRate, false) > 0)		
 				{	
-					Nethercraft.proxy.powerFX(this.getPos().getX()+0.5D, this.getPos().getY()+1.5D, this.getPos().getZ()+0.5D,  l);
+					
+					List<Vector3> lv = getOffset(world, l);
+					
+					lv.add(ii.getParticleOffset());
+					
+					Nethercraft.proxy.powerFX(this.getPos().getX()+0.5D, this.getPos().getY()+1.5D, this.getPos().getZ()+0.5D,  lv);
 				
 					power -= ii.fill(transferRate, true);	
 					
@@ -171,9 +173,6 @@ public class TileFormationBase extends TileMod implements IGenerator, IConsumer
 		}
 	}
 	
-	
-	
-
 	public boolean canRun(World w, BlockPos pos, NBTTagCompound nbt) 
 	{
 		
@@ -242,8 +241,7 @@ public class TileFormationBase extends TileMod implements IGenerator, IConsumer
 	@Override
 	public boolean isGen() 
 	{
-		
-		
+
 		return  formation == null ? false : formation instanceof IGenFormation;
 	}
 	
@@ -268,11 +266,9 @@ public class TileFormationBase extends TileMod implements IGenerator, IConsumer
 	@Override
 	public int getPower() 
 	{
-
 		return power;
 	}
 	
-
 @SuppressWarnings("unused")
 public static List<BlockPos> getPathToConsumer(World w, BlockPos posF, List<BlockPos> linked, boolean includeStart){
 	
@@ -296,8 +292,6 @@ public static List<BlockPos> getPathToConsumer(World w, BlockPos posF, List<Bloc
 	}else
 		toCheck.addAll(linked);
 	
-	
-	
 	while(!toCheck.isEmpty()){
 
 		BlockPos pos = toCheck.remove(0);
@@ -313,8 +307,6 @@ public static List<BlockPos> getPathToConsumer(World w, BlockPos posF, List<Bloc
 		
 		if(!ip.isActiveNode())
 			continue;
-		
-		
 		
 		if(w.getTileEntity(pos) instanceof IConsumer)
 		{
@@ -355,32 +347,22 @@ public static List<BlockPos> getPathToConsumer(World w, BlockPos posF, List<Bloc
 				int i = choice.remove(choice.size()-1);
 				
 				toCheck.add(path.get(i));
-				
-				
-				
+
 				for(int j = i+1; j< path.size();j++)
 					path.remove(j);
-				
-				
-				
+						
 			}
 			
 		}
-		
-	
-			
+				
 	}
-	
-//	BlockPos pos2 = path.get(path.size()-1); 
-		
-//	w.spawnParticle(e.EXPLOSION_HUGE, pos2.getX(), pos2.getY()+2, pos2.getZ(), 0, 0, 0, null);
+
 	ArrayList<BlockPos> pf = new ArrayList<BlockPos>();
 	if(includeStart)
 		pf.add(posF);
 	pf.addAll(path);	
 	return pf;
 }
-
 
 public static List<BlockPos> getPathToConsumer2(World w, BlockPos s, List<BlockPos> linked, boolean includeStart){
 	
@@ -495,7 +477,6 @@ public static List<Vector3> getOffset(World w, List<BlockPos> bp)
 	
 	return v3;	
 }
-
 
  public boolean isDone() {
 

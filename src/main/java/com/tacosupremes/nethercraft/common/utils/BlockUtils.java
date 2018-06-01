@@ -318,7 +318,26 @@ public class BlockUtils
 		 return e2.get(in);
 	}
 	
-	
+	public static List<BlockPos> diamond(World w, BlockPos pos, int r)
+	{
+		
+		List<BlockPos> l = new ArrayList<BlockPos>(); 
+		
+		l.add(pos);
+		
+		if(r > 1)
+		{
+			for(int x = -1 * (r-1), z = -1 * (r-1); x < r-1; x++, z++)
+			{
+				if(x == 0 && z == 0)
+					continue;
+				
+				l.add(pos.add(x, 0, z));
+			}
+		}
+		
+		return null;
+	}
 	
 
 }

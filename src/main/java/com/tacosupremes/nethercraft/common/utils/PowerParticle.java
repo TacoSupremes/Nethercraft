@@ -9,9 +9,9 @@ import net.minecraft.world.World;
 
 public class PowerParticle extends ParticleRedstone {
 
-	private List<BlockPos> path;
+	private List<Vector3> path;
 
-	public PowerParticle(World worldIn, double xCoordIn, double yCoordIn, double zCoordIn, float r, float g, float b, List<BlockPos> path) {
+	public PowerParticle(World worldIn, double xCoordIn, double yCoordIn, double zCoordIn, float r, float g, float b, List<Vector3> path) {
 		super(worldIn, xCoordIn, yCoordIn, zCoordIn, r, g, b);
 		this.particleRed = r;
 		this.particleGreen = g;
