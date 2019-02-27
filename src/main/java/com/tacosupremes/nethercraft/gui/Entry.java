@@ -8,6 +8,15 @@ public class Entry
 	private int id;
 	private Entry parent = null; // parent/prev entry
 	private Entry next = null; // next entry
+	private boolean sub = false;
+	
+	public Entry(int id)
+	{
+		this.id = id;
+		this.name = "FAKEENTRY";
+	}
+	
+	
 	
 	public Entry(String name, GuiID type)
 	{
@@ -58,7 +67,7 @@ public class Entry
 		return this.parent;
 	}
 	
-	public Entry setNextEntry(Entry e)
+	public Entry setNextEntry(Entry e) // linked entry on next page
 	{
 		this.next = e;
 		return this;
@@ -68,5 +77,16 @@ public class Entry
 	public Entry getNextEntry()
 	{
 		return this.next;
+	}
+	
+	public boolean isSubEntry()
+	{
+		return sub;
+	}
+	
+	public Entry setSubEntry()
+	{
+		sub = true;
+		return this;
 	}
 }

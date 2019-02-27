@@ -29,6 +29,7 @@ public class GuiModBookText extends GuiModBook{
 		text = e.getName();
 		pc = e.getPageCount();
 		cp = 1;
+		
 	}
 	
 
@@ -39,4 +40,31 @@ public class GuiModBookText extends GuiModBook{
 
 		this.drawTextSplit(mc.fontRenderer, I18n.format(LibMisc.MODID + "." + text + cp), left+20, top+20,  guiWidth-40, Color.WHITE.getRGB());		   	
 	}
+
+
+	@Override
+	protected void actionPerformed(GuiButton gb) {
+		
+		if(gb.id == e.getNextEntry().getID() && cp < pc)
+		{	
+			cp++;
+			if(cp == pc)
+				gb.visible = false;
+		}
+		else if(gb.id == e.getParent().getID() && cp > 1)
+		{
+			cp--;
+			if(cp < pc)
+			{
+				for(GuiButton gb2 : this.buttonList)
+				{
+					if(gb2.id == e.getNextEntry().getID())
+						gb2.visible = true;
+				}
+					
+			}
+		}else
+			super.actionPerformed(gb);
+		}
+	
 }

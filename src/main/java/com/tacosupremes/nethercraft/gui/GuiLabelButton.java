@@ -12,18 +12,24 @@ public class GuiLabelButton extends GuiButton {
 	private int trim;
 
 
+	public GuiLabelButton(int buttonId, int x, int y, String buttonText) {
+		this(buttonId, x, y, Minecraft.getMinecraft().fontRenderer.getStringWidth(buttonText), Minecraft.getMinecraft().fontRenderer.FONT_HEIGHT, buttonText);
+			
+	}
+	
+	public GuiLabelButton(int buttonId, int x, int y, String buttonText, int trim) {
+		this(buttonId, x, y, Minecraft.getMinecraft().fontRenderer.getStringWidth(buttonText), Minecraft.getMinecraft().fontRenderer.FONT_HEIGHT, buttonText, trim);
+	}
+	
 
 	public GuiLabelButton(int buttonId, int x, int y, int widthIn, int heightIn, String buttonText, int trim) {
 		super(buttonId, x, y, widthIn, heightIn, buttonText);
-		this.trim = trim;
-		
+		this.trim = trim;	
 	}
 	
 	public GuiLabelButton(int buttonId, int x, int y, int widthIn, int heightIn, String buttonText) {
 		super(buttonId, x, y, widthIn, heightIn, buttonText);
 		trim = 0;
-		//Minecraft.getMinecraft().fontRenderer.getStringWidth(displayString + 1);
-		
 	}
 	
 	
@@ -36,7 +42,7 @@ public class GuiLabelButton extends GuiButton {
             FontRenderer fontrenderer = mc.fontRenderer;
             mc.getTextureManager().bindTexture(BUTTON_TEXTURES);
             GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-            this.hovered = mouseX >= this.x && mouseY >= this.y && mouseX < this.x + this.width && mouseY < this.y + this.height;
+            this.hovered = mouseX >= this.x - width/2 && mouseY >= this.y && mouseX < this.x + this.width / 2 && mouseY < this.y + this.height;
             int i = this.getHoverState(this.hovered);
             GlStateManager.enableBlend();
             GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
@@ -65,5 +71,11 @@ public class GuiLabelButton extends GuiButton {
            // this.drawCenteredString(fontrenderer, this.displayString, this.x + this.width / 2, this.y + (this.height - 8) / 2, j);
         }
     }
+	
+	@Override
+	public boolean mousePressed(Minecraft mc, int mouseX, int mouseY)
+	{
+		return this.enabled && this.visible &&  mouseX >= this.x - width/2 && mouseY >= this.y && mouseX < this.x + this.width / 2 && mouseY < this.y + this.height;
+	}
 
 }

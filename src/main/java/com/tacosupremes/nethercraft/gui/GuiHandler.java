@@ -22,12 +22,11 @@ public class GuiHandler implements IGuiHandler
 	{
 		Entry e = new EntryList("Nether-Tome", new Entry[]{new Entry("Intro"), new Entry("Generating-Nether-Energy"), new Entry("Using-Nether-Energy"), new Entry("Nether-Items")});		
 		
-		Entry e2 = new EntryList("Intro", new Entry[] {new EntryText("What-is-Nethercraft", 1), new EntryText("Nether-Energy", 1),  new EntryText("heat-altar" ,1),new EntryText("Overuse-of-Nether-Energy", 1)});
-	
+		Entry e2 = new EntryList("Intro", new Entry[] {new EntryText("What-is-Nethercraft", 2), new EntryText("Nether-Energy", 1),  new EntryText("heat-altar" ,1),new EntryText("Overuse-of-Nether-Energy", 1)});
 		
-	//	Entry e3 = new EntryItem(new ItemStack(ModBlocks.formationBase));
+		Entry e3 = new EntryItem(new ItemStack(ModBlocks.formationBase));
 		
-	//	setNextEntry("heat-altar", new ItemStack(ModBlocks.formationBase));
+		setNextEntry("heat-altar", new ItemStack(ModBlocks.formationBase));
 	
 	}
 	

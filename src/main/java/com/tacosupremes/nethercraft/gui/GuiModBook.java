@@ -43,9 +43,17 @@ public class GuiModBook extends GuiScreen {
 		left = width / 2 - guiWidth / 2;
 		top = height / 2 - guiHeight / 2;
 						
-		if(e.getParent() != null)
-			this.buttonList.add(new GuiLabelButton(GuiHandler.getEntryFromName(e.getParent().getName()).getID(), left+guiWidth/2, top+guiHeight-20, 100, 20, I18n.format(LibMisc.MODID + "." + "back")));
+		if(e.getParent() != null && e.getNextEntry() == null)
+			this.buttonList.add(new GuiLabelButton(GuiHandler.getEntryFromName(e.getParent().getName()).getID(), left+guiWidth/2, top+guiHeight-20, I18n.format(LibMisc.MODID + "." + "back")));
+		else if(e.getParent() != null && e.getNextEntry() != null)
+		{
+			String back = I18n.format(LibMisc.MODID + "." + "back");
 			
+			this.buttonList.add(new GuiLabelButton(GuiHandler.getEntryFromName(e.getParent().getName()).getID(), left+20+Minecraft.getMinecraft().fontRenderer.getStringWidth(back)/2, top+guiHeight-20, back));
+			this.buttonList.add(new GuiLabelButton(e.getNextEntry().getID(), left+guiWidth - 30, top+guiHeight-20, I18n.format(LibMisc.MODID + "." + "next")));
+			
+		}
+				
 		initGuiFeatures();
 	
 	}

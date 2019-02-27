@@ -30,7 +30,7 @@ public class GuiModBookList extends GuiModBook {
 	public void initGuiFeatures()
 	{
 		for(int i = 0; i<l.length; i++)
-				this.buttonList.add(new GuiLabelButton(GuiHandler.getEntryFromName(l[i].getName()).getID(), left+guiWidth/2, top+25+15*i, 100, 20, I18n.format(LibMisc.MODID + "." + l[i].getName())));	
+				this.buttonList.add(new GuiLabelButton(GuiHandler.getEntryFromName(l[i].getName()).getID(), left+guiWidth/2, top+25+15*i, I18n.format(LibMisc.MODID + "." + l[i].getName())));	
 	}
 
 		
