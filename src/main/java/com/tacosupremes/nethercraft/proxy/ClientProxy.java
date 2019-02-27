@@ -11,6 +11,7 @@ import com.tacosupremes.nethercraft.common.utils.Vector3;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;
@@ -88,6 +89,18 @@ public class ClientProxy extends CommonProxy
 			return true;
 		
 		return false;
+	}
+	
+	@Override
+	public boolean playerWearingItem(Item wand, EntityEquipmentSlot slot) 
+	{
+		
+		if(Minecraft.getMinecraft().player == null)
+			return false;
+		
+		ItemStack is = Minecraft.getMinecraft().player.getItemStackFromSlot(slot);
+		
+		return is != null && is.getItem() == wand;
 	}
 
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import com.tacosupremes.nethercraft.common.utils.ProxyRegistry;
 import com.tacosupremes.nethercraft.common.utils.Vector3;
 
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.MinecraftForge;
@@ -43,6 +44,11 @@ public class CommonProxy
 
 	public boolean playerHoldingItem(Item wand) 
 	{
+		return false;
+	}
+
+	public boolean playerWearingItem(Item wand, EntityEquipmentSlot slot) {
+		
 		return false;
 	}
 

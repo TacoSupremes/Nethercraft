@@ -86,8 +86,8 @@ public class NetherSpawnerFormation implements IConsumerFormation {
 	}
 
 	@Override
-	public Vector3 getOffset() {
-		
+	public Vector3 getOffset() 
+	{	
 		return Vector3.zero;
 	}
 
@@ -95,6 +95,12 @@ public class NetherSpawnerFormation implements IConsumerFormation {
 	public int getMaxPower()
 	{	
 		return 5000;
+	}
+
+	@Override
+	public int getRange()
+	{	
+		return -1;
 	}
 
 }

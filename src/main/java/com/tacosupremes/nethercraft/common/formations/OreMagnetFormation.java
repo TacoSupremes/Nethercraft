@@ -21,8 +21,8 @@ import net.minecraft.world.World;
 public class OreMagnetFormation implements IConsumerFormation {
 
 	@Override
-	public Block[] getBlocks() {
-	
+	public Block[] getBlocks() 
+	{
 		Block a = Blocks.AIR;
 		
 		Block d = Blocks.DIAMOND_BLOCK; 
@@ -37,20 +37,19 @@ public class OreMagnetFormation implements IConsumerFormation {
 				a,o,g,o,a,
 				o,g,d,g,o,
 				a,o,g,o,a,
-				a,a,o,a,a
-				
+				a,a,o,a,a		
 		};
 	}
 
 	@Override
-	public Vector3 getOffset() {
-		// TODO Auto-generated method stub
+	public Vector3 getOffset()
+	{
 		return Vector3.down;
 	}
 
 	@Override
-	public int getMaxPower() {
-		// TODO Auto-generated method stub
+	public int getMaxPower()
+	{
 		return 2000;
 	}
 
@@ -63,9 +62,9 @@ public class OreMagnetFormation implements IConsumerFormation {
 		
 		for(int y = pos.getY()-1; y > 1; y--)
 		{
-			for(int x = pos.getX() - 8; x <= pos.getX() + 8; x++)
+			for(int x = pos.getX() - getRange(); x <= pos.getX() + getRange(); x++)
 			{
-				for(int z = pos.getZ() - 8; z <= pos.getZ() + 8; z++)
+				for(int z = pos.getZ() - getRange(); z <= pos.getZ() + getRange(); z++)
 				{				
 					BlockPos pos_ = new BlockPos(x, y, z);
 					
@@ -97,7 +96,12 @@ public class OreMagnetFormation implements IConsumerFormation {
 			}
 		}
 	}
+
+	@Override
+	public int getRange()
+	{
+		return 8;
+	}
 		
-	
 
 }

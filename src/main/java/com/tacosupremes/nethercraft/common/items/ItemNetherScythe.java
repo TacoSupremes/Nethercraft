@@ -19,7 +19,8 @@ import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumParticleTypes;
 
-public class ItemNetherScythe extends ItemSword {
+public class ItemNetherScythe extends ItemSword 
+{
 
 	public ItemNetherScythe() 
 	{
@@ -81,13 +82,9 @@ public class ItemNetherScythe extends ItemSword {
 	}
 
 	@Override
-	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity) {
-	
-		if(entity.isDead)
-			System.out.print("dead nibbas");
-		
+	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity) 
+	{	
 		return super.onLeftClickEntity(stack, player, entity);
 	}
-	
-	
+		
 }

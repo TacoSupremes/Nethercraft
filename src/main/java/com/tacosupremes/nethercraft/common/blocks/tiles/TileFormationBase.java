@@ -19,6 +19,7 @@ import com.tacosupremes.nethercraft.common.utils.Vector3;
 
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
@@ -90,7 +91,7 @@ public class TileFormationBase extends TileMod implements IGenerator, IConsumer
 		{
 			if(this.getWorld().getTileEntity(linkedTo.get(i)) instanceof INode)
 			{
-				if(((INode)this.getWorld().getTileEntity(linkedTo.get(i))).isActiveNode() && Nethercraft.proxy.playerHoldingItem(ModItems.wand))
+				if(((INode)this.getWorld().getTileEntity(linkedTo.get(i))).isActiveNode() && (Nethercraft.proxy.playerHoldingItem(ModItems.wand) || Nethercraft.proxy.playerWearingItem(ModItems.netherGlasses, EntityEquipmentSlot.HEAD)))
 					BlockUtils.drawLine(getWorld(), this.getParticleOffset(), ((INode)this.getWorld().getTileEntity(linkedTo.get(i))).getParticleOffset(), EnumParticleTypes.REDSTONE);	
 			}
 			else
@@ -110,14 +111,22 @@ public class TileFormationBase extends TileMod implements IGenerator, IConsumer
 		if(formation == null)
 			return;
 		
+		if(formation.getRange() != -1 && Nethercraft.proxy.playerWearingItem(ModItems.netherGlasses, EntityEquipmentSlot.HEAD))
+		{	
+			double r = formation.getRange();
+			this.getWorld().spawnParticle(EnumParticleTypes.SPELL_WITCH, this.getPos().getX() - r + 0.5D, this.getPos().getY(), this.getPos().getZ() - r + 0.5D, 0, 1.0, 0);
+			this.getWorld().spawnParticle(EnumParticleTypes.SPELL_WITCH, this.getPos().getX() + r + 0.5D, this.getPos().getY(), this.getPos().getZ() - r + 0.5D, 0, 1.0, 0);
+			this.getWorld().spawnParticle(EnumParticleTypes.SPELL_WITCH, this.getPos().getX() - r + 0.5D, this.getPos().getY(), this.getPos().getZ() + r + 0.5D, 0, 1.0, 0);
+			this.getWorld().spawnParticle(EnumParticleTypes.SPELL_WITCH, this.getPos().getX() + r + 0.5D, this.getPos().getY(), this.getPos().getZ() + r + 0.5D, 0, 1.0, 0);
+		}
+		
 		if(!canRun(this.getWorld(), this.getPos(), nbt))
 		{
 			formation = null;
 			return;
 		}
-		
-		
-		if(this.isGen()  && !linkedTo.isEmpty() && this.power >= this.transferRate)
+			
+		if(this.isGen() && !linkedTo.isEmpty() && this.power >= this.transferRate)
 		{
 			IConsumer ii = null;
 			
@@ -154,13 +163,11 @@ public class TileFormationBase extends TileMod implements IGenerator, IConsumer
 		if(isGen())
 		{
 		
-		
 			if(power < formation.getMaxPower())
 				((IGenFormation)formation).generatePower(this.getWorld(), this.getPos(), nbt, this);
 			else if(power > formation.getMaxPower())
 				power = formation.getMaxPower();
-			
-			
+				
 		}
 		else
 		{

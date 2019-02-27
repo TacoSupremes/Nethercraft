@@ -23,9 +23,9 @@ public class NetherGenFormation implements IGenFormation
 		
 		for(int y = 1; y < pos.getY(); y++)
 		{
-			for(int x = pos.getX() - 16; x <= pos.getX() + 16; x++)
+			for(int x = pos.getX() - getRange(); x <= pos.getX() + getRange(); x++)
 			{
-				for(int z = pos.getZ() - 16; z <= pos.getZ() + 16; z++)
+				for(int z = pos.getZ() - getRange(); z <= pos.getZ() + getRange(); z++)
 				{				
 					BlockPos pos_ = new BlockPos(x, y, z);
 					
@@ -34,9 +34,7 @@ public class NetherGenFormation implements IGenFormation
 						if(w.getTileEntity(pos_) == null && w.getBlockState(pos_).getBlock() != Blocks.NETHERRACK)
 						{			
 							w.setBlockState(pos_, Blocks.NETHERRACK.getDefaultState(), 3);	
-							
-							
-							
+												
 							System.out.println("GENERATOR" + te.power);
 							
 							return;
@@ -46,15 +44,14 @@ public class NetherGenFormation implements IGenFormation
 				}
 			}
 		}
-		
-		nbt.setBoolean("DONE", true);
-		
+		nbt.setBoolean("DONE", true);	
 	}
 
 	
 
 	@Override
-	public Block[] getBlocks() {
+	public Block[] getBlocks() 
+	{
 		Block f = Blocks.FIRE;
 		
 		Block a = Blocks.AIR;
@@ -84,6 +81,14 @@ public class NetherGenFormation implements IGenFormation
 	public int getMaxPower() 
 	{
 		return 1000;
+	}
+
+
+
+	@Override
+	public int getRange() 
+	{
+		return 16;
 	}
 
 }

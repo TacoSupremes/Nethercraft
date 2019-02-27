@@ -36,7 +36,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @Mod(modid = LibMisc.MODID, version = LibMisc.VERSION)
 public class Nethercraft
 {
-
 	public static CreativeTabs tab;
 
 	public static NCEventHandler events;
@@ -69,10 +68,10 @@ public class Nethercraft
 		config = new ModConfig();
 		
 		config.preInit(event);
+			
+		ModBlocks.register();
 		
 		ModItems.register();
-		
-		ModBlocks.register();
 
 		ModRecipes.preInit();
 

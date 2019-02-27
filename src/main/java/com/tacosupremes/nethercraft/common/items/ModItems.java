@@ -36,6 +36,10 @@ public class ModItems
 	
 	public static Item book;
 	
+	public static Item netherGlasses;
+	
+	public static Item blazeChestPlate;
+	
 	//FIRE Sword swing to shoot fire right click for fire shield
 	
 	//Item that moves you 8 blocks at a time since that is nether rules for distance
@@ -49,9 +53,8 @@ public class ModItems
 	//nether glasses to see range of formations ie: you can see chunks that are targeted by nether gen and to allow for discovery of dungeons,
 	// TODO: MAKE BOOK 
 	
-	// make power particles move and shit
+	// Item that flies like blaze take water damage
 	
-	// enchant lava walker
 	
 	public static void preInit()
 	{
@@ -65,6 +68,11 @@ public class ModItems
 		
 		netherScythe = new ItemNetherScythe();
 		
+		netherGlasses = new ItemNetherGlasses();
+		
+		blazeChestPlate = new ItemBlazeChestPlate();
+		
+		book = new ItemModBook();
 	}
 	
 	public static void register()

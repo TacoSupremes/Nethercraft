@@ -10,6 +10,7 @@ import com.tacosupremes.nethercraft.common.items.ModItems;
 import com.tacosupremes.nethercraft.common.utils.BlockUtils;
 import com.tacosupremes.nethercraft.common.utils.Vector3;
 
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
@@ -70,7 +71,7 @@ public class TileNode extends TileMod implements INode
 		{
 			if(this.getWorld().getTileEntity(linkedTo.get(i)) instanceof INode)
 			{
-				if(((INode)this.getWorld().getTileEntity(linkedTo.get(i))).isActiveNode() && Nethercraft.proxy.playerHoldingItem(ModItems.wand))
+				if(((INode)this.getWorld().getTileEntity(linkedTo.get(i))).isActiveNode() && (Nethercraft.proxy.playerHoldingItem(ModItems.wand) || Nethercraft.proxy.playerWearingItem(ModItems.netherGlasses, EntityEquipmentSlot.HEAD)))
 					BlockUtils.drawLine(getWorld(), this.getParticleOffset(), ((INode)this.getWorld().getTileEntity(linkedTo.get(i))).getParticleOffset(), EnumParticleTypes.REDSTONE);	
 			}
 			else

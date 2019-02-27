@@ -22,7 +22,10 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockFire extends BlockMod {
 
-	public BlockFire() {
+	
+	
+	public BlockFire() 
+	{
 		super(Material.CIRCUITS, "fire");
 		this.setLightLevel(0.6F);
 	}
@@ -95,5 +98,11 @@ public class BlockFire extends BlockMod {
     {
         return BlockFaceShape.UNDEFINED;
     }
+    
+    @Override
+    public boolean addToTab()
+	{
+		return false;
+	}
 	
 }

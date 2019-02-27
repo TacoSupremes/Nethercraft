@@ -85,5 +85,11 @@ public class BlockGlowstoneCrop extends BlockMod {
 	 {
 	        return BlockFaceShape.UNDEFINED;
 	 }
+	 
+	 @Override
+	 public boolean addToTab()
+     {
+		 	return false;
+     }
 
 }

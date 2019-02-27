@@ -75,4 +75,12 @@ public class LavaGenFormation implements IGenFormation
 		
 	}
 
+
+
+	@Override
+	public int getRange() {
+	
+		return -1;
+	}
+
 }

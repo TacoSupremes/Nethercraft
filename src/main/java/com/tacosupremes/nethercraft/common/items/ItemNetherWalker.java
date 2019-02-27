@@ -10,7 +10,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.text.translation.I18n;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -62,7 +62,7 @@ public class ItemNetherWalker extends ItemMod {
 		
 		super.addInformation(stack, worldIn, tooltip, flagIn);
 		
-		tooltip.add(stack.getItemDamage() != 0 ? (I18n.translateToLocal(this.getUnlocalizedName() + ".active")) : (I18n.translateToLocal(this.getUnlocalizedName() + ".disabled")));
+		tooltip.add(stack.getItemDamage() != 0 ? (I18n.format(this.getUnlocalizedName() + ".active")) : (I18n.format(this.getUnlocalizedName() + ".disabled")));
 	}
 
 	

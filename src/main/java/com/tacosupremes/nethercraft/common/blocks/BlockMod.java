@@ -8,12 +8,13 @@ import net.minecraft.block.material.Material;
 
 public class BlockMod extends Block
 {
-
+	
 	public BlockMod(Material materialIn, String s)
 	{
 		super(materialIn);
 		this.setUnlocalizedName(s);
-		this.setCreativeTab(Nethercraft.tab);
+		if(addToTab())
+			this.setCreativeTab(Nethercraft.tab);
 		ModBlocks.blocks.add(this);
 	}
 
@@ -23,6 +24,11 @@ public class BlockMod extends Block
 		super.setUnlocalizedName(name);
 		setRegistryName(LibMisc.MODID + ":" + name);
 		return this;
+	}
+	
+	public boolean addToTab()
+	{
+		return true;
 	}
 
 }

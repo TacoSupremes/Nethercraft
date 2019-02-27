@@ -34,9 +34,8 @@ public class ItemFireSword extends ItemSword
 
 	@Override
 	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) 
-	{
-		
-		target.setFire(7);
+	{	
+		target.setFire(5);
 		
 		return super.hitEntity(stack, target, attacker);
 	}
@@ -51,13 +50,15 @@ public class ItemFireSword extends ItemSword
 			
 			if(e != null)
 			{
-					e.setFire(5);
+					e.setFire(4);
+					
 					e.attackEntityFrom(DamageSource.ON_FIRE, 3);
+					
+					stack.damageItem(2, entityLiving);
 					
 					Nethercraft.proxy.flameTornadoFX(e.posX, e.posY, e.posZ, 1);
 			}
 		}
-		
 		return super.onEntitySwing(entityLiving, stack);
 	}
 
@@ -67,12 +68,13 @@ public class ItemFireSword extends ItemSword
 		super.onUsingTick(stack, player, count);
 	}
 	
-	
 	public ActionResult<ItemStack> onItemRightClick(World w, EntityPlayer player, EnumHand handIn)
     {
         ItemStack itemstack = player.getHeldItem(handIn);
 
 		Nethercraft.proxy.flameTornadoFX(player.posX, player.posY, player.posZ, 2D);
+		
+		itemstack.damageItem(1, player);
 		
 		List<Entity> ent = w.getEntitiesWithinAABBExcludingEntity(player, new AxisAlignedBB(player.getPosition().add(2.25D, 3, 2.25D), player.getPosition().add(-2.25D, -3, -2.25D)));
 		
@@ -101,15 +103,15 @@ public class ItemFireSword extends ItemSword
 
         return new ActionResult(EnumActionResult.PASS, itemstack);     
     }
-	
-	
+		
 	 public EnumAction getItemUseAction(ItemStack stack)
-	    {
+	 {
 	        return EnumAction.BLOCK;
-	    }
+	 }
+	 
 	 public int getMaxItemUseDuration(ItemStack stack)
-	    {
+	 {
 	        return 72000;
-	    }
+	 }
 
 }

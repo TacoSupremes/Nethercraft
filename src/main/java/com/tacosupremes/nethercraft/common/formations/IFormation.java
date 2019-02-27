@@ -15,4 +15,7 @@ public interface IFormation
 	
 	public int getMaxPower();
 	
+	// For Glasses to see area affected by formation
+	public int getRange();
+	
 }

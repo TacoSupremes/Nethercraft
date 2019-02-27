@@ -9,7 +9,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.translation.I18n;
+import net.minecraft.client.resources.I18n;
 
 public class ItemMod extends Item
 {
@@ -60,7 +60,7 @@ public class ItemMod extends Item
 		
 		
 
-		return I18n.translateToLocal(this.getUnlocalizedName(stack).replace(String.valueOf(stack.getMetadata()), "") + ".name");
+		return I18n.format(this.getUnlocalizedName(stack).replace(String.valueOf(stack.getMetadata()), "") + ".name");
 	}
 
 	@Override
@@ -111,7 +111,7 @@ public class ItemMod extends Item
 
 	public String getLocalizedName()
 	{
-		return I18n.translateToLocal(this.getUnlocalizedName() + ".name");
+		return I18n.format(this.getUnlocalizedName() + ".name");
 	}
 
 }

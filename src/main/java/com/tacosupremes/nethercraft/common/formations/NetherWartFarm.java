@@ -43,9 +43,9 @@ public class NetherWartFarm implements IConsumerFormation {
 		if(te.getWorld().getWorldTime() % 100 != 0)
 			return;	
 		
-		for(int xD = -2; xD <= 2; xD++)
+		for(int xD = -getRange(); xD <= getRange(); xD++)
 		{
-			for(int zD = -2; zD <= 2; zD++)
+			for(int zD = -getRange(); zD <= getRange(); zD++)
 			{
 				BlockPos pos_ = pos.add(xD, 0, zD);
 				
@@ -74,6 +74,12 @@ public class NetherWartFarm implements IConsumerFormation {
 	public int getMaxPower() 
 	{	
 		return 1000;
+	}
+
+	@Override
+	public int getRange() 
+	{	
+		return 2;
 	}
 
 

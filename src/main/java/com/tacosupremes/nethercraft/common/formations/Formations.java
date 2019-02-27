@@ -22,9 +22,14 @@ public class Formations
 		formations.add(new LavaGenFormation());
 		formations.add(new GlowstoneFarm());
 		formations.add(new OreMagnetFormation());
+		formations.add(new LavaPitFormation());
 		
 		
-		//TODO smelter, soul gen, soul cage = (Containment for Entities) .
+		/*TODO smelter(Lava Pit), 
+		soul gen, attacks entities for energy
+		soul cage = (Containment for Entities) 
+		Breeder/NetherPigman/MooShroom maker. 10% chance to create Mooshroom/pigman when breeding, make spawn mad cows that attack player/other cows
+		*/
 	}
 
 

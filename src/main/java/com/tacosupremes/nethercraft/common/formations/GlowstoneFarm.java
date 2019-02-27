@@ -116,5 +116,11 @@ public class GlowstoneFarm implements IConsumerFormation
 		
 	}
 
+	@Override
+	public int getRange() 
+	{
+		return -1;
+	}
+
 	
 }
