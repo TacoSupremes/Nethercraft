@@ -4,7 +4,7 @@ import net.minecraft.item.ItemStack;
 
 public class EntryItem extends Entry 
 {
-	private ItemStack itemStack;
+	private ItemStack is;
 
 	public EntryItem(String s)
 	{
@@ -14,7 +14,12 @@ public class EntryItem extends Entry
 	public EntryItem(ItemStack is)
 	{
 		this(is.getUnlocalizedName());
-		this.itemStack = is;
+		this.is = is;
+	}
+	
+	public ItemStack getItemStack()
+	{
+		return is;
 	}
 
 }

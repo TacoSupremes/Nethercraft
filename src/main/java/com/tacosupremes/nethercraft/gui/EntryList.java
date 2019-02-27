@@ -10,7 +10,6 @@ public class EntryList extends Entry {
 		super(name, GuiID.List);
 		this.e = en;
 		
-		
 		for(Entry entry : this.e)
 		{
 			entry.setParent(this);
@@ -18,8 +17,8 @@ public class EntryList extends Entry {
 		
 	}
 
-	public Entry[] getList() {
-		// TODO Auto-generated method stub
+	public Entry[] getList() 
+	{
 		return e;
 	}
 

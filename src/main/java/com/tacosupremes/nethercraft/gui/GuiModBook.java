@@ -2,6 +2,7 @@ package com.tacosupremes.nethercraft.gui;
 
 import java.awt.Color;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.lwjgl.opengl.GL11;
@@ -10,6 +11,7 @@ import com.tacosupremes.nethercraft.Nethercraft;
 import com.tacosupremes.nethercraft.common.lib.LibMisc;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.item.ItemStack;
@@ -21,7 +23,7 @@ public class GuiModBook extends GuiScreen {
 	public static final ResourceLocation texture = new ResourceLocation("nethercraft:textures/gui/book.png");
 	
 	
-	private Entry e;
+	protected Entry e;
 	
 	public GuiModBook(Entry e)
 	{
@@ -44,10 +46,14 @@ public class GuiModBook extends GuiScreen {
 		if(e.getParent() != null)
 			this.buttonList.add(new GuiLabelButton(GuiHandler.getEntryFromName(e.getParent().getName()).getID(), left+guiWidth/2, top+guiHeight-20, 100, 20, I18n.format(LibMisc.MODID + "." + "back")));
 			
+		initGuiFeatures();
+	
 	}
 
-	@Override
-	public void updateScreen() {}
+	public void initGuiFeatures() 
+	{
+		// NOOP
+	}
 
 	@Override
 	public void drawScreen(int par1, int par2, float par3) {
@@ -121,5 +127,56 @@ public class GuiModBook extends GuiScreen {
 	            }
 	        }
 	    }
+	
+public static void drawTextSplit(FontRenderer f, String s,  int x, int y,  int trim,  int color){
+		
+		if(s.isEmpty() || s == "")
+			return;
+		
+		if(f.getStringWidth(s) < trim){
+			f.drawString(s, x, y, color);
+			return;
+		}
+		
+		List<String> toDraw = new ArrayList<String>();
+		
+		String cs = "";
+		char[] ca = s.toCharArray();
+		int space = -1;
+	
+		for(int i = 0; i<s.length(); i++){
+			
+			cs +=ca[i];
+			
+			if(ca[i] == ' ')
+				space = i;
+			
+			if(f.getStringWidth(cs) >= trim){
+				if(ca[i] != ' '){
+					if(space != -1){
+					for(int d = i; d> space; d--){
+					StringBuilder sb = new StringBuilder(cs);
+					sb.deleteCharAt(cs.length()-1);
+					cs = sb.toString();
+					}
+					}
+					
+				}
+					
+				toDraw.add(cs);
+				cs = "";
+				i=space;
+			}
+		
+		}
+		
+		toDraw.add(cs);
+		
+		for(int i = 0; i< toDraw.size();i++){
+			f.drawString(toDraw.get(i), x, y+i*f.FONT_HEIGHT, color);
+			
+		}
+		
+	}
 		
 }
