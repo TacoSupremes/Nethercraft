@@ -318,6 +318,32 @@ public class BlockUtils
 		 return e2.get(in);
 	}
 	
+	
+	public static List<Entity> rayTraceEntities(World w, EntityPlayer player, int r2){
+		 
+		 RayTraceResult r = rayTrace2(w, player, r2);
+		 
+		 if(r == null)
+			 return null;
+		 
+		 List<Entity> e2 =	w.getEntitiesWithinAABBExcludingEntity(player, new AxisAlignedBB(player.getPosition(), r.getBlockPos()).expand(1, 1, 1));
+		 
+		 if(e2.isEmpty())
+			 return null;
+
+		 
+		 List<Entity> rl = new ArrayList<Entity>();
+		 
+		 for(int i = 0; i<e2.size(); i++){
+			 
+			 if(e2.get(i).getDistanceToEntity(player) <= r2)
+				 rl.add(e2.get(i));
+			 
+		 }
+		 
+		 return rl;
+	}
+	
 	public static List<BlockPos> diamond(World w, BlockPos pos, int r)
 	{
 		
@@ -336,7 +362,7 @@ public class BlockUtils
 			}
 		}
 		
-		return null;
+		return l;
 	}
 	
 

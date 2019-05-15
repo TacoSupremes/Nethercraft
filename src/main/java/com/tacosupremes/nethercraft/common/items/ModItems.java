@@ -12,6 +12,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
 
@@ -53,7 +54,7 @@ public class ModItems
 	//nether glasses to see range of formations ie: you can see chunks that are targeted by nether gen and to allow for discovery of dungeons,
 	// TODO: MAKE BOOK 
 	
-	// Item that flies like blaze take water damage
+	
 	
 	
 	public static void preInit()
@@ -173,5 +174,5 @@ public class ModItems
 			ModelLoader.setCustomModelResourceLocation(item, i, new ModelResourceLocation(LibMisc.MODID + ":" + metaToName.apply(i), "inventory"));
 		}
 	}
-
+	
 }

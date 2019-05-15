@@ -49,6 +49,12 @@ public class ItemWand extends ItemMod
 	{
 		return is.hasTagCompound() && is.getTagCompound().hasKey("BOUND");
 	}
+
+	@Override
+	public ItemStack[] getRecipe() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 
 	

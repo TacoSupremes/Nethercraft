@@ -44,7 +44,7 @@ public class ItemBlazeChestPlate extends ItemArmor {
 			player.heal(1F);
 		}
 		
-		if(player.isInWater())
+		if(player.isInWater() || player.isWet())
 			player.attackEntityFrom(DamageSource.DROWN, 1F);
 	
 		if(!player.isCollidedVertically && player.motionY < 0 && !player.isSneaking())

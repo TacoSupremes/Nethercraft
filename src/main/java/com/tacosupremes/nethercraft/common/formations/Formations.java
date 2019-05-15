@@ -23,15 +23,10 @@ public class Formations
 		formations.add(new GlowstoneFarm());
 		formations.add(new OreMagnetFormation());
 		formations.add(new LavaPitFormation());
-		
-		
-		/*TODO smelter(Lava Pit), 
-		soul gen, attacks entities for energy
+		/*Tsoul gen, attacks entities for energy
 		soul cage = (Containment for Entities) 
-		Breeder/NetherPigman/MooShroom maker. 10% chance to create Mooshroom/pigman when breeding, make spawn mad cows that attack player/other cows
-		*/
+		Breeder/NetherPigman/MooShroom maker. 10% chance to create Mooshroom/pigman when breeding, make spawn mad cows that attack player/other cows*/
 	}
-
 
 	public static IFormation getFormation(World w, BlockPos pos) 
 	{
@@ -56,13 +51,9 @@ public class Formations
 						continue;
 					
 					if(w.getBlockState(pos.add(x, 0, z).add(v3.x, v3.y, v3.z)).getBlock() != b[index])
-					{
 						continue formLoop;
-					}
 				}
-				
 			}
-			
 			System.out.println(formations.get(i));
 			return formations.get(i);
 		}

@@ -65,6 +65,12 @@ public class ItemNetherWalker extends ItemMod {
 		tooltip.add(stack.getItemDamage() != 0 ? (I18n.format(this.getUnlocalizedName() + ".active")) : (I18n.format(this.getUnlocalizedName() + ".disabled")));
 	}
 
+	@Override
+	public ItemStack[] getRecipe() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	
 	
 	

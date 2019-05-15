@@ -83,4 +83,12 @@ public class LavaGenFormation implements IGenFormation
 		return -1;
 	}
 
+
+
+	@Override
+	public String getName() 
+	{
+		return "lava_gen";
+	}
+
 }

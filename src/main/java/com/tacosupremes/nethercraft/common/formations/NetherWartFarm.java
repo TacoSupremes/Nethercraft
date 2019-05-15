@@ -82,6 +82,12 @@ public class NetherWartFarm implements IConsumerFormation {
 		return 2;
 	}
 
+	@Override
+	public String getName() 
+	{
+		return "nether_wart";
+	}
+
 
 
 }

@@ -1,7 +1,8 @@
 itemGroup.nethercraft=Nethercraft
 item.wand.name=Nether Wand
 item.nether_walker.name=Nether Walker
-item.fire_pickaxe.name=Pickaxe of the Nether
+item.fire_pickaxe.name=Scorched Pickaxe
+item.fire_pickaxe.lore=Using Fervor, you are able to create a pickaxe that can use the heat of the Nether. Any block mined will be smelted and any ores will have a chance of being doubled. This is affected by Fortune.  If you right-click on a block you can place a light source at the cost of some durability.
 item.nether_scythe.name=Scythe of Decay
 nethercraft.Intro=Basics of Nethercraft
 nethercraft.back=Back

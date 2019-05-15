@@ -1,5 +1,9 @@
 package com.tacosupremes.nethercraft.gui;
 
+import com.tacosupremes.nethercraft.common.lib.LibMisc;
+
+import net.minecraft.client.resources.I18n;
+
 public class Entry 
 {
 	private String name;
@@ -16,27 +20,29 @@ public class Entry
 		this.name = "FAKEENTRY";
 	}
 	
-	
-	
 	public Entry(String name, GuiID type)
 	{
 		this(name);
-		
 		this.type = type;		
 	}
 	
 	public Entry(String name)
 	{
 		this.name = name;
-		GuiHandler.add(this);
-		
-		this.id = GuiHandler.count;
-		GuiHandler.count++;
+		GuiHandler.add(this);		
+		this.id = GuiHandler.count++;
 	}
 
 	public String getName() 
 	{
 		return name;
+	}
+	
+	
+	public String getLocalisedName()
+	{
+		return I18n.format(LibMisc.MODID + "." + this.getName());
+		
 	}
 	
 	public GuiID getType() 

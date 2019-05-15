@@ -15,6 +15,7 @@ public class EntryItem extends Entry
 	{
 		this(is.getUnlocalizedName());
 		this.is = is;
+		this.setNextEntry(new EntryRecipe(is).setParent(this));
 	}
 	
 	public ItemStack getItemStack()
@@ -22,4 +23,12 @@ public class EntryItem extends Entry
 		return is;
 	}
 
+	@Override
+	public String getLocalisedName() 
+	{
+		return is.getDisplayName();
+	}
+
+	
+	
 }

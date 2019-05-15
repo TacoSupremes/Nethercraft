@@ -14,13 +14,10 @@ public class NetherGenFormation implements IGenFormation
 
 	@Override
 	public void generatePower(World w, BlockPos pos, NBTTagCompound nbt, TileFormationBase te) 
-	{	
-		
+	{			
 		if(w.getWorldTime() %20 != 0)
 			return;
 
-		
-		
 		for(int y = 1; y < pos.getY(); y++)
 		{
 			for(int x = pos.getX() - getRange(); x <= pos.getX() + getRange(); x++)
@@ -71,7 +68,6 @@ public class NetherGenFormation implements IGenFormation
 	@Override
 	public Vector3 getOffset() 
 	{
-	
 		return Vector3.zero;
 	}
 
@@ -89,6 +85,14 @@ public class NetherGenFormation implements IGenFormation
 	public int getRange() 
 	{
 		return 16;
+	}
+
+
+
+	@Override
+	public String getName() 
+	{
+		return "nether_gen";
 	}
 
 }

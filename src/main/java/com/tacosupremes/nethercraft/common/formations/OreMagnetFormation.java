@@ -102,6 +102,12 @@ public class OreMagnetFormation implements IConsumerFormation {
 	{
 		return 8;
 	}
+
+	@Override
+	public String getName() 
+	{
+		return "ore_magnet";
+	}
 		
 
 }

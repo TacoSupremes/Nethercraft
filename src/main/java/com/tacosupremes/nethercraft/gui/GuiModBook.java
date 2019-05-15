@@ -22,7 +22,6 @@ public class GuiModBook extends GuiScreen {
 
 	public static final ResourceLocation texture = new ResourceLocation("nethercraft:textures/gui/book.png");
 	
-	
 	protected Entry e;
 	
 	public GuiModBook(Entry e)
@@ -52,8 +51,11 @@ public class GuiModBook extends GuiScreen {
 			this.buttonList.add(new GuiLabelButton(GuiHandler.getEntryFromName(e.getParent().getName()).getID(), left+20+Minecraft.getMinecraft().fontRenderer.getStringWidth(back)/2, top+guiHeight-20, back));
 			this.buttonList.add(new GuiLabelButton(e.getNextEntry().getID(), left+guiWidth - 30, top+guiHeight-20, I18n.format(LibMisc.MODID + "." + "next")));
 			
+		}else if(e.getNextEntry() != null )
+		{
+			this.buttonList.add(new GuiLabelButton(e.getNextEntry().getID(), left+guiWidth - 30, top+guiHeight-20, I18n.format(LibMisc.MODID + "." + "next")));
 		}
-				
+		
 		initGuiFeatures();
 	
 	}
@@ -64,24 +66,23 @@ public class GuiModBook extends GuiScreen {
 	}
 
 	@Override
-	public void drawScreen(int par1, int par2, float par3) {
+	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
 		
 		GL11.glColor4f(1F, 1F, 1F, 1F);
 		mc.renderEngine.bindTexture(texture);
 		drawTexturedModalRect(left, top, 0, 0, guiWidth, guiHeight);
 		
-		String s = I18n.format(LibMisc.MODID + "." + e.getName());
+		String s = I18n.format(LibMisc.MODID + "." + e.getName().trim());
 		
 		this.drawCenteredString(fontRenderer, s, left+guiWidth/2, top+10, Color.WHITE.getRGB());
 
 
-		super.drawScreen(par1, par2, par3);
-
-		
+		super.drawScreen(mouseX, mouseY, partialTicks);	
 	}
 
 	protected void actionPerformed(GuiButton gb) 
 	{	
+		
 		Minecraft.getMinecraft().player.openGui(Nethercraft.instance, gb.id, Minecraft.getMinecraft().player.world, 0, 0, 0);	
 	
 		System.out.println("opened" + gb.id);

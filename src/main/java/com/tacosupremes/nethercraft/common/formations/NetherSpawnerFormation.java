@@ -103,4 +103,10 @@ public class NetherSpawnerFormation implements IConsumerFormation {
 		return -1;
 	}
 
+	@Override
+	public String getName() 
+	{
+		return "nether_spawner";
+	}
+
 }

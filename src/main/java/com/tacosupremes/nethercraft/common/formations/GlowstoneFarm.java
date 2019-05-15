@@ -122,5 +122,11 @@ public class GlowstoneFarm implements IConsumerFormation
 		return -1;
 	}
 
+	@Override
+	public String getName() 
+	{
+		return "glowstone_farm";
+	}
+
 	
 }

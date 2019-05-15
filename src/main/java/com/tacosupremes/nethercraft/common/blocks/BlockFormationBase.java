@@ -3,9 +3,13 @@ package com.tacosupremes.nethercraft.common.blocks;
 import java.util.Random;
 
 import com.tacosupremes.nethercraft.common.blocks.tiles.TileFormationBase;
+import com.tacosupremes.nethercraft.common.items.IRecipeGiver;
+import com.tacosupremes.nethercraft.common.items.RecipeType;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
@@ -13,7 +17,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockFormationBase extends BlockModContainer {
+public class BlockFormationBase extends BlockModContainer implements IRecipeGiver{
 
 	public BlockFormationBase() 
 	{
@@ -45,6 +49,25 @@ public class BlockFormationBase extends BlockModContainer {
         }
     }
 	
+	@Override
+	public ItemStack[] getRecipe() 
+	{
+		ItemStack o = new ItemStack(Blocks.OBSIDIAN);
+		
+		ItemStack g = new ItemStack(Blocks.GLOWSTONE);
+		
+		ItemStack r = new ItemStack(Blocks.REDSTONE_BLOCK);
+		
+		return new ItemStack[] {o,g,o,
+							    o,r,o,
+							    o,o,o};
+	}
+
+	@Override
+	public RecipeType getType()
+	{
+		return RecipeType.Shaped;
+	}
 	
 	
 	

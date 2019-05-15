@@ -18,4 +18,6 @@ public interface IFormation
 	// For Glasses to see area affected by formation
 	public int getRange();
 	
+	public String getName();
+	
 }

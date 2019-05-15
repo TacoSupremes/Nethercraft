@@ -48,7 +48,7 @@ public class ItemFireSword extends ItemSword
 		{
 			Entity e = BlockUtils.rayTraceEntity(entityLiving.world, (EntityPlayer)entityLiving, 15);
 			
-			if(e != null)
+			if(e != null )
 			{
 					e.setFire(4);
 					
@@ -56,7 +56,8 @@ public class ItemFireSword extends ItemSword
 					
 					stack.damageItem(2, entityLiving);
 					
-					Nethercraft.proxy.flameTornadoFX(e.posX, e.posY, e.posZ, 1);
+					for(int i = 0; i < 5; i++)
+						Nethercraft.proxy.flameTornadoFX(e.posX, e.posY, e.posZ, 1);
 			}
 		}
 		return super.onEntitySwing(entityLiving, stack);

@@ -23,6 +23,12 @@ public class ItemModBook extends ItemMod {
 		player.openGui(Nethercraft.instance, GuiHandler.getEntryFromName("Nether-Tome").getID(), world, (int)player.posX, (int)player.posY, (int)player.posZ);
 		return super.onItemRightClick(world, player, hand);
 	}
+
+	@Override
+	public ItemStack[] getRecipe() 
+	{
+		return null;
+	}
 	
 	
 	

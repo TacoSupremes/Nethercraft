@@ -3,10 +3,18 @@ package com.tacosupremes.nethercraft.common.items;
 import com.tacosupremes.nethercraft.Nethercraft;
 import com.tacosupremes.nethercraft.common.blocks.ModBlocks;
 import com.tacosupremes.nethercraft.common.lib.LibMisc;
+import com.tacosupremes.nethercraft.common.utils.BlockUtils;
 
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Enchantments;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemPickaxe;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -40,7 +48,45 @@ public class ItemFirePickaxe extends ItemPickaxe {
 		
 		return super.onItemUse(player, w, pos, hand, facing, hitX, hitY, hitZ);
 	}
-	
+
+
+	@Override
+	public boolean onBlockStartBreak(ItemStack itemStack, BlockPos pos, EntityPlayer player)
+	{
+		ItemStack block = BlockUtils.toItemStack(player.getEntityWorld().getBlockState(pos));
+		
+		ItemStack r = FurnaceRecipes.instance().getSmeltingResult(block);
+		
+		r.setCount(1);
+			
+		if(r.isEmpty())
+			return super.onBlockStartBreak(itemStack, pos, player);
+		
+		if(LibMisc.Ores.isOre(block))
+		{
+			int lvl = EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, itemStack);
+			
+			int success  = player.getEntityWorld().rand.nextInt(6) + lvl;
+			
+			if(success > 4)
+			{
+				r.setCount(2);
+				itemStack.damageItem(2, player);
+			}
+		}
+		
+		player.getEntityWorld().setBlockToAir(pos);
+		
+		//TODO spawn particles
+		
+		player.getEntityWorld().getBlockState(pos).getBlock().spawnAsEntity(player.getEntityWorld(), pos, r);
+		
+		
+		
+		
+		return true;
+	}
+
 	
 	
 

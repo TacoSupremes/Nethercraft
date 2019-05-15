@@ -8,6 +8,7 @@ import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -91,5 +92,12 @@ public class BlockGlowstoneCrop extends BlockMod {
      {
 		 	return false;
      }
+
+
+	@Override
+	public ItemStack[] getRecipe() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

@@ -13,13 +13,16 @@ import com.tacosupremes.nethercraft.common.formations.Formations;
 import com.tacosupremes.nethercraft.common.formations.IConsumerFormation;
 import com.tacosupremes.nethercraft.common.formations.IFormation;
 import com.tacosupremes.nethercraft.common.formations.IGenFormation;
+import com.tacosupremes.nethercraft.common.items.IRecipeGiver;
 import com.tacosupremes.nethercraft.common.items.ModItems;
+import com.tacosupremes.nethercraft.common.items.RecipeType;
 import com.tacosupremes.nethercraft.common.utils.BlockUtils;
 import com.tacosupremes.nethercraft.common.utils.Vector3;
 
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
@@ -489,5 +492,7 @@ public static List<Vector3> getOffset(World w, List<BlockPos> bp)
 
 	return nbt.getBoolean("DONE");
 }
+
+
 
 }

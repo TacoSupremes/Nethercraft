@@ -6,8 +6,11 @@ import java.util.List;
 import java.util.Map;
 
 import com.tacosupremes.nethercraft.common.blocks.ModBlocks;
+import com.tacosupremes.nethercraft.common.items.ModItems;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
@@ -20,23 +23,31 @@ public class GuiHandler implements IGuiHandler
 	
 	public GuiHandler()
 	{
-		Entry e = new EntryList("Nether-Tome", new Entry[]{new Entry("Intro"), new Entry("Generating-Nether-Energy"), new Entry("Using-Nether-Energy"), new Entry("Nether-Items")});		
+		Entry e = new EntryList("Nether-Tome", new Entry[]{new Entry("Intro"), new Entry("Generating-Nether-Energy"), new Entry("Using-Nether-Energy"), new Entry("Nether-Items"), new Entry("n"), new Entry("n2"), new Entry("n3"), new Entry("n4"), new Entry("n5"), new Entry("n6"), new Entry("n7"), new Entry("n8"), new Entry("n9"), new Entry("n10"), new Entry("n11"), new Entry("n12")});		
 		
 		Entry e2 = new EntryList("Intro", new Entry[] {new EntryText("What-is-Nethercraft", 2), new EntryText("Nether-Energy", 1),  new EntryText("heat-altar" ,1),new EntryText("Overuse-of-Nether-Energy", 1)});
 		
 		Entry e3 = new EntryItem(new ItemStack(ModBlocks.formationBase));
 		
+		List<Entry> l = new ArrayList<Entry>();
+		
+		for(Item i : ModItems.nitems)
+		{
+			ItemStack is = new ItemStack(i);
+			Entry temp = new EntryItem(is);
+			l.add(temp);
+		}
+		
+		Entry items = new EntryList("Nether-Items", l.toArray(new Entry[l.size()]));
+		
 		setNextEntry("heat-altar", new ItemStack(ModBlocks.formationBase));
 	
 	}
 	
-	
 	private void setNextEntry(String parent, ItemStack itemStack)
 	{
-		setNextEntry(parent, itemStack.getUnlocalizedName());
-		
+		setNextEntry(parent, itemStack.getUnlocalizedName());	
 	}
-
 
 	public static void add(Entry e)
 	{
@@ -96,14 +107,12 @@ public class GuiHandler implements IGuiHandler
 	}
 
 	
-	public String s[] = new String[]{"Intro", "Generating Nether Energy", "Using Nether Energy", "Nether Items"};
+	//public String s[] = new String[]{"Intro", "Generating Nether Energy", "Using Nether Energy", "Nether Items"};
 	
-	public GuiID ls[] = new GuiID[] {GuiID.List, GuiID.List, GuiID.List, GuiID.List};
+	//public GuiID ls[] = new GuiID[] {GuiID.List, GuiID.List, GuiID.List, GuiID.List};
 	
-	public static int list = 0, gen = 0, consumer = 0, item = 0, info = 0;
+	//public static int list = 0, gen = 0, consumer = 0, item = 0, info = 0;
 	
-	
-
 	
 	//public static int IDCOUNT = 1;
 	
@@ -134,14 +143,15 @@ public class GuiHandler implements IGuiHandler
 		case Info:
 			return new GuiModBookText((EntryText)e);
 		case Item:
-			break;
+			return new GuiModBookItem((EntryItem)e);
 		case List:
-			return new GuiModBookList((EntryList)e);
+			return new GuiModBookList((EntryList)e);	
+		case Recipe:
+			return new GuiModBookRecipe((EntryRecipe)e);
 		default:
 			break;
 		
 		}
-	
 		
 		return null;
 	}

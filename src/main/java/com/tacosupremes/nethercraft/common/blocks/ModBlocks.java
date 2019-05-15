@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.tacosupremes.nethercraft.Nethercraft;
+import com.tacosupremes.nethercraft.common.items.IRecipeGiver;
 import com.tacosupremes.nethercraft.common.items.ModItems;
 import com.tacosupremes.nethercraft.common.utils.ProxyRegistry;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
 
 public class ModBlocks
 {
@@ -57,6 +59,5 @@ public class ModBlocks
 		}
 
 	}
-
 	
 }

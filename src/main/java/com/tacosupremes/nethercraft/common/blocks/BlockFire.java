@@ -9,6 +9,7 @@ import com.tacosupremes.nethercraft.common.blocks.tiles.TileFormationBase;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
@@ -103,6 +104,13 @@ public class BlockFire extends BlockMod {
     public boolean addToTab()
 	{
 		return false;
+	}
+
+
+	@Override
+	public ItemStack[] getRecipe() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

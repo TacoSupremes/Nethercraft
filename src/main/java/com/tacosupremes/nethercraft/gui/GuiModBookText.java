@@ -38,33 +38,37 @@ public class GuiModBookText extends GuiModBook{
 	{
 		super.drawScreen(par1, par2, par3);	
 
-		this.drawTextSplit(mc.fontRenderer, I18n.format(LibMisc.MODID + "." + text + cp), left+20, top+20,  guiWidth-40, Color.WHITE.getRGB());		   	
+		this.drawTextSplit(mc.fontRenderer, I18n.format(LibMisc.MODID + "." + text + cp), left + 15, top + 40,  guiWidth - 25, Color.WHITE.getRGB());		   	
 	}
 
 
 	@Override
-	protected void actionPerformed(GuiButton gb) {
+	protected void actionPerformed(GuiButton gb) 
+	{
 		
-		if(gb.id == e.getNextEntry().getID() && cp < pc)
+		if(e.getNextEntry() != null && gb.id == e.getNextEntry().getID() && cp < pc)
 		{	
 			cp++;
-			if(cp == pc)
+			
+			if(cp == pc && e.getNextEntry().getID() == EntryText.INCREASEPAGEID)
 				gb.visible = false;
 		}
 		else if(gb.id == e.getParent().getID() && cp > 1)
 		{
 			cp--;
+			
 			if(cp < pc)
 			{
 				for(GuiButton gb2 : this.buttonList)
 				{
-					if(gb2.id == e.getNextEntry().getID())
+					if(gb2.id == e.getNextEntry().getID() && !gb2.visible)
 						gb2.visible = true;
 				}
 					
 			}
+			
 		}else
 			super.actionPerformed(gb);
-		}
+	}
 	
 }

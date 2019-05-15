@@ -1,12 +1,15 @@
 package com.tacosupremes.nethercraft.common.blocks;
 
 import com.tacosupremes.nethercraft.Nethercraft;
+import com.tacosupremes.nethercraft.common.items.IRecipeGiver;
+import com.tacosupremes.nethercraft.common.items.RecipeType;
 import com.tacosupremes.nethercraft.common.lib.LibMisc;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.item.ItemStack;
 
-public class BlockMod extends Block
+public abstract class BlockMod extends Block implements IRecipeGiver
 {
 	
 	public BlockMod(Material materialIn, String s)
@@ -29,6 +32,15 @@ public class BlockMod extends Block
 	public boolean addToTab()
 	{
 		return true;
+	}
+
+	
+
+	@Override
+	public RecipeType getType() 
+	{
+		
+		return RecipeType.Shaped;
 	}
 
 }

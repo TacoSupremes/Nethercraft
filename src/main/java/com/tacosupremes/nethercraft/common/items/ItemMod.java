@@ -11,7 +11,7 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.client.resources.I18n;
 
-public class ItemMod extends Item
+public abstract class ItemMod extends Item implements IRecipeGiver
 {
 
 	public int meta;
@@ -113,5 +113,13 @@ public class ItemMod extends Item
 	{
 		return I18n.format(this.getUnlocalizedName() + ".name");
 	}
+
+	public RecipeType getType()
+	{
+		return RecipeType.Shaped;
+	}
+	
+	
+	
 
 }

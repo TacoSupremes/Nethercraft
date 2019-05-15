@@ -58,4 +58,10 @@ public class LavaPitFormation implements IConsumerFormation {
 		
 	}
 
+	@Override
+	public String getName()
+	{
+		return "lava_pit";
+	}
+
 }
