@@ -27,6 +27,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class TileFormationBase extends TileMod implements IGenerator, IConsumer
 {
@@ -186,7 +187,7 @@ public class TileFormationBase extends TileMod implements IGenerator, IConsumer
 	public boolean canRun(World w, BlockPos pos, NBTTagCompound nbt) 
 	{
 		
-		Block[] b = formation.getBlocks();
+		ItemStack[] b = formation.getBlocks();
 		
 		Vector3 v3 = formation.getOffset();
 		
@@ -200,13 +201,12 @@ public class TileFormationBase extends TileMod implements IGenerator, IConsumer
 			{
 				index++;
 				
-				if(b[index] == Blocks.AIR)
+				if(b[index] == ItemStack.EMPTY)
 					continue;
 				
-				if(w.getBlockState(pos.add(x, 0, z).add(v3.x, v3.y, v3.z)).getBlock() != b[index])
-				{
+				if(!(BlockUtils.toItemStack(w.getBlockState(pos.add(x, 0, z).add(v3.x, v3.y, v3.z))).isItemEqual(b[index]) || (b[index].getItemDamage() == OreDictionary.WILDCARD_VALUE && w.getBlockState(pos.add(x, 0, z).add(v3.x, v3.y, v3.z)).getBlock() == formation.getSpecialBlock())))
 					return false;
-				}
+				
 			}
 			
 		}

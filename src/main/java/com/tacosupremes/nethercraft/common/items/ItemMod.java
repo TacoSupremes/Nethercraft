@@ -20,7 +20,8 @@ public abstract class ItemMod extends Item implements IRecipeGiver
 	{
 		super();
 		this.setUnlocalizedName(s);
-		this.setCreativeTab(Nethercraft.tab);
+		if(addToTab())
+			this.setCreativeTab(Nethercraft.tab);
 		if (meta > 0)
 			this.setHasSubtypes(true);
 		ModItems.items.add(this);
@@ -117,6 +118,11 @@ public abstract class ItemMod extends Item implements IRecipeGiver
 	public RecipeType getType()
 	{
 		return RecipeType.Shaped;
+	}
+
+	public boolean addToTab()
+	{
+		return true;
 	}
 	
 	

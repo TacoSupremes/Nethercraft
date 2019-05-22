@@ -5,6 +5,7 @@ import com.tacosupremes.nethercraft.common.utils.Vector3;
 
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -47,13 +48,13 @@ public class NetherGenFormation implements IGenFormation
 	
 
 	@Override
-	public Block[] getBlocks() 
+	public ItemStack[] getBlocks() 
 	{
-		Block f = Blocks.FIRE;
+		ItemStack f = new ItemStack(Blocks.FIRE);
 		
-		Block a = Blocks.AIR;
+		ItemStack a = ItemStack.EMPTY;
 		
-		return new Block[]
+		return new ItemStack[]
 		{
 		 f,a,f,a,f,
 		 a,a,a,a,a,

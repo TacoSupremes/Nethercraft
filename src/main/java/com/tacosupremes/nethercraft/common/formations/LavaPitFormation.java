@@ -8,6 +8,7 @@ import com.tacosupremes.nethercraft.common.utils.Vector3;
 
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -15,20 +16,19 @@ import net.minecraft.world.World;
 public class LavaPitFormation implements IConsumerFormation {
 
 	@Override
-	public Block[] getBlocks()
+	public ItemStack[] getBlocks()
 	{
-
-		Block a = Blocks.AIR;
+		ItemStack a = ItemStack.EMPTY;
 			
-		Block n = Blocks.NETHER_BRICK;
+		ItemStack n = new ItemStack(Blocks.NETHER_BRICK);
 		
-		Block o = Blocks.OBSIDIAN;
+		ItemStack o = new ItemStack(Blocks.OBSIDIAN);
 		
-		return new Block[]
+		return new ItemStack[]
 		{
 				n,n,n,n,n,
 				n,o,a,o,n,
-				n,a,a,a,n,
+				n,a,o,a,n,
 				n,o,a,o,n,
 				n,n,n,n,n		
 		};
@@ -55,7 +55,7 @@ public class LavaPitFormation implements IConsumerFormation {
 	@Override
 	public void usePower(World w, BlockPos pos, NBTTagCompound nbt, TileFormationBase te) 
 	{
-		
+		//TODO:
 	}
 
 	@Override

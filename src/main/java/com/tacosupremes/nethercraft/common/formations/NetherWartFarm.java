@@ -7,6 +7,7 @@ import com.tacosupremes.nethercraft.common.utils.Vector3;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockNetherWart;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
@@ -15,20 +16,23 @@ import net.minecraft.world.World;
 public class NetherWartFarm implements IConsumerFormation {
 
 	@Override
-	public Block[] getBlocks() 
+	public ItemStack[] getBlocks() 
 	{
 	
-		Block n = Blocks.SOUL_SAND;
+		ItemStack n = new ItemStack(Blocks.SOUL_SAND);
 		
-		Block a = Blocks.OBSIDIAN;
+		ItemStack a = new ItemStack(Blocks.OBSIDIAN);
+		
+		ItemStack b = new ItemStack(Blocks.NETHER_WART_BLOCK);
 				
-		return new Block[]
-				{
-				n,n,n,n,n,						 
-				n,n,n,n,n,				
+		return new ItemStack[]
+		{
+				b,n,n,n,b,						 
+				n,b,n,b,n,				
 				n,n,a,n,n,				 
-				n,n,n,n,n,			
-				n,n,n,n,n};
+				n,b,n,b,n,			
+				b,n,n,n,b
+		};
 	}
 
 	@Override

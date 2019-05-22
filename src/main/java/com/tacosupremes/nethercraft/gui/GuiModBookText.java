@@ -38,7 +38,10 @@ public class GuiModBookText extends GuiModBook{
 	{
 		super.drawScreen(par1, par2, par3);	
 
-		this.drawTextSplit(mc.fontRenderer, I18n.format(LibMisc.MODID + "." + text + cp), left + 15, top + 40,  guiWidth - 25, Color.WHITE.getRGB());		   	
+		if(I18n.format(LibMisc.MODID + "." + text + cp).equals(LibMisc.MODID + "." + text + cp))
+			return;
+		
+		this.drawTextSplit(mc.fontRenderer, "" + I18n.format(LibMisc.MODID + "." + text + cp), left + 15, top + 40,  guiWidth - 25, Color.WHITE.getRGB());		   	
 	}
 
 

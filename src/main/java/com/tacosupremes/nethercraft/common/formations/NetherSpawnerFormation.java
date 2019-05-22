@@ -3,37 +3,42 @@ package com.tacosupremes.nethercraft.common.formations;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.tacosupremes.nethercraft.common.blocks.ModBlocks;
 import com.tacosupremes.nethercraft.common.blocks.tiles.TileFormationBase;
+import com.tacosupremes.nethercraft.common.items.ModItems;
 import com.tacosupremes.nethercraft.common.utils.Vector3;
 import com.tacosupremes.nethercraft.common.utils.WeightedObject;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.monster.EntityBlaze;
 import net.minecraft.entity.monster.EntityGhast;
 import net.minecraft.entity.monster.EntityMagmaCube;
 import net.minecraft.entity.monster.EntityPigZombie;
 import net.minecraft.entity.monster.EntityWitherSkeleton;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.WeightedRandom;
 import net.minecraft.util.WeightedRandom.Item;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class NetherSpawnerFormation implements IConsumerFormation {
 
 	@Override
-	public Block[] getBlocks() 
+	public ItemStack[] getBlocks() 
 	{
-		Block p = Blocks.PORTAL;
+		ItemStack p = new ItemStack(Blocks.PORTAL, 1, OreDictionary.WILDCARD_VALUE);
 		
-		Block o = Blocks.OBSIDIAN;
+		ItemStack o = new ItemStack(Blocks.OBSIDIAN);
 		
-		Block a = Blocks.AIR;
+		ItemStack a = ItemStack.EMPTY;
 		
-		return new Block[]
+		return new ItemStack[]
 		{
 		 o,p,p,p,o,
 		 p,a,a,a,p,
@@ -42,6 +47,29 @@ public class NetherSpawnerFormation implements IConsumerFormation {
 		 o,p,p,p,o				
 		};
 	}
+	
+	
+
+	@Override
+	public ItemStack[] getAltBlocks() 
+	{
+		ItemStack p = new ItemStack(ModItems.portal);
+		
+		ItemStack o = new ItemStack(Blocks.OBSIDIAN);
+		
+		ItemStack a = ItemStack.EMPTY;
+		
+		return new ItemStack[]
+		{
+		 o,p,p,p,o,
+		 p,a,a,a,p,
+		 p,a,a,a,p,
+		 p,a,a,a,p,
+		 o,p,p,p,o				
+		};
+	}
+
+
 
 	@Override
 	public void usePower(World w, BlockPos pos, NBTTagCompound nbt, TileFormationBase te)
@@ -56,11 +84,13 @@ public class NetherSpawnerFormation implements IConsumerFormation {
 		
 		if(te.power >= 300)
 		{
-			Entity e;
+			EntityLiving e;
 			
 			e = randEntity(w, new Entity[]{new EntityBlaze(w), new EntityGhast(w), new EntityPigZombie(w), new EntityMagmaCube(w), new EntityWitherSkeleton(w)});
 			
 			e.setPosition(pos.getX(), pos.getY() + 3, pos.getZ());
+			
+			e.enablePersistence();
 			
 			e.timeUntilPortal = 10000;
 			
@@ -72,7 +102,7 @@ public class NetherSpawnerFormation implements IConsumerFormation {
 	}
 	
 	
-	public Entity randEntity(World w, Entity[] l)
+	public EntityLiving randEntity(World w, Entity[] l)
 	{	
 		List<WeightedObject> l2  = new ArrayList<WeightedObject>();
 		l2.add(new WeightedObject(l[0], 70));
@@ -81,7 +111,7 @@ public class NetherSpawnerFormation implements IConsumerFormation {
 		l2.add(new WeightedObject(l[3], 60));
 		l2.add(new WeightedObject(l[4], 35));
 		
-		return (Entity)WeightedRandom.getRandomItem(w.rand, l2).getObject();
+		return (EntityLiving)WeightedRandom.getRandomItem(w.rand, l2).getObject();
 		
 	}
 
@@ -108,5 +138,17 @@ public class NetherSpawnerFormation implements IConsumerFormation {
 	{
 		return "nether_spawner";
 	}
+
+
+
+	@Override
+	public Block getSpecialBlock() 
+	{
+
+		return Blocks.PORTAL;
+	}
+	
+	
+	
 
 }

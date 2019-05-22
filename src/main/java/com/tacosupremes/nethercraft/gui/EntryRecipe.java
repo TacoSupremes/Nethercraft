@@ -11,7 +11,6 @@ import net.minecraft.item.ItemStack;
 public class EntryRecipe extends Entry 
 {
 	private ItemStack is;
-	private ItemStack[] recipe;
 
 	public EntryRecipe(String s)
 	{

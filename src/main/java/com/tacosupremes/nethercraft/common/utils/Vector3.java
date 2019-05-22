@@ -200,7 +200,26 @@ public class Vector3
 		z *= fz;
 		return this;
 	}
-
+	
+	public Vector3 divide(Vector3 f) {
+		x /= f.x;
+		y /= f.y;
+		z /= f.z;
+		return this;
+	}
+	
+	public Vector3 divide(double d) 
+	{
+		x /= d;
+		y /= d;
+		z /= d;
+		return this;
+	}
+	
+	public Vector3 divide(double fx, double fy, double fz) 
+	{
+		return multiply(1D / fx, 1D / fy, 1D / fz);
+	}
 	public double mag() {
 		return Math.sqrt(x * x + y * y + z * z);
 	}

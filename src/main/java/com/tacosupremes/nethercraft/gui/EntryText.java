@@ -7,6 +7,13 @@ public class EntryText extends Entry {
 	
 	public static int INCREASEPAGEID = -90876;
 	public static int DECREASEPAGEID = -90877;
+	
+	
+	public EntryText(String s)
+	{
+		this(s, 1);
+	}
+	
 
 	public EntryText(String s, int pages) {
 		super(s, GuiID.Info);

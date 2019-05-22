@@ -41,7 +41,9 @@ public class ModItems
 	
 	public static Item blazeChestPlate;
 	
+	public static Item ghastCannon;
 	//FIRE Sword swing to shoot fire right click for fire shield
+	public static Item portal;
 	
 	//Item that moves you 8 blocks at a time since that is nether rules for distance
 	
@@ -53,10 +55,7 @@ public class ModItems
 	
 	//nether glasses to see range of formations ie: you can see chunks that are targeted by nether gen and to allow for discovery of dungeons,
 	// TODO: MAKE BOOK 
-	
-	
-	
-	
+		
 	public static void preInit()
 	{
 		wand = new ItemWand();	
@@ -73,7 +72,11 @@ public class ModItems
 		
 		blazeChestPlate = new ItemBlazeChestPlate();
 		
+		ghastCannon = new ItemGhastCannon();
+		
 		book = new ItemModBook();
+		
+		portal = new ItemPortal();
 	}
 	
 	public static void register()
@@ -96,16 +99,13 @@ public class ModItems
 
 		for (ItemMod i : items)
 		{
-
 			if (i.getColor() != null)
 				Minecraft.getMinecraft().getItemColors().registerItemColorHandler(i.getColor(), i);
 
 			if (i.meta != 0)
 			{
-
 				if (i.hasOneModel())
 				{
-
 					for (int i2 = 0; i2 < i.meta + 1; i2++)
 						registerItemRenderSameModel(i, i2);
 
@@ -123,7 +123,6 @@ public class ModItems
 				{
 					for (int i2 = 0; i2 <= i.meta; i2++)
 						ModItems.registerItemRender(i, i2);
-
 				}
 
 			}
@@ -139,22 +138,18 @@ public class ModItems
 
 	public static void registerItemRender(Item i, int meta)
 	{
-
 		if (i == null)
 			return;
 
 		ModelLoader.setCustomModelResourceLocation(i, meta, new ModelResourceLocation(i.getRegistryName() + (meta == 0 ? "" : String.valueOf(meta)), "inventory"));
-
 	}
 
 	public static void registerItemRenderSameModel(Item i, int meta)
 	{
-
 		if (i == null)
 			return;
 
 		ModelLoader.setCustomModelResourceLocation(i, meta, new ModelResourceLocation(i.getRegistryName(), "inventory"));
-
 	}
 
 	public static void registerItemAllMeta(Item item, int range)

@@ -8,6 +8,7 @@ import com.tacosupremes.nethercraft.common.utils.Vector3;
 
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
@@ -17,18 +18,19 @@ public class LavaGenFormation implements IGenFormation
 {
 
 	@Override
-	public Block[] getBlocks() 
+	public ItemStack[] getBlocks() 
 	{
-		Block n = Blocks.NETHERRACK;
-		Block o = Blocks.OBSIDIAN;
-		Block b = Blocks.NETHER_BRICK;
-		Block a = Blocks.AIR;
+		ItemStack n = new ItemStack(Blocks.NETHERRACK);
+		ItemStack o = new ItemStack(Blocks.OBSIDIAN);
+		ItemStack b = new ItemStack(Blocks.NETHER_BRICK);
+		ItemStack i = new ItemStack(Blocks.IRON_BLOCK);
+		ItemStack a = ItemStack.EMPTY;
 		
-		return new Block[]
+		return new ItemStack[]
 				{
 				 b,o,n,o,b,
 				 o,a,b,a,o,
-				 n,b,a,b,n,
+				 n,b,i,b,n,
 				 o,a,b,a,o,
 				 b,o,n,o,b						
 				};

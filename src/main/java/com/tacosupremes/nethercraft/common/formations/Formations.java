@@ -3,12 +3,15 @@ package com.tacosupremes.nethercraft.common.formations;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.tacosupremes.nethercraft.common.utils.BlockUtils;
 import com.tacosupremes.nethercraft.common.utils.Vector3;
 
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class Formations
 {
@@ -33,7 +36,7 @@ public class Formations
 		formLoop:
 		for(int i = 0; i< formations.size(); i++)
 		{
-			Block[] b = formations.get(i).getBlocks();
+			ItemStack[] b = formations.get(i).getBlocks();
 			
 			int r = (int) (Math.sqrt(b.length) - 1) / 2;
 			
@@ -47,10 +50,10 @@ public class Formations
 				{
 					index++;
 					
-					if(b[index] == Blocks.AIR)
+					if(b[index] == ItemStack.EMPTY)
 						continue;
 					
-					if(w.getBlockState(pos.add(x, 0, z).add(v3.x, v3.y, v3.z)).getBlock() != b[index])
+					if(!(BlockUtils.toItemStack(w.getBlockState(pos.add(x, 0, z).add(v3.x, v3.y, v3.z))).isItemEqual(b[index]) || (b[i].getItemDamage() == OreDictionary.WILDCARD_VALUE && w.getBlockState(pos.add(x, 0, z).add(v3.x, v3.y, v3.z)).getBlock() == formations.get(i).getSpecialBlock())))
 						continue formLoop;
 				}
 			}

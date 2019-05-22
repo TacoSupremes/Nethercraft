@@ -4,22 +4,25 @@ import java.awt.Color;
 
 import org.lwjgl.opengl.GL11;
 
+import com.tacosupremes.nethercraft.common.formations.IFormation;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiLabel;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.crafting.CraftingHelper;
 
-public class GuiModBookRecipe extends GuiModBook {
-	
-	private ItemStack is;
+public class GuiModBookFormation extends GuiModBook
+{
+	private IFormation f;
+	private String name;
 	private ItemStack[] rec;
-	public GuiModBookRecipe(EntryRecipe e) 
+	public GuiModBookFormation(EntryFormation e) 
 	{
-		super(e);	
-		this.is = e.getItemStack();
-		this.rec = e.getRecipe();
+		super(e);
+		this.f = e.getFormation();
+		this.rec = f.getAltBlocks();
+		this.name = e.getLocalisedName();
 	}
 	
 	@Override
@@ -30,9 +33,7 @@ public class GuiModBookRecipe extends GuiModBook {
 		mc.renderEngine.bindTexture(texture);
 		drawTexturedModalRect(left, top, 0, 0, guiWidth, guiHeight);
 		
-		String s = is.getDisplayName();
-		
-		this.drawCenteredString(fontRenderer, s, left+guiWidth/2, top+10, Color.WHITE.getRGB());	
+		this.drawCenteredString(fontRenderer, name, left + guiWidth / 2, top + 10, Color.WHITE.getRGB());	
 			
 		for (int i = 0; i < this.buttonList.size(); ++i)
         {
@@ -52,14 +53,14 @@ public class GuiModBookRecipe extends GuiModBook {
 					
 			for(int i = 0; i < rec.length; i++)
 			{	
-				int m = left + guiWidth / 2 - 24 + 16 * j;
+				int m = left + guiWidth / 2 - 24 * ((int) (Math.sqrt(rec.length) - 1) / 2) + 16 * j + 8;
 				int n = top + 40 + 16 * k;
 			
 				Minecraft.getMinecraft().getRenderItem().renderItemAndEffectIntoGUI(rec[i], m, n);	
 				
 				j++;
 				
-				if(j == 3)
+				if(j == (int)Math.sqrt(rec.length))
 				{
 					j = 0;
 					k++;
@@ -76,7 +77,7 @@ public class GuiModBookRecipe extends GuiModBook {
 			for(int i = 0; i < rec.length; i++)
 			{
 				
-				int m = left + guiWidth / 2 - 24 + 16 * j;
+				int m = left + guiWidth / 2 - 24 * ((int) (Math.sqrt(rec.length) - 1) / 2) + 16 * j + 8;
 				int n = top + 40 + 16 * k;
 				
 				if(mouseX > m && mouseX < m + 16 && mouseY > n && mouseY < n + 16)
@@ -84,7 +85,7 @@ public class GuiModBookRecipe extends GuiModBook {
 				
 				j++;
 				
-				if(j == 3)
+				if(j == (int)Math.sqrt(rec.length))
 				{
 					j = 0;
 					k++;
@@ -92,4 +93,5 @@ public class GuiModBookRecipe extends GuiModBook {
 			}
 		}
 	}
+
 }

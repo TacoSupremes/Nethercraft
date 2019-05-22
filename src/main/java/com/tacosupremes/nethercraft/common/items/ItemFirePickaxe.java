@@ -81,9 +81,6 @@ public class ItemFirePickaxe extends ItemPickaxe {
 		
 		player.getEntityWorld().getBlockState(pos).getBlock().spawnAsEntity(player.getEntityWorld(), pos, r);
 		
-		
-		
-		
 		return true;
 	}
 

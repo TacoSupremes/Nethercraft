@@ -6,6 +6,9 @@ import java.util.List;
 import java.util.Map;
 
 import com.tacosupremes.nethercraft.common.blocks.ModBlocks;
+import com.tacosupremes.nethercraft.common.formations.Formations;
+import com.tacosupremes.nethercraft.common.formations.IFormation;
+import com.tacosupremes.nethercraft.common.formations.IGenFormation;
 import com.tacosupremes.nethercraft.common.items.ModItems;
 
 import net.minecraft.block.Block;
@@ -40,9 +43,36 @@ public class GuiHandler implements IGuiHandler
 		
 		Entry items = new EntryList("Nether-Items", l.toArray(new Entry[l.size()]));
 		
-		setNextEntry("heat-altar", new ItemStack(ModBlocks.formationBase));
-	
+		List<Entry> lGF = new ArrayList<Entry>();
+		List<Entry> lCF = new ArrayList<Entry>();
+		
+		for(IFormation i : Formations.formations)
+		{
+			Entry temp = new EntryText(i.getName() + ".lore");
+				
+			Entry temp2 = new EntryFormation(i);
+			
+			temp.setNextEntry(temp2.setParent(temp));
+			
+			if(i instanceof IGenFormation)
+				lGF.add(temp);
+			else
+				lCF.add(temp);
+		}
+		
+		Entry gF = new EntryList("Generating-Nether-Energy", lGF.toArray(new Entry[lGF.size()]));
+		Entry cF = new EntryList("Using-Nether-Energy", lCF.toArray(new Entry[lCF.size()]));	
+		
+		setNextEntry("heat-altar", new ItemStack(ModBlocks.formationBase));	
 	}
+	
+	private void addFormation(IFormation i)
+	{
+	//	Entry e = new EntryText(i.getName() + , 1);
+		
+		
+	}
+	
 	
 	private void setNextEntry(String parent, ItemStack itemStack)
 	{
@@ -65,7 +95,6 @@ public class GuiHandler implements IGuiHandler
 		}
 		else
 			m.put(e.getName(), e);
-		
 	}
 	
 	public static void setNextEntry(String parent, String next)
@@ -99,27 +128,30 @@ public class GuiHandler implements IGuiHandler
 	
 	//public static final int BOOKID = 0;
 	
-	
 	@Override
 	public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
 	{	
+		Entry e = getEntryFromID(ID); 
+		
+		
+		// if entry not null return null since book doesn't have a container
+		if(e != null)
+			return null;
+		
 		return null;
 	}
 
-	
 	//public String s[] = new String[]{"Intro", "Generating Nether Energy", "Using Nether Energy", "Nether Items"};
 	
 	//public GuiID ls[] = new GuiID[] {GuiID.List, GuiID.List, GuiID.List, GuiID.List};
 	
 	//public static int list = 0, gen = 0, consumer = 0, item = 0, info = 0;
-	
-	
+
 	//public static int IDCOUNT = 1;
 	
 	@Override
 	public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
 	{
-		
 		Entry e = getEntryFromID(ID); 
 		
 		if(e == null)
@@ -136,10 +168,8 @@ public class GuiHandler implements IGuiHandler
 		
 		switch(e.getType())
 		{
-		case Consumer:
-			break;
-		case Gen:
-			break;
+		case Formation:
+			return new GuiModBookFormation((EntryFormation)e);
 		case Info:
 			return new GuiModBookText((EntryText)e);
 		case Item:

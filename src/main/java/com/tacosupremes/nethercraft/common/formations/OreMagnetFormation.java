@@ -21,17 +21,17 @@ import net.minecraft.world.World;
 public class OreMagnetFormation implements IConsumerFormation {
 
 	@Override
-	public Block[] getBlocks() 
+	public ItemStack[] getBlocks() 
 	{
-		Block a = Blocks.AIR;
+		ItemStack a = ItemStack.EMPTY;
 		
-		Block d = Blocks.DIAMOND_BLOCK; 
+		ItemStack d = new ItemStack(Blocks.DIAMOND_BLOCK); 
 		
-		Block g = Blocks.GLOWSTONE;
+		ItemStack g = new ItemStack(Blocks.GLOWSTONE);
 		
-		Block o = Blocks.OBSIDIAN;
+		ItemStack o = new ItemStack(Blocks.OBSIDIAN);
 		
-		return new Block[]
+		return new ItemStack[]
 		{
 				a,a,o,a,a,
 				a,o,g,o,a,

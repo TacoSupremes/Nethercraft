@@ -139,7 +139,7 @@ public class GuiModBook extends GuiScreen {
 	
 public static void drawTextSplit(FontRenderer f, String s,  int x, int y,  int trim,  int color){
 		
-		if(s.isEmpty() || s == "")
+		if(s.isEmpty() || s == "" || s == null)
 			return;
 		
 		if(f.getStringWidth(s) < trim){

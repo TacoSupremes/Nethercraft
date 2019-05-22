@@ -9,6 +9,7 @@ import com.tacosupremes.nethercraft.common.utils.Vector3;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
@@ -18,15 +19,15 @@ public class GlowstoneFarm implements IConsumerFormation
 {
 
 	@Override
-	public Block[] getBlocks() 
+	public ItemStack[] getBlocks() 
 	{
-		Block g = Blocks.GLOWSTONE;
+		ItemStack g = new ItemStack(Blocks.GLOWSTONE);
 		
-		Block n = Blocks.NETHERRACK;
+		ItemStack n = new ItemStack(Blocks.NETHERRACK);
 		
-		Block a = Blocks.AIR;
+		ItemStack a = new ItemStack(Blocks.GOLD_BLOCK);
 		
-		return new Block[]
+		return new ItemStack[]
 		{
 		n,n,g,n,n,
 		n,n,n,n,n,
@@ -48,7 +49,6 @@ public class GlowstoneFarm implements IConsumerFormation
 		return 2000;
 	}
 
-	
 	public static final int MINECRAFTDAY = 24000;
 	
 	BlockPos aPos[] = new BlockPos[]{new BlockPos(2, 0, 0), new BlockPos(-2, 0, 0), new BlockPos(0, 0, 2), new BlockPos(0, 0, -2)};
@@ -62,8 +62,6 @@ public class GlowstoneFarm implements IConsumerFormation
 		if(w.getWorldTime() % (MINECRAFTDAY / 5) != 0)
 			return;
 	
-			
-		
 			int rand = w.rand.nextInt(4);
 			
 			BlockPos np = pos.add(aPos[rand]);
@@ -71,10 +69,7 @@ public class GlowstoneFarm implements IConsumerFormation
 			
 			setGlowstone(w, np, pos);
 		
-			te.power -= 200;
-		
-		
-		
+			te.power -= 200;		
 	}
 	
 	public int randGlowstone(World w, BlockPos pos)
@@ -111,9 +106,7 @@ public class GlowstoneFarm implements IConsumerFormation
 		}
 		
 		if(w.getBlockState(pos).getBlock() == Blocks.GLOWSTONE && (w.getBlockState(pos.up()).getBlock().isAir(w.getBlockState(pos.up()), w, pos.up()) || w.getBlockState(pos.up()).getBlock() == ModBlocks.glowstoneCrop))
-			setGlowstone(w, pos.up(), center);
-		
-		
+			setGlowstone(w, pos.up(), center);	
 	}
 
 	@Override

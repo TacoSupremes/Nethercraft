@@ -90,13 +90,9 @@ public class ProxyRegistry
 			for (IForgeRegistryEntry<?> entry : ourEntries)
 			{
 
-				if(entry instanceof Enchantment)
-				{
-	
-					if(!Nethercraft.config.isEnchantEnabled((Enchantment)entry))
+				if(entry instanceof Enchantment && !Nethercraft.config.isEnchantEnabled((Enchantment)entry))
 						continue;
 					
-				}
 				
 				event.getRegistry().register(entry);
 
