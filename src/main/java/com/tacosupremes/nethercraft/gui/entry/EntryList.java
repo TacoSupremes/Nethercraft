@@ -1,6 +1,8 @@
-package com.tacosupremes.nethercraft.gui;
+package com.tacosupremes.nethercraft.gui.entry;
 
 import java.util.List;
+
+import com.tacosupremes.nethercraft.gui.GuiID;
 
 public class EntryList extends Entry {
 

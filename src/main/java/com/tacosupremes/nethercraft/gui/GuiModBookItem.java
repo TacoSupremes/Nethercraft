@@ -5,6 +5,7 @@ import java.awt.Color;
 import org.lwjgl.opengl.GL11;
 
 import com.tacosupremes.nethercraft.common.lib.LibMisc;
+import com.tacosupremes.nethercraft.gui.entry.EntryItem;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;

@@ -1,9 +1,10 @@
-package com.tacosupremes.nethercraft.gui;
+package com.tacosupremes.nethercraft.gui.entry;
 
 import com.tacosupremes.nethercraft.common.blocks.ModBlocks;
 import com.tacosupremes.nethercraft.common.items.IRecipeGiver;
 import com.tacosupremes.nethercraft.common.items.ModItems;
 import com.tacosupremes.nethercraft.common.items.RecipeType;
+import com.tacosupremes.nethercraft.gui.GuiID;
 
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;

@@ -60,8 +60,6 @@ public abstract class ItemMod extends Item implements IRecipeGiver
 		if (this.meta == 0 || needsDifferentNames())
 			return super.getItemStackDisplayName(stack);
 		
-		
-
 		return I18n.format(this.getUnlocalizedName(stack).replace(String.valueOf(stack.getMetadata()), "") + ".name");
 	}
 
@@ -73,14 +71,11 @@ public abstract class ItemMod extends Item implements IRecipeGiver
 			super.getSubItems(tab, items);
 		else
 		{
-
 			for (int i = 0; i <= meta; i++)
 			{
 				items.add(new ItemStack(this, 1, i));
 			}
-
 		}
-
 	}
 	
 	public static void registerNonItemMod(Item item, String name)
@@ -125,8 +120,5 @@ public abstract class ItemMod extends Item implements IRecipeGiver
 	{
 		return true;
 	}
-	
-	
-	
 
 }

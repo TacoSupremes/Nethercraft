@@ -8,6 +8,8 @@ import org.lwjgl.opengl.GL11;
 import com.tacosupremes.nethercraft.Nethercraft;
 import com.tacosupremes.nethercraft.common.items.IRecipeGiver;
 import com.tacosupremes.nethercraft.common.items.RecipeType;
+import com.tacosupremes.nethercraft.gui.entry.EntryItem;
+import com.tacosupremes.nethercraft.gui.entry.EntryRecipe;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;

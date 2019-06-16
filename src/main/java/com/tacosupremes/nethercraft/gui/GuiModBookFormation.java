@@ -7,6 +7,7 @@ import org.lwjgl.opengl.GL11;
 import com.tacosupremes.nethercraft.common.formations.IFormation;
 import com.tacosupremes.nethercraft.common.lib.LibMisc;
 import com.tacosupremes.nethercraft.common.utils.Vector3;
+import com.tacosupremes.nethercraft.gui.entry.EntryFormation;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;

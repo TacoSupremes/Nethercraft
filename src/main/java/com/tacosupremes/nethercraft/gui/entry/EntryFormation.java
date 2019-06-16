@@ -1,7 +1,8 @@
-package com.tacosupremes.nethercraft.gui;
+package com.tacosupremes.nethercraft.gui.entry;
 
 import com.tacosupremes.nethercraft.common.formations.IFormation;
 import com.tacosupremes.nethercraft.common.lib.LibMisc;
+import com.tacosupremes.nethercraft.gui.GuiID;
 
 import net.minecraft.item.ItemStack;
 

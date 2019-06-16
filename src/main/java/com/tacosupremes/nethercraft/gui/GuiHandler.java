@@ -12,6 +12,12 @@ import com.tacosupremes.nethercraft.common.formations.IGenFormation;
 import com.tacosupremes.nethercraft.common.items.IRecipeGiver;
 import com.tacosupremes.nethercraft.common.items.ItemMod;
 import com.tacosupremes.nethercraft.common.items.ModItems;
+import com.tacosupremes.nethercraft.gui.entry.Entry;
+import com.tacosupremes.nethercraft.gui.entry.EntryFormation;
+import com.tacosupremes.nethercraft.gui.entry.EntryItem;
+import com.tacosupremes.nethercraft.gui.entry.EntryList;
+import com.tacosupremes.nethercraft.gui.entry.EntryRecipe;
+import com.tacosupremes.nethercraft.gui.entry.EntryText;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;

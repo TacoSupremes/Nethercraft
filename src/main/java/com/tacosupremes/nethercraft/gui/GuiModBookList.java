@@ -8,6 +8,8 @@ import org.lwjgl.opengl.GL11;
 
 import com.tacosupremes.nethercraft.Nethercraft;
 import com.tacosupremes.nethercraft.common.lib.LibMisc;
+import com.tacosupremes.nethercraft.gui.entry.Entry;
+import com.tacosupremes.nethercraft.gui.entry.EntryList;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;

@@ -1,6 +1,8 @@
-package com.tacosupremes.nethercraft.gui;
+package com.tacosupremes.nethercraft.gui.entry;
 
 import com.tacosupremes.nethercraft.common.lib.LibMisc;
+import com.tacosupremes.nethercraft.gui.GuiHandler;
+import com.tacosupremes.nethercraft.gui.GuiID;
 
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.resources.I18n;

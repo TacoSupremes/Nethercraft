@@ -1,4 +1,6 @@
-package com.tacosupremes.nethercraft.gui;
+package com.tacosupremes.nethercraft.gui.entry;
+
+import com.tacosupremes.nethercraft.gui.GuiID;
 
 public class EntryText extends Entry {
 
