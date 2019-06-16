@@ -1,6 +1,8 @@
 package com.tacosupremes.nethercraft.common.items;
 
-public enum RecipeType 
-{
-	Shapeless, Shaped;
-}
+
+	public enum RecipeType
+	{// 					One in One Out
+		Shapeless, Shaped, OIOO;
+	}
+	

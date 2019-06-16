@@ -11,6 +11,7 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IProjectile;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
@@ -23,7 +24,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
-public class ItemFireSword extends ItemSword 
+public class ItemFireSword extends ItemSword implements IRecipeGiver
 {
 
 	public ItemFireSword() 
@@ -115,4 +116,25 @@ public class ItemFireSword extends ItemSword
 	        return 72000;
 	 }
 
+	@Override
+	public ItemStack[] getRecipe(int meta) 
+	{
+		ItemStack b = new ItemStack(ModItems.blazeIngot, 1, 1);
+			
+		ItemStack s = new ItemStack(Items.STICK);
+			
+		ItemStack n = ItemStack.EMPTY;
+			
+		return new ItemStack[] {
+					n,b,n,
+					n,b,n,
+					n,s,n
+				};
+		}
+
+	@Override
+	public RecipeType getType(int meta)
+	{
+		return RecipeType.Shaped;
+	}
 }

@@ -1,0 +1,6 @@
+{
+    "parent": "item/handheld",
+    "textures": {
+        "layer0": "nethercraft:items/blaze_ingot1"
+    }
+}

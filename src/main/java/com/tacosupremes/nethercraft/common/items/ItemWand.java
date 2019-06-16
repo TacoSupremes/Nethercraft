@@ -51,7 +51,7 @@ public class ItemWand extends ItemMod
 	}
 
 	@Override
-	public ItemStack[] getRecipe() {
+	public ItemStack[] getRecipe(int meta) {
 		// TODO Auto-generated method stub
 		return null;
 	}

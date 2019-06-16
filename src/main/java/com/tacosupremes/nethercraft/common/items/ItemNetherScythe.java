@@ -19,7 +19,7 @@ import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumParticleTypes;
 
-public class ItemNetherScythe extends ItemSword 
+public class ItemNetherScythe extends ItemSword implements IRecipeGiver
 {
 
 	public ItemNetherScythe() 
@@ -85,6 +85,28 @@ public class ItemNetherScythe extends ItemSword
 	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity) 
 	{	
 		return super.onLeftClickEntity(stack, player, entity);
+	}
+	
+	@Override
+	public ItemStack[] getRecipe(int meta) 
+	{
+		ItemStack b = new ItemStack(ModItems.blazeIngot, 1, 1);
+			
+		ItemStack s = new ItemStack(Items.STICK);
+			
+		ItemStack n = ItemStack.EMPTY;
+			
+		return new ItemStack[] {
+					b,b,b,
+					n,s,b,
+					s,n,n
+				};
+		}
+
+	@Override
+	public RecipeType getType(int meta)
+	{
+		return RecipeType.Shaped;
 	}
 		
 }

@@ -1,0 +1,6 @@
+{
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "nethercraft:items/blaze_ingot"
+    }
+}

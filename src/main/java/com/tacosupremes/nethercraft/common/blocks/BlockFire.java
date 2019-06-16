@@ -108,7 +108,7 @@ public class BlockFire extends BlockMod {
 
 
 	@Override
-	public ItemStack[] getRecipe() {
+	public ItemStack[] getRecipe(int meta) {
 		// TODO Auto-generated method stub
 		return null;
 	}

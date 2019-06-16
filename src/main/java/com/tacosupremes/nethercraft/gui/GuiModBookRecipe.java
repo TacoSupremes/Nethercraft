@@ -1,10 +1,16 @@
 package com.tacosupremes.nethercraft.gui;
 
 import java.awt.Color;
+import java.io.IOException;
 
 import org.lwjgl.opengl.GL11;
 
+import com.tacosupremes.nethercraft.Nethercraft;
+import com.tacosupremes.nethercraft.common.items.IRecipeGiver;
+import com.tacosupremes.nethercraft.common.items.RecipeType;
+
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiLabel;
 import net.minecraft.client.renderer.RenderHelper;
@@ -15,11 +21,14 @@ public class GuiModBookRecipe extends GuiModBook {
 	
 	private ItemStack is;
 	private ItemStack[] rec;
+	private RecipeType recType;
+	
 	public GuiModBookRecipe(EntryRecipe e) 
 	{
 		super(e);	
 		this.is = e.getItemStack();
-		this.rec = e.getRecipe();
+		this.rec = e.getRecipe(is.getItemDamage());
+		this.recType = e.getRecipeType();
 	}
 	
 	@Override
@@ -46,7 +55,7 @@ public class GuiModBookRecipe extends GuiModBook {
                
     	if(rec != null)
 		{
-			RenderHelper.enableGUIStandardItemLighting();
+			RenderHelper.enableGUIStandardItemLighting();	
 			
 			int j = 0, k = 0;
 					
@@ -54,8 +63,9 @@ public class GuiModBookRecipe extends GuiModBook {
 			{	
 				int m = left + guiWidth / 2 - 24 + 16 * j;
 				int n = top + 40 + 16 * k;
-			
-				Minecraft.getMinecraft().getRenderItem().renderItemAndEffectIntoGUI(rec[i], m, n);	
+				
+				if(rec[i] != ItemStack.EMPTY)
+					Minecraft.getMinecraft().getRenderItem().renderItemAndEffectIntoGUI(rec[i], m, n);	
 				
 				j++;
 				
@@ -64,14 +74,13 @@ public class GuiModBookRecipe extends GuiModBook {
 					j = 0;
 					k++;
 				}
-				
 			}
 			
 			RenderHelper.disableStandardItemLighting();
 			
-			 j = 0;
+			j = 0;
 			 
-			 k = 0;
+			k = 0;
 			
 			for(int i = 0; i < rec.length; i++)
 			{
@@ -79,8 +88,8 @@ public class GuiModBookRecipe extends GuiModBook {
 				int m = left + guiWidth / 2 - 24 + 16 * j;
 				int n = top + 40 + 16 * k;
 				
-				if(mouseX > m && mouseX < m + 16 && mouseY > n && mouseY < n + 16)
-					this.renderToolTip(rec[i], mouseX - 8, mouseY);
+				if(mouseX > m && mouseX < m + 16 && mouseY > n && mouseY < n + 16  && rec[i] != ItemStack.EMPTY)
+					this.renderToolTip(rec[i], mouseX - 8, mouseY+8);
 				
 				j++;
 				
@@ -91,5 +100,41 @@ public class GuiModBookRecipe extends GuiModBook {
 				}		
 			}
 		}
+	}
+	
+	@Override
+	protected void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException 
+	{
+		
+		int j = 0, k = 0;
+		
+		for(int i = 0; i < rec.length; i++)
+		{	
+			int m = left + guiWidth / 2 - 24 + 16 * j;
+			int n = top + 40 + 16 * k;
+			
+			EntryItem dest = (EntryItem) GuiHandler.getEntryFromStack(rec[i]);
+			
+			if(mouseX > m && mouseX < m + 16 && mouseY > n && mouseY < n + 16 && rec[i] != ItemStack.EMPTY && dest != null)
+			{
+				
+				dest.setTempParent(this.e);
+				Minecraft.getMinecraft().player.openGui(Nethercraft.instance, dest.getID(), Minecraft.getMinecraft().player.world, 0, 0, 0);	
+			}
+		//	Minecraft.getMinecraft().getRenderItem().renderItemAndEffectIntoGUI(rec[i], m, n);	
+			
+			
+			j++;
+			
+			if(j == 3)
+			{
+				j = 0;
+				k++;
+			}
+			
+		}
+		
+		super.mouseClicked(mouseX, mouseY, mouseButton);
+		
 	}
 }

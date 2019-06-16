@@ -50,7 +50,7 @@ public class BlockFormationBase extends BlockModContainer implements IRecipeGive
     }
 	
 	@Override
-	public ItemStack[] getRecipe() 
+	public ItemStack[] getRecipe(int meta) 
 	{
 		ItemStack o = new ItemStack(Blocks.OBSIDIAN);
 		
@@ -64,10 +64,12 @@ public class BlockFormationBase extends BlockModContainer implements IRecipeGive
 	}
 
 	@Override
-	public RecipeType getType()
+	public RecipeType getType(int meta)
 	{
 		return RecipeType.Shaped;
 	}
+
+	
 	
 	
 	

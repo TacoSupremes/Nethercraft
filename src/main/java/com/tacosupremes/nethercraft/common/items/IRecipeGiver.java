@@ -4,9 +4,14 @@ import net.minecraft.item.ItemStack;
 
 public interface IRecipeGiver 
 {
-	ItemStack[] getRecipe();
+	ItemStack[] getRecipe(int meta);
 	
-	RecipeType getType();
+	RecipeType getType(int meta);
+	
+	default int getCountOfRecipes() 
+	{
+		return 1;
+	}
 	
 	
 }

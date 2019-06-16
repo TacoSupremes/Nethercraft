@@ -25,7 +25,7 @@ public class ItemModBook extends ItemMod {
 	}
 
 	@Override
-	public ItemStack[] getRecipe() 
+	public ItemStack[] getRecipe(int meta) 
 	{
 		return null;
 	}

@@ -17,7 +17,7 @@ public class ItemGhastCannon extends ItemMod {
 	}
 
 	@Override
-	public ItemStack[] getRecipe()
+	public ItemStack[] getRecipe(int meta)
 	{
 		return null;
 	}

@@ -26,6 +26,7 @@ public abstract class ItemMod extends Item implements IRecipeGiver
 			this.setHasSubtypes(true);
 		ModItems.items.add(this);
 		this.meta = meta;
+		this.setMaxDamage(0);
 	}
 
 	public ItemMod(String s)
@@ -115,7 +116,7 @@ public abstract class ItemMod extends Item implements IRecipeGiver
 		return I18n.format(this.getUnlocalizedName() + ".name");
 	}
 
-	public RecipeType getType()
+	public RecipeType getType(int meta)
 	{
 		return RecipeType.Shaped;
 	}

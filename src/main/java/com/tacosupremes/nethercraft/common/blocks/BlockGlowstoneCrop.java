@@ -95,7 +95,7 @@ public class BlockGlowstoneCrop extends BlockMod {
 
 
 	@Override
-	public ItemStack[] getRecipe() {
+	public ItemStack[] getRecipe(int meta) {
 		// TODO Auto-generated method stub
 		return null;
 	}

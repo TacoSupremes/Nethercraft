@@ -22,6 +22,8 @@ public class GuiModBook extends GuiScreen {
 
 	public static final ResourceLocation texture = new ResourceLocation("nethercraft:textures/gui/book.png");
 	
+	public static final ResourceLocation grid = new ResourceLocation("nethercraft:textures/gui/grid.png");
+	
 	protected Entry e;
 	
 	public GuiModBook(Entry e)
@@ -82,7 +84,8 @@ public class GuiModBook extends GuiScreen {
 
 	protected void actionPerformed(GuiButton gb) 
 	{	
-		
+		Entry e = GuiHandler.getEntryFromID(gb.id);
+				
 		Minecraft.getMinecraft().player.openGui(Nethercraft.instance, gb.id, Minecraft.getMinecraft().player.world, 0, 0, 0);	
 	
 		System.out.println("opened" + gb.id);
@@ -110,11 +113,10 @@ public class GuiModBook extends GuiScreen {
 	
 	@Override
 	 protected void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException
-	    {
+	 {
 	        if (mouseButton == 0)
 	        {
-	        	
-	        	
+	       	
 	            for (int i = 0; i < this.buttonList.size(); ++i)
 	            {
 	                GuiButton guibutton = (GuiButton)this.buttonList.get(i);
@@ -137,7 +139,7 @@ public class GuiModBook extends GuiScreen {
 	        }
 	    }
 	
-public static void drawTextSplit(FontRenderer f, String s,  int x, int y,  int trim,  int color){
+	public static void drawTextSplit(FontRenderer f, String s,  int x, int y,  int trim,  int color){
 		
 		if(s.isEmpty() || s == "" || s == null)
 			return;
@@ -181,11 +183,19 @@ public static void drawTextSplit(FontRenderer f, String s,  int x, int y,  int t
 		
 		toDraw.add(cs);
 		
-		for(int i = 0; i< toDraw.size();i++){
+		for(int i = 0; i< toDraw.size(); i++){
 			f.drawString(toDraw.get(i), x, y+i*f.FONT_HEIGHT, color);
 			
 		}
 		
+	}
+
+	protected void renderToolTip(ItemStack stack, int x, int y)
+	{
+		FontRenderer font = stack.getItem().getFontRenderer(stack);
+		net.minecraftforge.fml.client.config.GuiUtils.preItemToolTip(stack);
+		this.drawHoveringText(this.getItemToolTip(stack) + (GuiHandler.getEntryFromStack(stack) != null ? I18n.format(LibMisc.MODID + "." + "click") : ""), x, y);
+		net.minecraftforge.fml.client.config.GuiUtils.postItemToolTip();	
 	}
 		
 }

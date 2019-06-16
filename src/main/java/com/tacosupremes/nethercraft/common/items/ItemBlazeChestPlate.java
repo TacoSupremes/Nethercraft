@@ -2,6 +2,7 @@ package com.tacosupremes.nethercraft.common.items;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
@@ -12,7 +13,7 @@ import net.minecraft.potion.PotionType;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
-public class ItemBlazeChestPlate extends ItemArmor {
+public class ItemBlazeChestPlate extends ItemArmor implements IRecipeGiver {
 
 	public ItemBlazeChestPlate()
 	{
@@ -64,4 +65,25 @@ public class ItemBlazeChestPlate extends ItemArmor {
 	
 	}
 	
+	@Override
+	public ItemStack[] getRecipe(int meta) 
+	{
+		ItemStack b = new ItemStack(ModItems.blazeIngot, 1, 1);
+			
+		ItemStack s = new ItemStack(Items.STICK);
+			
+		ItemStack n = ItemStack.EMPTY;
+			
+		return new ItemStack[] {
+					b,n,b,
+					b,b,b,
+					b,b,b,
+				};
+		}
+
+	@Override
+	public RecipeType getType(int meta)
+	{
+		return RecipeType.Shaped;
+	}
 }

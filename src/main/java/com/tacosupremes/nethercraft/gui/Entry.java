@@ -2,7 +2,9 @@ package com.tacosupremes.nethercraft.gui;
 
 import com.tacosupremes.nethercraft.common.lib.LibMisc;
 
+import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.item.ItemStack;
 
 public class Entry 
 {
@@ -11,6 +13,7 @@ public class Entry
 
 	private int id;
 	private Entry parent = null; // parent/prev entry
+	private Entry tempParent = null; // temp entry itemlink entry
 	private Entry next = null; // next entry
 	private boolean sub = false;
 	
@@ -70,6 +73,12 @@ public class Entry
 	
 	public Entry getParent()
 	{
+		if(this.getTempParent() != null)
+		{
+			Entry e = this.getTempParent();
+			this.setTempParent(null);
+			return e;
+		}
 		return this.parent;
 	}
 	
@@ -95,4 +104,15 @@ public class Entry
 		sub = true;
 		return this;
 	}
+	
+	public void setTempParent(Entry e)
+	{
+		this.tempParent = e;	
+	}
+	
+	public Entry getTempParent()
+	{
+		return this.tempParent;
+	}
+	
 }

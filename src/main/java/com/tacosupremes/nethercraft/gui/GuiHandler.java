@@ -9,6 +9,8 @@ import com.tacosupremes.nethercraft.common.blocks.ModBlocks;
 import com.tacosupremes.nethercraft.common.formations.Formations;
 import com.tacosupremes.nethercraft.common.formations.IFormation;
 import com.tacosupremes.nethercraft.common.formations.IGenFormation;
+import com.tacosupremes.nethercraft.common.items.IRecipeGiver;
+import com.tacosupremes.nethercraft.common.items.ItemMod;
 import com.tacosupremes.nethercraft.common.items.ModItems;
 
 import net.minecraft.block.Block;
@@ -34,12 +36,20 @@ public class GuiHandler implements IGuiHandler
 		
 		List<Entry> l = new ArrayList<Entry>();
 		
+		for(ItemMod i : ModItems.items)
+		{
+			ItemStack is = new ItemStack(i);
+			Entry temp = new EntryItem(is);
+			l.add(temp);
+		}
+		
 		for(Item i : ModItems.nitems)
 		{
 			ItemStack is = new ItemStack(i);
 			Entry temp = new EntryItem(is);
 			l.add(temp);
 		}
+		
 		
 		Entry items = new EntryList("Nether-Items", l.toArray(new Entry[l.size()]));
 		
@@ -78,6 +88,11 @@ public class GuiHandler implements IGuiHandler
 	{
 		setNextEntry(parent, itemStack.getUnlocalizedName());	
 	}
+	
+	public static boolean hasEntry(Entry e)
+	{
+		return m.containsKey(e.getName());
+	}
 
 	public static void add(Entry e)
 	{
@@ -114,6 +129,14 @@ public class GuiHandler implements IGuiHandler
 	{
 		return m.get(s);
 	}
+	
+	public static Entry getEntryFromStack(ItemStack is)
+	{
+		
+		
+		return m.get(is.getUnlocalizedName());
+	}
+	
 	
 	public static Entry getEntryFromID(int ID)
 	{

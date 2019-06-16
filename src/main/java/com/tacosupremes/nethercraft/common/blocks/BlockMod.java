@@ -34,10 +34,8 @@ public abstract class BlockMod extends Block implements IRecipeGiver
 		return true;
 	}
 
-	
-
 	@Override
-	public RecipeType getType() 
+	public RecipeType getType(int meta) 
 	{
 		
 		return RecipeType.Shaped;

@@ -45,6 +45,8 @@ public class ModItems
 	//FIRE Sword swing to shoot fire right click for fire shield
 	public static Item portal;
 	
+	public static Item blazeIngot;
+	
 	//Item that moves you 8 blocks at a time since that is nether rules for distance
 	
 	// ghast/blaze cannon
@@ -59,6 +61,8 @@ public class ModItems
 	public static void preInit()
 	{
 		wand = new ItemWand();	
+		
+		blazeIngot = new ItemBlazeIngot();
 		
 		firePickaxe = new ItemFirePickaxe();
 		
@@ -77,6 +81,8 @@ public class ModItems
 		book = new ItemModBook();
 		
 		portal = new ItemPortal();
+		
+	
 	}
 	
 	public static void register()
@@ -99,16 +105,19 @@ public class ModItems
 
 		for (ItemMod i : items)
 		{
-			if (i.getColor() != null)
-				Minecraft.getMinecraft().getItemColors().registerItemColorHandler(i.getColor(), i);
-
+			
 			if (i.meta != 0)
 			{
 				if (i.hasOneModel())
 				{
 					for (int i2 = 0; i2 < i.meta + 1; i2++)
 						registerItemRenderSameModel(i, i2);
-
+					
+					if (i.getColor() != null) 
+					{
+					
+						Minecraft.getMinecraft().getItemColors().registerItemColorHandler(i.getColor(), i);
+					}
 					continue;
 				}
 
@@ -129,10 +138,18 @@ public class ModItems
 
 			if (i.meta == 0 || i.skipVariants())
 				registerItemRender(i, 0);
+			
+			if (i.getColor() != null) 
+			{
+				
+				Minecraft.getMinecraft().getItemColors().registerItemColorHandler(i.getColor(), i);
+			}
 		}
 
 		for (Item i : nitems)
 			registerItemRender(i, 0);
+		
+	
 
 	}
 
