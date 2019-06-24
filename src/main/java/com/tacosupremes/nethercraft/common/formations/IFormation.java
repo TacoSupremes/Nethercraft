@@ -12,11 +12,6 @@ public interface IFormation
 {	
 	public ItemStack[] getBlocks();
 	
-	public default ItemStack[] getAltBlocks()
-	{
-		return IFormation.this.getBlocks();	
-	}
-	
 	public Vector3 getOffset();
 	
 	public int getMaxPower();
@@ -26,9 +21,6 @@ public interface IFormation
 	
 	public String getName();
 
-	public default Block getSpecialBlock() 
-	{
-		return null;
-	}
+	
 	
 }

@@ -54,13 +54,12 @@ public class GuiModBook extends GuiScreen {
 			this.buttonList.add(new GuiLabelButton(GuiHandler.getEntryFromName(e.getParent().getName()).getID(), left+20+Minecraft.getMinecraft().fontRenderer.getStringWidth(back)/2, top+guiHeight-20, back));
 			this.buttonList.add(new GuiLabelButton(e.getNextEntry().getID(), left+guiWidth - 30, top+guiHeight-20, I18n.format(LibMisc.MODID + "." + "next")));
 			
-		}else if(e.getNextEntry() != null )
+		}else if(e.getNextEntry() != null)
 		{
 			this.buttonList.add(new GuiLabelButton(e.getNextEntry().getID(), left+guiWidth - 30, top+guiHeight-20, I18n.format(LibMisc.MODID + "." + "next")));
 		}
 		
 		initGuiFeatures();
-	
 	}
 
 	public void initGuiFeatures() 
@@ -69,8 +68,8 @@ public class GuiModBook extends GuiScreen {
 	}
 
 	@Override
-	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-		
+	public void drawScreen(int mouseX, int mouseY, float partialTicks)
+	{	
 		GL11.glColor4f(1F, 1F, 1F, 1F);
 		mc.renderEngine.bindTexture(texture);
 		drawTexturedModalRect(left, top, 0, 0, guiWidth, guiHeight);
@@ -78,7 +77,6 @@ public class GuiModBook extends GuiScreen {
 		String s = I18n.format(LibMisc.MODID + "." + e.getName().trim());
 		
 		this.drawCenteredString(fontRenderer, s, left+guiWidth/2, top+10, Color.WHITE.getRGB());
-
 
 		super.drawScreen(mouseX, mouseY, partialTicks);	
 	}
@@ -191,12 +189,6 @@ public class GuiModBook extends GuiScreen {
 		
 	}
 
-	protected void renderToolTip(ItemStack stack, int x, int y)
-	{
-		FontRenderer font = stack.getItem().getFontRenderer(stack);
-		net.minecraftforge.fml.client.config.GuiUtils.preItemToolTip(stack);
-		this.drawHoveringText(this.getItemToolTip(stack) + (GuiHandler.getEntryFromStack(stack) != null ? I18n.format(LibMisc.MODID + "." + "click") : ""), x, y);
-		net.minecraftforge.fml.client.config.GuiUtils.postItemToolTip();	
-	}
+	
 		
 }

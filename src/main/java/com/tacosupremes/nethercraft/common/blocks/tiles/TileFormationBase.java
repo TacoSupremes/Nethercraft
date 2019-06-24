@@ -14,6 +14,7 @@ import com.tacosupremes.nethercraft.common.formations.IConsumerFormation;
 import com.tacosupremes.nethercraft.common.formations.IFormation;
 import com.tacosupremes.nethercraft.common.formations.IGenFormation;
 import com.tacosupremes.nethercraft.common.items.IRecipeGiver;
+import com.tacosupremes.nethercraft.common.items.ItemCloneBlock;
 import com.tacosupremes.nethercraft.common.items.ModItems;
 import com.tacosupremes.nethercraft.common.items.RecipeType;
 import com.tacosupremes.nethercraft.common.utils.BlockUtils;
@@ -161,8 +162,6 @@ public class TileFormationBase extends TileMod implements IGenerator, IConsumer
 			
 		}
 		
-		if(this.getWorld().isRemote)
-			return;
 		
 		if(isGen())
 		{
@@ -204,13 +203,12 @@ public class TileFormationBase extends TileMod implements IGenerator, IConsumer
 				if(b[index] == ItemStack.EMPTY)
 					continue;
 				
-				if(!(BlockUtils.toItemStack(w.getBlockState(pos.add(x, 0, z).add(v3.x, v3.y, v3.z))).isItemEqual(b[index]) || (b[index].getItemDamage() == OreDictionary.WILDCARD_VALUE && w.getBlockState(pos.add(x, 0, z).add(v3.x, v3.y, v3.z)).getBlock() == formation.getSpecialBlock())))
+				if(!(BlockUtils.toItemStack(w.getBlockState(pos.add(x, 0, z).add(v3.x, v3.y, v3.z))).isItemEqual(b[index]) || (b[index].getItem() instanceof ItemCloneBlock && w.getBlockState(pos.add(x, 0, z).add(v3.x, v3.y, v3.z)).getBlock() == ((ItemCloneBlock)b[index].getItem()).getBlock())))
 					return false;
 				
 			}
 			
 		}
-		
 		
 		return true;
 	}

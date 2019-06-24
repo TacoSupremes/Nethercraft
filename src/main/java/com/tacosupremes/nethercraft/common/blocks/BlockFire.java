@@ -27,7 +27,7 @@ public class BlockFire extends BlockMod {
 	
 	public BlockFire() 
 	{
-		super(Material.CIRCUITS, "fire");
+		super(Material.CIRCUITS, "pick_fire");
 		this.setLightLevel(0.6F);
 	}
 

@@ -32,27 +32,6 @@ public class NetherSpawnerFormation implements IConsumerFormation {
 	@Override
 	public ItemStack[] getBlocks() 
 	{
-		ItemStack p = new ItemStack(Blocks.PORTAL, 1, OreDictionary.WILDCARD_VALUE);
-		
-		ItemStack o = new ItemStack(Blocks.OBSIDIAN);
-		
-		ItemStack a = ItemStack.EMPTY;
-		
-		return new ItemStack[]
-		{
-		 o,p,p,p,o,
-		 p,a,a,a,p,
-		 p,a,a,a,p,
-		 p,a,a,a,p,
-		 o,p,p,p,o				
-		};
-	}
-	
-	
-
-	@Override
-	public ItemStack[] getAltBlocks() 
-	{
 		ItemStack p = new ItemStack(ModItems.portal);
 		
 		ItemStack o = new ItemStack(Blocks.OBSIDIAN);
@@ -68,9 +47,7 @@ public class NetherSpawnerFormation implements IConsumerFormation {
 		 o,p,p,p,o				
 		};
 	}
-
-
-
+	
 	@Override
 	public void usePower(World w, BlockPos pos, NBTTagCompound nbt, TileFormationBase te)
 	{
@@ -139,7 +116,7 @@ public class NetherSpawnerFormation implements IConsumerFormation {
 		return "nether_spawner";
 	}
 
-
+/*
 
 	@Override
 	public Block getSpecialBlock() 
@@ -148,7 +125,7 @@ public class NetherSpawnerFormation implements IConsumerFormation {
 		return Blocks.PORTAL;
 	}
 	
-	
+*/
 	
 
 }

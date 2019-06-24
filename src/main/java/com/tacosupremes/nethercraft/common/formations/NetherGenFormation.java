@@ -1,6 +1,7 @@
 package com.tacosupremes.nethercraft.common.formations;
 
 import com.tacosupremes.nethercraft.common.blocks.tiles.TileFormationBase;
+import com.tacosupremes.nethercraft.common.items.ModItems;
 import com.tacosupremes.nethercraft.common.utils.Vector3;
 
 import net.minecraft.block.Block;
@@ -12,11 +13,10 @@ import net.minecraft.world.World;
 
 public class NetherGenFormation implements IGenFormation
 {
-
 	@Override
 	public void generatePower(World w, BlockPos pos, NBTTagCompound nbt, TileFormationBase te) 
 	{			
-		if(w.getWorldTime() %20 != 0)
+		if(w.getWorldTime() %20 != 0 || te.power >= getMaxPower())
 			return;
 
 		for(int y = 1; y < pos.getY(); y++)
@@ -32,6 +32,8 @@ public class NetherGenFormation implements IGenFormation
 						if(w.getTileEntity(pos_) == null && w.getBlockState(pos_).getBlock() != Blocks.NETHERRACK)
 						{			
 							w.setBlockState(pos_, Blocks.NETHERRACK.getDefaultState(), 3);	
+							
+							te.power += 10;
 												
 							System.out.println("GENERATOR" + te.power);
 							
@@ -45,12 +47,10 @@ public class NetherGenFormation implements IGenFormation
 		nbt.setBoolean("DONE", true);	
 	}
 
-	
-
 	@Override
 	public ItemStack[] getBlocks() 
 	{
-		ItemStack f = new ItemStack(Blocks.FIRE);
+		ItemStack f = new ItemStack(ModItems.fire);
 		
 		ItemStack a = ItemStack.EMPTY;
 		
@@ -64,15 +64,11 @@ public class NetherGenFormation implements IGenFormation
 		};
 	}
 
-
-
 	@Override
 	public Vector3 getOffset() 
 	{
 		return Vector3.zero;
 	}
-
-
 
 	@Override
 	public int getMaxPower() 
@@ -80,15 +76,11 @@ public class NetherGenFormation implements IGenFormation
 		return 1000;
 	}
 
-
-
 	@Override
 	public int getRange() 
 	{
 		return 16;
 	}
-
-
 
 	@Override
 	public String getName() 

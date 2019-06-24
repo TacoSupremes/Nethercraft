@@ -28,17 +28,15 @@ import net.minecraftforge.fml.common.network.IGuiHandler;
 
 public class GuiHandler implements IGuiHandler
 {
-	static Map<String, Entry> m = new HashMap<String, Entry>();
+	private static Map<String, Entry> m = new HashMap<String, Entry>();
 
-	static int count = 0;
+	public static int count = 0;
 	
 	public GuiHandler()
 	{
 		Entry e = new EntryList("Nether-Tome", new Entry[]{new Entry("Intro"), new Entry("Generating-Nether-Energy"), new Entry("Using-Nether-Energy"), new Entry("Nether-Items"), new Entry("n"), new Entry("n2"), new Entry("n3"), new Entry("n4"), new Entry("n5"), new Entry("n6"), new Entry("n7"), new Entry("n8"), new Entry("n9"), new Entry("n10"), new Entry("n11"), new Entry("n12")});		
 		
-		Entry e2 = new EntryList("Intro", new Entry[] {new EntryText("What-is-Nethercraft", 2), new EntryText("Nether-Energy", 1),  new EntryText("heat-altar" ,1),new EntryText("Overuse-of-Nether-Energy", 1)});
-		
-		Entry e3 = new EntryItem(new ItemStack(ModBlocks.formationBase));
+		Entry e2 = new EntryList("Intro", new Entry[] {new EntryText("What-is-Nethercraft", 2), new EntryText("Nether-Energy", 1),  new EntryItem(new ItemStack(ModBlocks.formationBase)), new EntryText("Overuse-of-Nether-Energy", 1)});
 		
 		List<Entry> l = new ArrayList<Entry>();
 		
@@ -78,8 +76,6 @@ public class GuiHandler implements IGuiHandler
 		
 		Entry gF = new EntryList("Generating-Nether-Energy", lGF.toArray(new Entry[lGF.size()]));
 		Entry cF = new EntryList("Using-Nether-Energy", lCF.toArray(new Entry[lCF.size()]));	
-		
-		setNextEntry("heat-altar", new ItemStack(ModBlocks.formationBase));	
 	}
 	
 	private void addFormation(IFormation i)

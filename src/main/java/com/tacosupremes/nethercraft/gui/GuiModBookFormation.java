@@ -25,14 +25,13 @@ public class GuiModBookFormation extends GuiModBook
 	{
 		super(e);
 		this.f = e.getFormation();
-		this.rec = f.getAltBlocks();
+		this.rec = f.getBlocks();
 		this.name = e.getLocalisedName();
 	}
 	
 	@Override
 	public void drawScreen(int mouseX, int mouseY, float partialTicks)
 	{
-		
 		GL11.glColor4f(1F, 1F, 1F, 1F);
 		mc.renderEngine.bindTexture(texture);
 		drawTexturedModalRect(left, top, 0, 0, guiWidth, guiHeight);
@@ -49,17 +48,20 @@ public class GuiModBookFormation extends GuiModBook
             ((GuiLabel)this.labelList.get(j)).drawLabel(this.mc, mouseX, mouseY);
         }
         
-        //I18n.format(LibMisc.MODID + "." + "levelto")
-               
     	if(rec != null)
 		{
     		// this should be placed n blocks below (offset) 
     		if(f.getOffset() != Vector3.zero)
-    			this.drawTextSplit(mc.fontRenderer, "" + I18n.format(LibMisc.MODID + "." + "place") + (int)(-1 * f.getOffset().y) + " " + I18n.format(LibMisc.MODID + "." + ((Math.abs(f.getOffset().y)  == 1.0) ? "block" : "blocks"))  + " " + I18n.format(LibMisc.MODID + "." + "below"), left + 15, top + 60 + 16 * ((int)Math.sqrt(rec.length)-1),  guiWidth - 25, Color.WHITE.getRGB());		   	
+    			this.drawTextSplit(mc.fontRenderer, "" + 
+    		I18n.format(LibMisc.MODID + "." + "place") + 
+    		(int)(-1 * f.getOffset().y) + " " + 
+    		I18n.format(LibMisc.MODID + "." + 
+    		((Math.abs(f.getOffset().y)  == 1.0) ? "block" : "blocks")) + 
+    		" " + I18n.format(LibMisc.MODID + "." + "below"), 
+    		left + 15, top + 60 + 16 * ((int)Math.sqrt(rec.length)-1),  guiWidth - 25, Color.WHITE.getRGB());		   	
     		else
-    			this.drawTextSplit(mc.fontRenderer, "" + I18n.format(LibMisc.MODID + "." + "levelto"), (left + 15), top + 60,  guiWidth - 25, Color.WHITE.getRGB());		   	
-        		
-    		
+    			this.drawTextSplit(mc.fontRenderer, "" + I18n.format(LibMisc.MODID + "." + "levelto"), (left + 15), top + 60 + 16 * ((int)Math.sqrt(rec.length)-1),  guiWidth - 25, Color.WHITE.getRGB());		   	
+        			
 			RenderHelper.enableGUIStandardItemLighting();
 			
 			int j = 0, k = 0;

@@ -72,6 +72,9 @@ public class EntryRecipe extends Entry
 
 	public RecipeType getRecipeType() 
 	{	
+		if(isBlock())
+			return ((IRecipeGiver)Block.getBlockFromItem(is.getItem())).getType(is.getItemDamage());
+		
 		return ((IRecipeGiver)is.getItem()).getType(is.getItemDamage());
 	}
 	

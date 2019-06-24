@@ -8,6 +8,7 @@ import org.lwjgl.opengl.GL11;
 import com.tacosupremes.nethercraft.Nethercraft;
 import com.tacosupremes.nethercraft.common.items.IRecipeGiver;
 import com.tacosupremes.nethercraft.common.items.RecipeType;
+import com.tacosupremes.nethercraft.common.lib.LibMisc;
 import com.tacosupremes.nethercraft.gui.entry.EntryItem;
 import com.tacosupremes.nethercraft.gui.entry.EntryRecipe;
 
@@ -16,6 +17,7 @@ import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiLabel;
 import net.minecraft.client.renderer.RenderHelper;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.crafting.CraftingHelper;
 
@@ -138,5 +140,13 @@ public class GuiModBookRecipe extends GuiModBook {
 		
 		super.mouseClicked(mouseX, mouseY, mouseButton);
 		
+	}
+	
+	protected void renderToolTip(ItemStack stack, int x, int y)
+	{
+		FontRenderer font = stack.getItem().getFontRenderer(stack);
+		net.minecraftforge.fml.client.config.GuiUtils.preItemToolTip(stack);
+		this.drawHoveringText(this.getItemToolTip(stack) + (GuiHandler.getEntryFromStack(stack) != null ? I18n.format(LibMisc.MODID + "." + "click") : ""), x, y);
+		net.minecraftforge.fml.client.config.GuiUtils.postItemToolTip();	
 	}
 }

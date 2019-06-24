@@ -11,6 +11,7 @@ import com.tacosupremes.nethercraft.common.utils.ProxyRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -44,6 +45,8 @@ public class ModItems
 	public static Item ghastCannon;
 	//FIRE Sword swing to shoot fire right click for fire shield
 	public static Item portal;
+	
+	public static Item fire;
 	
 	public static Item blazeIngot;
 	
@@ -80,9 +83,9 @@ public class ModItems
 		
 		book = new ItemModBook();
 		
-		portal = new ItemPortal();
+		portal = new ItemCloneBlock(Blocks.PORTAL);
 		
-	
+		fire = new ItemCloneBlock(Blocks.FIRE);
 	}
 	
 	public static void register()
@@ -148,9 +151,6 @@ public class ModItems
 
 		for (Item i : nitems)
 			registerItemRender(i, 0);
-		
-	
-
 	}
 
 	public static void registerItemRender(Item i, int meta)

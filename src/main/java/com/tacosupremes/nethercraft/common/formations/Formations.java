@@ -3,6 +3,7 @@ package com.tacosupremes.nethercraft.common.formations;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.tacosupremes.nethercraft.common.items.ItemCloneBlock;
 import com.tacosupremes.nethercraft.common.utils.BlockUtils;
 import com.tacosupremes.nethercraft.common.utils.Vector3;
 
@@ -53,7 +54,7 @@ public class Formations
 					if(b[index] == ItemStack.EMPTY)
 						continue;
 					
-					if(!(BlockUtils.toItemStack(w.getBlockState(pos.add(x, 0, z).add(v3.x, v3.y, v3.z))).isItemEqual(b[index]) || (b[i].getItemDamage() == OreDictionary.WILDCARD_VALUE && w.getBlockState(pos.add(x, 0, z).add(v3.x, v3.y, v3.z)).getBlock() == formations.get(i).getSpecialBlock())))
+					if(!(BlockUtils.toItemStack(w.getBlockState(pos.add(x, 0, z).add(v3.x, v3.y, v3.z))).isItemEqual(b[index]) || (b[index].getItem() instanceof ItemCloneBlock && w.getBlockState(pos.add(x, 0, z).add(v3.x, v3.y, v3.z)).getBlock() == ((ItemCloneBlock)b[index].getItem()).getBlock())))
 						continue formLoop;
 				}
 			}
