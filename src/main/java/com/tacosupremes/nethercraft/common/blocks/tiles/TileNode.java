@@ -22,7 +22,6 @@ public class TileNode extends TileMod implements INode
 	@Override
 	public boolean isActiveNode() 
 	{
-		
 		return !this.getWorld().isBlockPowered(this.getPos());
 	}
 	
@@ -71,7 +70,7 @@ public class TileNode extends TileMod implements INode
 		{
 			if(this.getWorld().getTileEntity(linkedTo.get(i)) instanceof INode)
 			{
-				if(((INode)this.getWorld().getTileEntity(linkedTo.get(i))).isActiveNode() && (Nethercraft.proxy.playerHoldingItem(ModItems.wand) || Nethercraft.proxy.playerWearingItem(ModItems.netherGlasses, EntityEquipmentSlot.HEAD)))
+				if(this.isActiveNode() && ((INode)this.getWorld().getTileEntity(linkedTo.get(i))).isActiveNode() && (Nethercraft.proxy.playerHoldingItem(ModItems.wand) || Nethercraft.proxy.playerWearingItem(ModItems.netherGlasses, EntityEquipmentSlot.HEAD)))
 					BlockUtils.drawLine(getWorld(), this.getParticleOffset(), ((INode)this.getWorld().getTileEntity(linkedTo.get(i))).getParticleOffset(), EnumParticleTypes.REDSTONE);	
 			}
 			else
@@ -94,11 +93,6 @@ public class TileNode extends TileMod implements INode
 		double d1 = (double)pos.getY() + 0.5D;
 	    
 		double d2 = (double)pos.getZ() + 0.5D;
-	    
-		double d3 = 0.22D;
-	    
-		double d4 = 0.27D;
-
 	    
 		if (enumfacing.getAxis().isHorizontal())
 		{

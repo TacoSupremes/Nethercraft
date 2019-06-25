@@ -31,9 +31,4 @@ public class EntryItem extends Entry
 		return is.getDisplayName();
 	}
 
-	
-	
-
-	
-	
 }

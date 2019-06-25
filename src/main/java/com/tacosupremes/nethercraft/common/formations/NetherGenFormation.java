@@ -27,9 +27,9 @@ public class NetherGenFormation implements IGenFormation
 				{				
 					BlockPos pos_ = new BlockPos(x, y, z);
 					
-					if(w.getBlockState(pos_).getBlockHardness(w, pos_) > 0)
+					if(w.getBlockState(pos_).getBlockHardness(w, pos_) > 0 )
 					{
-						if(w.getTileEntity(pos_) == null && w.getBlockState(pos_).getBlock() != Blocks.NETHERRACK)
+						if(w.getTileEntity(pos_) == null && w.getBlockState(pos_).getBlock() != Blocks.NETHERRACK && !TileFormationBase.isProtected(w, pos_))
 						{			
 							w.setBlockState(pos_, Blocks.NETHERRACK.getDefaultState(), 3);	
 							

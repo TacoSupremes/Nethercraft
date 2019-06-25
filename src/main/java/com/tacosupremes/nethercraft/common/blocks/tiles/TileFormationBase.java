@@ -25,6 +25,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -47,6 +48,8 @@ public class TileFormationBase extends TileMod implements IGenerator, IConsumer
 	public int power = 0;
 
 	public static int transferRate = 50;
+	
+	public static Map<String, List<BlockPos>> protectedBlocks = new HashMap<String, List<BlockPos>>();
 	
 	public IFormation formation = null;
 	
@@ -96,7 +99,7 @@ public class TileFormationBase extends TileMod implements IGenerator, IConsumer
 		{
 			if(this.getWorld().getTileEntity(linkedTo.get(i)) instanceof INode)
 			{
-				if(((INode)this.getWorld().getTileEntity(linkedTo.get(i))).isActiveNode() && (Nethercraft.proxy.playerHoldingItem(ModItems.wand) || Nethercraft.proxy.playerWearingItem(ModItems.netherGlasses, EntityEquipmentSlot.HEAD)))
+				if(this.isActiveNode() && ((INode)this.getWorld().getTileEntity(linkedTo.get(i))).isActiveNode() && (Nethercraft.proxy.playerHoldingItem(ModItems.wand) || Nethercraft.proxy.playerWearingItem(ModItems.netherGlasses, EntityEquipmentSlot.HEAD)))
 					BlockUtils.drawLine(getWorld(), this.getParticleOffset(), ((INode)this.getWorld().getTileEntity(linkedTo.get(i))).getParticleOffset(), EnumParticleTypes.REDSTONE);	
 			}
 			else
@@ -116,18 +119,31 @@ public class TileFormationBase extends TileMod implements IGenerator, IConsumer
 		if(formation == null)
 			return;
 		
+		
+		if(!protectedBlocks.containsKey(this.getPos().toString()))
+		{
+			protectedBlocks.put(this.getPos().toString(), this.getBlocks());
+		}
+		
 		if(formation.getRange() != -1 && Nethercraft.proxy.playerWearingItem(ModItems.netherGlasses, EntityEquipmentSlot.HEAD))
 		{	
-			double r = formation.getRange();
-			this.getWorld().spawnParticle(EnumParticleTypes.SPELL_WITCH, this.getPos().getX() - r + 0.5D, this.getPos().getY(), this.getPos().getZ() - r + 0.5D, 0, 1.0, 0);
-			this.getWorld().spawnParticle(EnumParticleTypes.SPELL_WITCH, this.getPos().getX() + r + 0.5D, this.getPos().getY(), this.getPos().getZ() - r + 0.5D, 0, 1.0, 0);
-			this.getWorld().spawnParticle(EnumParticleTypes.SPELL_WITCH, this.getPos().getX() - r + 0.5D, this.getPos().getY(), this.getPos().getZ() + r + 0.5D, 0, 1.0, 0);
-			this.getWorld().spawnParticle(EnumParticleTypes.SPELL_WITCH, this.getPos().getX() + r + 0.5D, this.getPos().getY(), this.getPos().getZ() + r + 0.5D, 0, 1.0, 0);
+			int r = formation.getRange();
+			BlockPos pos = this.getPos();
+		
+			BlockUtils.spawnParticle(EnumParticleTypes.SPELL_WITCH, this.getWorld(), Vector3.fromBlockPos(this.getWorld().getTopSolidOrLiquidBlock(pos.add(-r, 0, -r))).add(0.5D, 0, 0.5D), new Vector3(0, 1.0D,0));
+			BlockUtils.spawnParticle(EnumParticleTypes.SPELL_WITCH, this.getWorld(), Vector3.fromBlockPos(this.getWorld().getTopSolidOrLiquidBlock(pos.add(+r, 0, -r))).add(0.5D, 0, 0.5D), new Vector3(0, 1.0D,0));
+			BlockUtils.spawnParticle(EnumParticleTypes.SPELL_WITCH, this.getWorld(), Vector3.fromBlockPos(this.getWorld().getTopSolidOrLiquidBlock(pos.add(-r, 0, +r))).add(0.5D, 0, 0.5D), new Vector3(0, 1.0D,0));
+			BlockUtils.spawnParticle(EnumParticleTypes.SPELL_WITCH, this.getWorld(), Vector3.fromBlockPos(this.getWorld().getTopSolidOrLiquidBlock(pos.add(+r, 0, +r))).add(0.5D, 0, 0.5D), new Vector3(0, 1.0D,0));
+			
+			
 		}
 		
 		if(!canRun(this.getWorld(), this.getPos(), nbt))
 		{
 			formation = null;
+			
+			protectedBlocks.remove(this.getPos().toString());
+			
 			return;
 		}
 			
@@ -135,13 +151,23 @@ public class TileFormationBase extends TileMod implements IGenerator, IConsumer
 		{
 			IConsumer ii = null;
 			
-			List<BlockPos> l = getPathToConsumer(getWorld(), getPos(), linkedTo, false);
+			//List<BlockPos> l = getPathToConsumer(getWorld(), getPos(), linkedTo, false);
+			List<BlockPos> l = new ArrayList<BlockPos>();
+			
+			getPathToConsumer3(world, pos, this.linkedTo, l, new ArrayList<String>(), false);
 			
 			if(!l.isEmpty())
 			{	
 				if(this.getWorld().getTileEntity(l.get(l.size() - 1)) != null && this.getWorld().getTileEntity(l.get(l.size() - 1)) instanceof IConsumer && ((IConsumer)this.getWorld().getTileEntity(l.get(l.size() - 1))).isConsumer())
 					ii = ((IConsumer)this.getWorld().getTileEntity(l.get(l.size() - 1)));
-			
+				else
+				{
+					System.out.println("THE LIST DOES NOT HAVE CONSUMER OOF");
+				}
+			}
+			else
+			{
+				System.out.println("BIG OOF The path is empty");
 			}
 			
 			if(ii != null)
@@ -155,6 +181,16 @@ public class TileFormationBase extends TileMod implements IGenerator, IConsumer
 					
 					Nethercraft.proxy.powerFX(this.getPos().getX()+0.5D, this.getPos().getY()+1.5D, this.getPos().getZ()+0.5D,  lv);
 				
+					int delay = 0;
+					
+					long ct = this.getWorld().getWorldTime();
+					
+					while(this.getWorld().getWorldTime() < ct + 100L)
+						{
+						System.out.print("\n Time Let Delay : " + (this.getWorld().getWorldTime() + 100L - ct));
+					
+						};
+					
 					power -= ii.fill(transferRate, true);	
 					
 				}
@@ -183,6 +219,56 @@ public class TileFormationBase extends TileMod implements IGenerator, IConsumer
 		}
 	}
 	
+	private List<BlockPos> getBlocks() 
+	{
+		ItemStack[] b = formation.getBlocks();
+		
+		Vector3 v3 = formation.getOffset();
+		
+		List<BlockPos> bp = new ArrayList<BlockPos>();
+		
+		int r = (int) (Math.sqrt(b.length) - 1) / 2;
+		
+		int index = -1;
+		
+		for(int x = -r; x <= r; x++)
+		{
+			for(int z = -r; z <= r; z++)
+			{
+				index++;
+				
+				if(b[index] == ItemStack.EMPTY)
+					continue;
+				
+				bp.add(pos.add(x, 0, z).add(v3.x, v3.y, v3.z));
+			}
+			
+		}
+		
+		return bp;
+	}
+	
+	public static boolean isProtected(World w, BlockPos pos)
+	{
+		for(EnumFacing e : EnumFacing.VALUES)
+		{
+			if(w.getTileEntity(pos.add(e.getDirectionVec())) != null && w.getTileEntity(pos.add(e.getDirectionVec())) instanceof INode) 
+				return true;
+		}
+		
+		
+		for(List<BlockPos> lbp : protectedBlocks.values())
+		{
+			for(BlockPos bp : lbp)
+			{
+				if(bp.equals(pos))
+					return true;
+			}
+		}
+		
+		return false;
+	}
+
 	public boolean canRun(World w, BlockPos pos, NBTTagCompound nbt) 
 	{
 		
@@ -277,197 +363,6 @@ public class TileFormationBase extends TileMod implements IGenerator, IConsumer
 		return power;
 	}
 	
-@SuppressWarnings("unused")
-public static List<BlockPos> getPathToConsumer(World w, BlockPos posF, List<BlockPos> linked, boolean includeStart){
-	
-	List<BlockPos> toCheck = new ArrayList<BlockPos>();
-	
-	List<BlockPos> path = new ArrayList<BlockPos>();
-	
-	List<String> checked = new ArrayList<String>();
-	
-	List<Integer> choice = new ArrayList<Integer>();
-	
-	if(linked.isEmpty())
-		return toCheck;
-	
-	if(linked.size() > 1){
-		
-		choice.add(0);
-		
-		toCheck.add(linked.get(0));
-	
-	}else
-		toCheck.addAll(linked);
-	
-	while(!toCheck.isEmpty()){
-
-		BlockPos pos = toCheck.remove(0);
-		
-		path.add(pos);
-
-		checked.add(pos.toString());
-		
-		INode ip = (INode)w.getTileEntity(pos);
-		
-		if(ip == null)
-			continue;
-		
-		if(!ip.isActiveNode())
-			continue;
-		
-		if(w.getTileEntity(pos) instanceof IConsumer)
-		{
-		
-			IConsumer ipt = (IConsumer)w.getTileEntity(pos);
-					
-				if(ipt.fill(transferRate, false) > 0)
-					break;
-
-		}
-		
-		List<BlockPos> aba = new ArrayList<BlockPos>();
-		
-		if(ip == null)
-			continue;
-		
-		for(int i = 0; i< ip.getNodeList().size(); i++){
-			
-			if(ip.getNodeList().get(i) == null)
-				continue;
-			
-			if(!checked.contains(ip.getNodeList().get(i).toString()))	
-				aba.add(ip.getNodeList().get(i));
-		}
-		
-		
-		if(aba.size() > 1)
-			choice.add(path.size()-1);
-		
-		if(aba.size() > 0)
-			toCheck.add(aba.get(0));
-		else{
-
-			if(choice.isEmpty())
-				return new ArrayList<BlockPos>();
-			else{
-				
-				int i = choice.remove(choice.size()-1);
-				
-				toCheck.add(path.get(i));
-
-				for(int j = i+1; j< path.size();j++)
-					path.remove(j);
-						
-			}
-			
-		}
-				
-	}
-
-	ArrayList<BlockPos> pf = new ArrayList<BlockPos>();
-	if(includeStart)
-		pf.add(posF);
-	pf.addAll(path);	
-	return pf;
-}
-
-public static List<BlockPos> getPathToConsumer2(World w, BlockPos s, List<BlockPos> linked, boolean includeStart){
-	
-	Map<Integer, List<BlockPos>> map = new HashMap<Integer, List<BlockPos>>();
-	
-	BlockPos consumer = null;
-	
-	int lvl = 0;
-
-	List<String> checked = new ArrayList<String>();
-
-	boolean added = true;
-	
-	List<BlockPos> first = new ArrayList<BlockPos>();
-	
-	first.add(s);
-	
-	map.put(lvl, first);
-	
-	while(added)
-	{
-		added = false;
-		
-		List<BlockPos> l = new ArrayList<BlockPos>();
-				
-		for(BlockPos bp : map.get(lvl))
-		{
-			checked.add(bp.toString());
-			
-			if(w.getTileEntity(bp) instanceof IConsumer && ((IConsumer)w.getTileEntity(bp)).fill(transferRate, false) > 0)
-			{
-				
-				System.out.println("Found it nibba");
-				consumer = bp;
-				break;
-			}
-			
-			for(BlockPos bp2 : ((INode)w.getTileEntity(bp)).getNodeList())
-			{
-				if(!checked.contains(bp2.toString()))
-				{
-					added = true;
-					l.add(bp2);
-				}
-			}
-	
-		}
-		
-		lvl++;
-		
-		map.put(lvl, l);
-	}
-			
-	
-	
-	List<BlockPos> bt = new ArrayList<BlockPos>();
-	
-	if(consumer == null)
-	{
-		return bt;
-	}
-	
-	bt.add(consumer);
-	
-	while(lvl > 0)
-	{
-		lvl--;
-		
-		outer:
-		for(BlockPos pos : ((INode)w.getTileEntity(bt.get(bt.size()-1))).getNodeList())
-		
-			for(BlockPos ipos : map.get(lvl))
-			{
-				if(pos.toString() == ipos.toString())
-				{
-					bt.add(ipos);
-					break outer;
-				}
-			}
-			
-		
-		
-	}
-	if(!includeStart)
-	bt.remove(bt.size()-1);
-	
-	List<BlockPos> tbt = new ArrayList<BlockPos>();
-	for(int i = bt.size()-1; i >= 0; i--)
-		tbt.add(bt.get(i));
-	
-	return tbt;
-	
-	//toCheck	//Backtrack nodes at end.
-
-	
-	
-}
 
 public static List<Vector3> getOffset(World w, List<BlockPos> bp)
 {	
@@ -486,9 +381,67 @@ public static List<Vector3> getOffset(World w, List<BlockPos> bp)
 	return v3;	
 }
 
- public boolean isDone() {
-
+public static boolean getPathToConsumer3(World w, BlockPos posF,
+		List<BlockPos> linked, List<BlockPos> path, List<String> used, boolean includeStart)
+{
+	
+	if(includeStart)
+	{
+		path.add(posF);
+	}
+	
+	used.add(posF.toString());
+	//*G-N - N - N
+	// |		 |
+	// N -N		 N
+	//    |		 |
+	//	  N		 C
+	
+	for(BlockPos bp : linked)
+	{
+		if(!used.contains(bp.toString()))
+		{
+			INode i = (INode)w.getTileEntity(bp);
+			
+			used.add(bp.toString());
+			
+			if(!i.isActiveNode())
+				continue;
+			
+			path.add(bp);
+						
+			if(i instanceof IConsumer && ((IConsumer)i).isConsumer() && ((IConsumer)i).canFill())
+			{
+				return true;
+			}
+			
+			List<BlockPos> l2 = new ArrayList<BlockPos>();
+					
+			if(getPathToConsumer3(w, posF, i.getNodeList(), l2, used, false))
+			{
+				path.addAll(l2);
+				return true;
+			}
+			
+			if(!path.isEmpty())
+				path.remove(path.size() - 1);
+		}
+		
+	}
+	return false;
+	
+}
+ 
+public boolean isDone() 
+{
 	return nbt.getBoolean("DONE");
+}
+
+
+ @Override
+public boolean canFill() 
+{
+	return formation != null ? power < formation.getMaxPower() : false;
 }
 
 

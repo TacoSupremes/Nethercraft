@@ -5,4 +5,6 @@ public interface IConsumer extends INode
 	public int fill(int amount, boolean doit);
 	
 	public boolean isConsumer();
+	
+	public boolean canFill();
 }

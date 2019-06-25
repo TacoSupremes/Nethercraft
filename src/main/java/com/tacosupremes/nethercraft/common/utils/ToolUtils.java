@@ -13,7 +13,11 @@ public class ToolUtils
 
 	public enum ToolType
 	{
-		Pickaxe(Material.ROCK, Material.IRON, Material.ANVIL, Material.PACKED_ICE), Spade(Material.GROUND, Material.SNOW, Material.SAND, Material.CLAY, Material.GRASS), Axe(Material.WOOD, Material.GOURD), Hoe(Material.GOURD), Items(Material.AIR);
+		Pickaxe(Material.ROCK, Material.IRON, Material.ANVIL, Material.PACKED_ICE), 
+		Spade(Material.GROUND, Material.SNOW, Material.SAND, Material.CLAY, Material.GRASS), 
+		Axe(Material.WOOD, Material.GOURD), 
+		Hoe(Material.GOURD), 
+		Items(Material.AIR);
 
 		public Material[] effective;
 
@@ -21,12 +25,10 @@ public class ToolUtils
 		{
 			this.effective = i;
 		}
-
 	}
 
 	public static boolean isToolEffective(ItemStack is, IBlockState i)
 	{
-
 		return isToolEffective(getToolType(is), i);
 	}
 
@@ -60,6 +62,8 @@ public class ToolUtils
 
 		if (is.getItem() instanceof ItemHoe)
 			return ToolType.Hoe;
+		
+	//	is.getItem().gete
 
 		return ToolType.Items;
 

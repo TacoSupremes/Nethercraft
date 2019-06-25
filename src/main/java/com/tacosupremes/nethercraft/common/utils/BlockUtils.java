@@ -240,9 +240,20 @@ public class BlockUtils
 		  
 	  }
 	
-	public static void spawnParticle(World w, BlockPos pos, EnumParticleTypes type)
+	
+	public static void spawnParticle(EnumParticleTypes type, World w, BlockPos pos, Vector3 v3)
 	{
-		w.spawnParticle(type, pos.getX(), pos.getY(), pos.getZ(), 0, 0, 0);
+		spawnParticle(type, w, Vector3.fromBlockPos(pos), v3);
+	}
+	
+	public static void spawnParticle(EnumParticleTypes type, World w, Vector3 pos)
+	{
+		spawnParticle(type, w, pos, Vector3.zero);
+	}
+	
+	public static void spawnParticle(EnumParticleTypes type, World w, Vector3 pos, Vector3 v)
+	{
+		w.spawnParticle(type, pos.getX(), pos.getY(), pos.getZ(), v.x, v.y, v.z);
 	}
 	
 	public static void spawnParticle(World w, Vector3 start, Vector3 end, EnumParticleTypes type, double speed)
@@ -252,6 +263,10 @@ public class BlockUtils
 		w.spawnParticle(type, start.getX(), start.getY(), start.getZ(), v.getX(), v.getY(), v.getZ());
 	}
 	
+	public static void spawnParticle(EnumParticleTypes type, World w, BlockPos pos) {
+		 spawnParticle(type, w, Vector3.fromBlockPos(pos));
+		
+	}
 	 public static RayTraceResult rayTrace(World worldIn, EntityPlayer playerIn, boolean useLiquids, double r)
 	  {
 	      float f = playerIn.rotationPitch;
@@ -364,6 +379,8 @@ public class BlockUtils
 		
 		return l;
 	}
+
+	
 	
 
 }

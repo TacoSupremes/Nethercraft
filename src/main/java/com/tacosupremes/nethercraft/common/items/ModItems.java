@@ -43,23 +43,18 @@ public class ModItems
 	public static Item blazeChestPlate;
 	
 	public static Item ghastCannon;
-	//FIRE Sword swing to shoot fire right click for fire shield
+	
 	public static Item portal;
 	
 	public static Item fire;
 	
 	public static Item blazeIngot;
 	
-	//Item that moves you 8 blocks at a time since that is nether rules for distance
 	
-	// ghast/blaze cannon
-	
-	//scythe high chance of dropping heads
-
 	//hellcats because why not
 	
-	//nether glasses to see range of formations ie: you can see chunks that are targeted by nether gen and to allow for discovery of dungeons,
-	// TODO: MAKE BOOK 
+	//nether glasses to see range of formations 
+	// to allow for discovery of dungeons,???
 		
 	public static void preInit()
 	{
@@ -117,10 +112,8 @@ public class ModItems
 						registerItemRenderSameModel(i, i2);
 					
 					if (i.getColor() != null) 
-					{
-					
 						Minecraft.getMinecraft().getItemColors().registerItemColorHandler(i.getColor(), i);
-					}
+					
 					continue;
 				}
 
@@ -136,17 +129,13 @@ public class ModItems
 					for (int i2 = 0; i2 <= i.meta; i2++)
 						ModItems.registerItemRender(i, i2);
 				}
-
 			}
 
 			if (i.meta == 0 || i.skipVariants())
 				registerItemRender(i, 0);
 			
-			if (i.getColor() != null) 
-			{
-				
+			if (i.getColor() != null) 	
 				Minecraft.getMinecraft().getItemColors().registerItemColorHandler(i.getColor(), i);
-			}
 		}
 
 		for (Item i : nitems)

@@ -63,7 +63,7 @@ public class NetherWartFarm implements IConsumerFormation {
 						w.getBlockState(pos_).getBlock().dropBlockAsItem(w, pos_, w.getBlockState(pos_), 0);
 						w.setBlockState(pos_, Blocks.NETHER_WART.getDefaultState());
 						te.power -= 100;
-						BlockUtils.spawnParticle(w, pos_, EnumParticleTypes.FLAME);
+						BlockUtils.spawnParticle(EnumParticleTypes.FLAME, w, pos_);
 						System.out.println("Wart Farmed");
 					}
 				
