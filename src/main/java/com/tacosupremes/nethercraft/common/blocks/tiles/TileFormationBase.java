@@ -15,6 +15,8 @@ import com.tacosupremes.nethercraft.common.formations.IFormation;
 import com.tacosupremes.nethercraft.common.formations.IGenFormation;
 import com.tacosupremes.nethercraft.common.items.IRecipeGiver;
 import com.tacosupremes.nethercraft.common.items.ItemCloneBlock;
+import com.tacosupremes.nethercraft.common.items.ItemUpgradeRune;
+import com.tacosupremes.nethercraft.common.items.ItemUpgradeRune.RuneType;
 import com.tacosupremes.nethercraft.common.items.ModItems;
 import com.tacosupremes.nethercraft.common.items.RecipeType;
 import com.tacosupremes.nethercraft.common.utils.BlockUtils;
@@ -33,6 +35,8 @@ import net.minecraftforge.oredict.OreDictionary;
 
 public class TileFormationBase extends TileMod implements IGenerator, IConsumer
 {
+	
+
 	@Override
 	public int drain(int amount, boolean doit) 
 	{
@@ -57,11 +61,15 @@ public class TileFormationBase extends TileMod implements IGenerator, IConsumer
 	
 	public NBTTagCompound nbt = new NBTTagCompound();
 
+	private ItemUpgradeRune.RuneType rt = null;
+
 	@Override
 	public void writeCustomNBT(NBTTagCompound cmp) 
 	{
 		cmp.setInteger("POWER", power);
 		cmp.setTag("NBT", nbt);
+		if(rt != null)
+			cmp.setString("UPGRADED", rt.name());
 		
 		if(!linkedTo.isEmpty())
 		{
@@ -79,6 +87,7 @@ public class TileFormationBase extends TileMod implements IGenerator, IConsumer
 	{
 		this.power = cmp.getInteger("POWER");
 		this.nbt = cmp.getCompoundTag("NBT");
+		this.rt = RuneType.valueOf(cmp.getString("UPGRADED"));
 		
 		if(cmp.hasKey("SIZE"))
 		{
@@ -174,23 +183,16 @@ public class TileFormationBase extends TileMod implements IGenerator, IConsumer
 			{
 				if(ii.fill(transferRate, false) > 0)		
 				{	
+					int delay = 0;
 					
 					List<Vector3> lv = getOffset(world, l);
 					
 					lv.add(ii.getParticleOffset());
 					
+					delay = (int) Math.ceil(getTime(world, lv) * 20);
+					
 					Nethercraft.proxy.powerFX(this.getPos().getX()+0.5D, this.getPos().getY()+1.5D, this.getPos().getZ()+0.5D,  lv);
-				
-					int delay = 0;
-					
-					long ct = this.getWorld().getWorldTime();
-					
-					while(this.getWorld().getWorldTime() < ct + 100L)
-						{
-						System.out.print("\n Time Let Delay : " + (this.getWorld().getWorldTime() + 100L - ct));
-					
-						};
-					
+		
 					power -= ii.fill(transferRate, true);	
 					
 				}
@@ -255,8 +257,7 @@ public class TileFormationBase extends TileMod implements IGenerator, IConsumer
 			if(w.getTileEntity(pos.add(e.getDirectionVec())) != null && w.getTileEntity(pos.add(e.getDirectionVec())) instanceof INode) 
 				return true;
 		}
-		
-		
+			
 		for(List<BlockPos> lbp : protectedBlocks.values())
 		{
 			for(BlockPos bp : lbp)
@@ -364,12 +365,15 @@ public class TileFormationBase extends TileMod implements IGenerator, IConsumer
 	}
 	
 
+public static final double SPEED = 1;	
+
 public static List<Vector3> getOffset(World w, List<BlockPos> bp)
 {	
 	List<Vector3> v3 = new ArrayList<Vector3>();
-	
+
 	for(BlockPos pos : bp)
 	{
+		
 		if(w.getTileEntity(pos) == null)
 			return new ArrayList<Vector3>();
 		
@@ -379,6 +383,30 @@ public static List<Vector3> getOffset(World w, List<BlockPos> bp)
 	}
 	
 	return v3;	
+}
+
+public static double getTime(World w, List<Vector3> v3)
+{	
+
+	Vector3 prev = null;
+	
+	double delay = 0;
+	
+	for(Vector3 pos : v3)
+	{
+		
+		if(w.getTileEntity(pos.toBlockPos()) == null)
+			return delay;
+		
+		if(prev != null)
+		{
+			delay += SPEED * prev.distanceTo(pos);
+		}
+		
+		prev = pos;
+	}
+	
+	return delay;	
 }
 
 public static boolean getPathToConsumer3(World w, BlockPos posF,
@@ -405,7 +433,7 @@ public static boolean getPathToConsumer3(World w, BlockPos posF,
 			
 			used.add(bp.toString());
 			
-			if(!i.isActiveNode())
+			if(i == null || !i.isActiveNode())
 				continue;
 			
 			path.add(bp);
@@ -444,6 +472,20 @@ public boolean canFill()
 	return formation != null ? power < formation.getMaxPower() : false;
 }
 
+public boolean hasUpgradeRune() 
+{
+	return rt != null;
+}
 
+public void setUpgradeRune(RuneType r) 
+{
+	rt = r;
+}
+
+public ItemUpgradeRune.RuneType getUpgradeRune()
+{
+	// TODO Auto-generated method stub
+	return rt;
+}
 
 }

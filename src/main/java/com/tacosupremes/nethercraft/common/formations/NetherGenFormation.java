@@ -1,6 +1,8 @@
 package com.tacosupremes.nethercraft.common.formations;
 
 import com.tacosupremes.nethercraft.common.blocks.tiles.TileFormationBase;
+import com.tacosupremes.nethercraft.common.items.ItemUpgradeRune;
+import com.tacosupremes.nethercraft.common.items.ItemUpgradeRune.RuneType;
 import com.tacosupremes.nethercraft.common.items.ModItems;
 import com.tacosupremes.nethercraft.common.utils.Vector3;
 
@@ -16,8 +18,10 @@ public class NetherGenFormation implements IGenFormation
 	@Override
 	public void generatePower(World w, BlockPos pos, NBTTagCompound nbt, TileFormationBase te) 
 	{			
-		if(w.getWorldTime() %20 != 0 || te.power >= getMaxPower())
+		if(w.getWorldTime() % (ItemUpgradeRune.getSpeed(te.getUpgradeRune(), 20)) != 0 || te.power >= getMaxPower())
 			return;
+		
+	
 
 		for(int y = 1; y < pos.getY(); y++)
 		{
@@ -33,9 +37,9 @@ public class NetherGenFormation implements IGenFormation
 						{			
 							w.setBlockState(pos_, Blocks.NETHERRACK.getDefaultState(), 3);	
 							
-							te.power += 10;
+							te.power += ItemUpgradeRune.getPowerGen(te.getUpgradeRune(), 10);
 												
-							System.out.println("GENERATOR" + te.power);
+					//		System.out.println("GENERATOR" + te.power);
 							
 							return;
 						}
@@ -44,6 +48,7 @@ public class NetherGenFormation implements IGenFormation
 				}
 			}
 		}
+		
 		nbt.setBoolean("DONE", true);	
 	}
 
@@ -87,5 +92,7 @@ public class NetherGenFormation implements IGenFormation
 	{
 		return "nether_gen";
 	}
+
+
 
 }

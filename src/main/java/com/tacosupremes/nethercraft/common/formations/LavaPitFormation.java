@@ -4,6 +4,9 @@ import java.util.List;
 
 import com.tacosupremes.nethercraft.common.blocks.tiles.TileFormationBase;
 import com.tacosupremes.nethercraft.common.blocks.tiles.power.IConsumer;
+import com.tacosupremes.nethercraft.common.items.ItemUpgradeRune;
+import com.tacosupremes.nethercraft.common.items.ItemUpgradeRune.RuneType;
+import com.tacosupremes.nethercraft.common.lib.LibMisc;
 import com.tacosupremes.nethercraft.common.utils.Vector3;
 
 import net.minecraft.block.Block;
@@ -73,18 +76,27 @@ public class LavaPitFormation implements IConsumerFormation {
 			{	
 				e.setNoDespawn();
 				
-				if(te.power < 25)
+				if(te.power < ItemUpgradeRune.getCost(te.getUpgradeRune(), 25))
 				{
 					if(e.cannotPickup())
 						e.setNoPickupDelay();
 					continue;
 				}
+				
 				e.setPickupDelay(20);
 				
-				if(nbt.getInteger(tag) >= 100)
+				if(nbt.getInteger(tag) >= ItemUpgradeRune.getSpeed(te.getUpgradeRune(), 100))
 				{
 					ItemStack r = FurnaceRecipes.instance().getSmeltingResult(is);
-					r.setCount(1);
+					if(LibMisc.Ores.isOre(is) && te.getUpgradeRune() == RuneType.Chaos && w.rand.nextBoolean())
+					{
+						r.setCount(2);
+					}
+					else
+						r.setCount(1);
+					
+					
+					
 							
 					nbt.removeTag(tag);
 					

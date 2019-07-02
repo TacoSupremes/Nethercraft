@@ -66,6 +66,8 @@ public class ClientProxy extends CommonProxy
 	{
 		PowerParticle wisp = new PowerParticle(Minecraft.getMinecraft().world, x, y, z, 0, 1.0F, 0, list);
 		
+		wisp.setAlphaF(1F);
+		
 		Minecraft.getMinecraft().effectRenderer.addEffect(wisp);
 	}
 	

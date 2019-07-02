@@ -17,9 +17,19 @@ import net.minecraft.util.ResourceLocation;
 public class EnchantUtils
 {
 
+	public static void enchantItem(ItemStack is, int lvl, Enchantment... e)
+	{
+		for(Enchantment e2 : e)
+				enchantItem(is, e2, lvl);
+	}
+	
+	
+	
 	public static void enchantItem(ItemStack is, Enchantment e, int lvl)
 	{
-
+		if(lvl == 0)
+			return;
+		
 		NBTTagList nbtl = new NBTTagList();
 
 		NBTTagCompound nbt = new NBTTagCompound();

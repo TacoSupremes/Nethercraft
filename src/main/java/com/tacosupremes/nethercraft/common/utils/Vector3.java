@@ -343,6 +343,16 @@ public class Vector3
 		Quat.aroundAxis(axis.copy().normalize(), angle).rotate(this);
 		return this;
 	}
+	
+	public double distanceTo(Vector3 v3)
+	{
+		return Math.sqrt((v3.x - this.x) * (v3.x - this.x)+ (v3.y - this.y) * (v3.y - this.y) + (v3.z - this.z) * (v3.z - this.z));
+	}
+	
+	public double distanceToSQ(Vector3 v3)
+	{
+		return (v3.x - this.x) * (v3.x - this.x)+ (v3.y - this.y) * (v3.y - this.y) + (v3.z - this.z) * (v3.z - this.z);
+	}
 
 	@Override
 	public boolean equals(Object o) {

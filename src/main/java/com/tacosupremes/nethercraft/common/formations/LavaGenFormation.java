@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.tacosupremes.nethercraft.common.blocks.tiles.TileFormationBase;
 import com.tacosupremes.nethercraft.common.blocks.tiles.power.IGenerator;
+import com.tacosupremes.nethercraft.common.items.ItemUpgradeRune.RuneType;
 import com.tacosupremes.nethercraft.common.utils.Vector3;
 
 import net.minecraft.block.Block;
@@ -53,8 +54,9 @@ public class LavaGenFormation implements IGenFormation
 	@Override
 	public void generatePower(World w, BlockPos pos, NBTTagCompound nbt, TileFormationBase te) 
 	{
-		
-		if(w.getWorldTime() % 60 != 0)
+		int r = 60;
+	
+		if(w.getWorldTime() % r != 0)
 				return;
 			
 		for(int xD = -1; xD <= 1; xD++)
@@ -69,7 +71,7 @@ public class LavaGenFormation implements IGenFormation
 				if(w.getBlockState(pos_).getBlock() == Blocks.LAVA)
 				{
 					w.setBlockToAir(pos_);
-					te.power += 100;
+					te.power += 80;
 					return;
 				}
 			}
@@ -92,5 +94,9 @@ public class LavaGenFormation implements IGenFormation
 	{
 		return "lava_gen";
 	}
+
+
+
+
 
 }

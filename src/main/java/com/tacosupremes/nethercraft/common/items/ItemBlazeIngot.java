@@ -79,8 +79,6 @@ public class ItemBlazeIngot extends ItemMod {
 			item.getItem().getTagCompound().setInteger(name, 0);
 		}
 		
-		
-	
 		if(item.isInLava() && item.getItem().getItemDamage() == 0)
 		{
 			item.motionX *= Math.random() * 2.5D;

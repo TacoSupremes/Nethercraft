@@ -50,6 +50,8 @@ public class ModItems
 	
 	public static Item blazeIngot;
 	
+	public static Item upgradeRune;
+	
 	
 	//hellcats because why not
 	
@@ -81,6 +83,8 @@ public class ModItems
 		portal = new ItemCloneBlock(Blocks.PORTAL);
 		
 		fire = new ItemCloneBlock(Blocks.FIRE);
+	
+		upgradeRune = new ItemUpgradeRune();
 	}
 	
 	public static void register()

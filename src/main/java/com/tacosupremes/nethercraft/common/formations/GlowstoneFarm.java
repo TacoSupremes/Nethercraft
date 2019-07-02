@@ -3,6 +3,8 @@ package com.tacosupremes.nethercraft.common.formations;
 import com.tacosupremes.nethercraft.common.blocks.BlockGlowstoneCrop;
 import com.tacosupremes.nethercraft.common.blocks.ModBlocks;
 import com.tacosupremes.nethercraft.common.blocks.tiles.TileFormationBase;
+import com.tacosupremes.nethercraft.common.items.ItemUpgradeRune;
+import com.tacosupremes.nethercraft.common.items.ItemUpgradeRune.RuneType;
 import com.tacosupremes.nethercraft.common.utils.BlockUtils;
 import com.tacosupremes.nethercraft.common.utils.Vector3;
 
@@ -56,7 +58,7 @@ public class GlowstoneFarm implements IConsumerFormation
 	@Override
 	public void usePower(World w, BlockPos pos, NBTTagCompound nbt, TileFormationBase te) 
 	{
-		if(te.power < 200)
+		if(te.power < ItemUpgradeRune.getCost(te.getUpgradeRune(), 200))
 			return;
 		
 		if(w.getWorldTime() % (MINECRAFTDAY / 5) != 0)
@@ -67,28 +69,22 @@ public class GlowstoneFarm implements IConsumerFormation
 			BlockPos np = pos.add(aPos[rand]);
 			IBlockState ib = w.getBlockState(np);
 			
-			setGlowstone(w, np, pos);
+			setGlowstone(w, np, pos, te);
 		
-			te.power -= 200;		
+			te.power -= ItemUpgradeRune.getCost(te.getUpgradeRune(), 200);		
 	}
 	
-	public int randGlowstone(World w, BlockPos pos)
-	{
-		
-		int rand = w.rand.nextInt(4);
-		
-		while(w.getBlockState(pos.add(aPos[rand])).getBlock() != ModBlocks.glowstoneCrop)
-			rand = w.rand.nextInt(4);
-		
-		return rand; 
-	}
+	
 
-	public void setGlowstone(World w, BlockPos pos, BlockPos center)
+	public void setGlowstone(World w, BlockPos pos, BlockPos center, TileFormationBase te)
 	{
 		
 		if(w.getBlockState(pos).getBlock().isAir(w.getBlockState(pos), w, pos))
 		{
-			w.setBlockState(pos, ModBlocks.glowstoneCrop.getDefaultState());
+			if(te.getUpgradeRune() == RuneType.Chaos && w.rand.nextInt(6) == 0)
+				w.setBlockState(pos, Blocks.GLOWSTONE.getDefaultState());
+			else
+				w.setBlockState(pos, ModBlocks.glowstoneCrop.getDefaultState());
 			return;
 		}
 	
@@ -96,7 +92,12 @@ public class GlowstoneFarm implements IConsumerFormation
 		{
 		
 			if(((Integer)w.getBlockState(pos).getValue(BlockGlowstoneCrop.AGE)).intValue() < 5)
-				w.setBlockState(pos, w.getBlockState(pos).cycleProperty(BlockGlowstoneCrop.AGE));
+			{	
+				if(te.getUpgradeRune() == RuneType.Chaos && w.rand.nextInt(6) == 0)
+					w.setBlockState(pos, Blocks.GLOWSTONE.getDefaultState());
+				else
+					w.setBlockState(pos, w.getBlockState(pos).cycleProperty(BlockGlowstoneCrop.AGE));
+			}
 			else
 				w.setBlockState(pos, Blocks.GLOWSTONE.getDefaultState(), 3);
 			
@@ -106,7 +107,7 @@ public class GlowstoneFarm implements IConsumerFormation
 		}
 		
 		if(w.getBlockState(pos).getBlock() == Blocks.GLOWSTONE && (w.getBlockState(pos.up()).getBlock().isAir(w.getBlockState(pos.up()), w, pos.up()) || w.getBlockState(pos.up()).getBlock() == ModBlocks.glowstoneCrop))
-			setGlowstone(w, pos.up(), center);	
+			setGlowstone(w, pos.up(), center, te);	
 	}
 
 	@Override
